@@ -1,39 +1,33 @@
 {
-  "cli": {
-    "version": ">= 9.0.8"
-  },
-  "build": {
-    "production": {
-      "node": "20.15.1",
-      "pnpm": "9.5.0",
-      "env": {
-        "EXPO_PUBLIC_BACKEND_URL": "https://vdvonl.leumit.co.il/api/"
-      }
-    },
-    "development": {
-      "extends": "production",
-      "developmentClient": true,
-      "distribution": "internal",
-      "ios": {
-        "simulator": true
-      },
-      "env": {
-        "EXPO_PUBLIC_BACKEND_URL": "https://vdvonl.leumit.co.il/api/"
-      }
-    },
+	"cli": {
+		"version": ">= 9.0.8"
+	},
+	"build": {
+		"production": {
+			"node": "20.15.1",
+			"pnpm": "9.5.0"
+		},
+		"development": {
+			"extends": "production",
+			"developmentClient": true,
+			"distribution": "internal",
+			"ios": {
+				"simulator": true
+			}
+		},
 
-    "preview": {
-      "extends": "production",
-      "distribution": "internal"
-    }
-  },
-  "submit": {
-    "production": {
-      "ios": {
-        "appleId": "webmaster@leumit.co.il",
-        "ascAppId": "6503964440",
-        "appleTeamId": "869Y96474U"
-      }
-    }
-  }
+		"preview": {
+			"extends": "production",
+			"distribution": "internal"
+		}
+	},
+	"submit": {
+		"production": {
+			"ios": {
+				"appleId": "webmaster@leumit.co.il",
+				"ascAppId": "6503964440",
+				"appleTeamId": "869Y96474U"
+			}
+		}
+	}
 }

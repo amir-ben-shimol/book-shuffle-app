@@ -1,6 +1,6 @@
 {
 	"expo": {
-		"name": "Book shuffle",
+		"name": "Diana's library",
 		"slug": "book-shuffle",
 		"orientation": "portrait",
 		"icon": "./src/assets/images/icon.png",
@@ -24,7 +24,7 @@
 			}
 		},
 		"ios": {
-			"bundleIdentifier": "book-shuffle.co.il",
+			"bundleIdentifier": "leumit.test.co.il",
 			"supportsTablet": true,
 			"infoPlist": {
 				"ExpoLocalization_supportsRTL": true,
@@ -56,12 +56,7 @@
 			"expo-document-picker",
 			"expo-file-system",
 			"expo-asset",
-			[
-				"expo-font",
-				{
-					"fonts": ["./src/assets/fonts/Rubik-Regular.ttf", "./src/assets/fonts/Rubik-Bold.ttf"]
-				}
-			],
+			"expo-image-picker",
 			[
 				"expo-notifications",
 				{

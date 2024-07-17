@@ -16,7 +16,8 @@
 			"@/types/*": ["src/lib/types/*"],
 			"@/utils/*": ["src/utils/*"],
 			"@/styles/*": ["src/styles/*"],
-			"@/app/*": ["src/app/*"]
+			"@/app/*": ["src/app/*"],
+			"@/modals/*": ["src/components/modals/*"]
 		}
 	}
 }
