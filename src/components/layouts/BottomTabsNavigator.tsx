@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { View, Text, Pressable } from 'react-native';
+import * as Haptics from 'expo-haptics';
 import { router, Tabs } from 'expo-router';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Animated, { useSharedValue, useAnimatedStyle, withRepeat, withSequence, withTiming, Easing } from 'react-native-reanimated';
@@ -11,9 +12,12 @@ const BottomTabsNavigator: React.FC = () => {
 	useEffect(() => {
 		rotation.value = withRepeat(
 			withSequence(
-				withTiming(45, { duration: 1000 }),
-				withTiming(0, { duration: 1000 }),
-				withTiming(0, { duration: 3000 }), // Pausing for 3 seconds
+				withTiming(45, { duration: 250 }),
+				withTiming(-20, { duration: 250 }),
+				withTiming(20, { duration: 250 }),
+				withTiming(0, { duration: 250 }),
+				withTiming(0, { duration: 500 }),
+				withTiming(0, { duration: 1500 }),
 			),
 			-1,
 			false,
@@ -21,6 +25,8 @@ const BottomTabsNavigator: React.FC = () => {
 	}, [rotation]);
 
 	const handlePress = () => {
+		Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Soft);
+
 		pressRotation.value = withSequence(
 			withTiming(360, { duration: 500, easing: Easing.in(Easing.ease) }),
 			withTiming(720, { duration: 500, easing: Easing.out(Easing.ease) }),
@@ -39,9 +45,9 @@ const BottomTabsNavigator: React.FC = () => {
 
 	return (
 		<Tabs
-			sceneContainerStyle={{ backgroundColor: 'white' }}
+			sceneContainerStyle={{ backgroundColor: '#f1f5f9' }}
 			screenOptions={{
-				tabBarActiveTintColor: 'navy',
+				tabBarActiveTintColor: '#93c5fd',
 				tabBarIconStyle: { marginBottom: -15 },
 				headerShown: false,
 			}}
@@ -70,6 +76,7 @@ const BottomTabsNavigator: React.FC = () => {
 					),
 					tabBarLabel: 'Shuffle',
 					tabBarLabelStyle: { fontSize: 12, position: 'absolute', bottom: -10, fontWeight: '500' },
+					headerTintColor: 'black',
 				}}
 			/>
 			<Tabs.Screen

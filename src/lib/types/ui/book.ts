@@ -10,7 +10,7 @@ export type Book = {
 	readonly averageRating: number;
 	readonly publisher: string;
 	readonly binding: string;
-	readonly numberOfPages: number;
+	readonly numberOfPages: number | undefined;
 	readonly yearPublished: number;
 	readonly originalPublicationYear: number;
 	readonly dateRead: string;
@@ -24,3 +24,5 @@ export type Book = {
 	readonly ownedCopies: number;
 	readonly bookCoverUrl?: string;
 };
+
+export type FilterTabs = 'all' | 'to-read';

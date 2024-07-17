@@ -13,7 +13,7 @@ export const UITitle = (props: Props) => {
 	const textFontSize = props.size === 'small' ? 'text-lg' : props.size === 'medium' ? 'text-xl' : props.size === 'large' ? 'text-2xl' : 'text-2xl';
 
 	return (
-		<Text style={props.style} className={`${textFontSize} font-bold text-purpleText ${props.className}`}>
+		<Text style={props.style} className={`${textFontSize} font-bold text-blue-500 ${props.className}`}>
 			{props.children}
 		</Text>
 	);

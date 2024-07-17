@@ -24,7 +24,13 @@ const RootLayout: React.FC = () => {
 			try {
 				SplashScreen.preventAutoHideAsync();
 
-				loadBooks();
+				const bookLoadingPromise = loadBooks();
+
+				const splashTimeoutPromise = new Promise((resolve) => {
+					setTimeout(resolve, 2000);
+				});
+
+				await Promise.all([bookLoadingPromise, splashTimeoutPromise]);
 
 				setAppIsReady(true);
 				await SplashScreen.hideAsync();
