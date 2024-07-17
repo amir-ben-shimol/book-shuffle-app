@@ -1,97 +1,84 @@
 {
-  "expo": {
-    "name": "Book shuffle",
-    "slug": "book-shuffle",
-    "orientation": "portrait",
-    "icon": "./src/assets/images/icon.png",
-    "scheme": "myapp",
-    "userInterfaceStyle": "automatic",
-    "splash": {
-      "image": "./src/assets/images/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
-    "updates": {
-      "enabled": true,
-      "checkAutomatically": "ON_LOAD"
-    },
-    "extra": {
-      "supportsRTL": true,
-      "forcesRTL": true,
-      "router": {
-        "origin": false
-      },
-      "eas": {
-        "projectId": "d126ec9d-9c3c-4ab2-86fd-7c4173008bbd"
-      }
-    },
-    "ios": {
-      "bundleIdentifier": "book-shuffle.co.il",
-      "supportsTablet": true,
-      "infoPlist": {
-        "ExpoLocalization_supportsRTL": true,
-        "ITSAppUsesNonExemptEncryption": false,
-        "NSAppTransportSecurity": {
-          "NSAllowsArbitraryLoads": true
-        },
-        "UIBackgroundModes": [
-          "fetch",
-          "remote-notification"
-        ]
-      }
-    },
-    "android": {
-      "package": "il.co.leumit.mobile",
-      "adaptiveIcon": {
-        "foregroundImage": "./src/assets/images/icon.png",
-        "backgroundColor": "#ffffff"
-      },
-      "permissions": [
-        "android.permission.USE_BIOMETRIC",
-        "android.permission.USE_FINGERPRINT",
-        "android.permission.RECEIVE_BOOT_COMPLETED",
-        "android.permission.READ_EXTERNAL_STORAGE",
-        "android.permission.WRITE_EXTERNAL_STORAGE",
-        "android.permission.INTERNET"
-      ],
-      "useNextNotificationsApi": true
-    },
-    "plugins": [
-      "expo-router",
-      "expo-document-picker",
-      "expo-file-system",
-      "expo-asset",
-      [
-        "expo-font",
-        {
-          "fonts": [
-            "./src/assets/fonts/Rubik-Regular.ttf",
-            "./src/assets/fonts/Rubik-Bold.ttf"
-          ]
-        }
-      ],
-      [
-        "expo-notifications",
-        {
-          "icon": "./src/assets/images/icon.png",
-          "color": "#ffffff",
-          "defaultChannel": {
-            "name": "default",
-            "importance": "max",
-            "vibrationPattern": [
-              0,
-              250,
-              250,
-              250
-            ],
-            "sound": true
-          }
-        }
-      ]
-    ],
-    "experiments": {
-      "typedRoutes": true
-    },
-    "owner": "amir-ben-shimol"
-  }
+	"expo": {
+		"name": "Book shuffle",
+		"slug": "book-shuffle",
+		"orientation": "portrait",
+		"icon": "./src/assets/images/icon.png",
+		"scheme": "myapp",
+		"userInterfaceStyle": "automatic",
+		"splash": {
+			"image": "./src/assets/images/splash.png",
+			"resizeMode": "contain",
+			"backgroundColor": "#ffffff"
+		},
+		"updates": {
+			"enabled": true,
+			"checkAutomatically": "ON_LOAD"
+		},
+		"extra": {
+			"router": {
+				"origin": false
+			},
+			"eas": {
+				"projectId": "d126ec9d-9c3c-4ab2-86fd-7c4173008bbd"
+			}
+		},
+		"ios": {
+			"bundleIdentifier": "book-shuffle.co.il",
+			"supportsTablet": true,
+			"infoPlist": {
+				"ExpoLocalization_supportsRTL": true,
+				"ITSAppUsesNonExemptEncryption": false,
+				"NSAppTransportSecurity": {
+					"NSAllowsArbitraryLoads": true
+				},
+				"UIBackgroundModes": ["fetch", "remote-notification"]
+			}
+		},
+		"android": {
+			"package": "il.co.leumit.mobile",
+			"adaptiveIcon": {
+				"foregroundImage": "./src/assets/images/icon.png",
+				"backgroundColor": "#ffffff"
+			},
+			"permissions": [
+				"android.permission.USE_BIOMETRIC",
+				"android.permission.USE_FINGERPRINT",
+				"android.permission.RECEIVE_BOOT_COMPLETED",
+				"android.permission.READ_EXTERNAL_STORAGE",
+				"android.permission.WRITE_EXTERNAL_STORAGE",
+				"android.permission.INTERNET"
+			],
+			"useNextNotificationsApi": true
+		},
+		"plugins": [
+			"expo-router",
+			"expo-document-picker",
+			"expo-file-system",
+			"expo-asset",
+			[
+				"expo-font",
+				{
+					"fonts": ["./src/assets/fonts/Rubik-Regular.ttf", "./src/assets/fonts/Rubik-Bold.ttf"]
+				}
+			],
+			[
+				"expo-notifications",
+				{
+					"icon": "./src/assets/images/icon.png",
+					"color": "#ffffff",
+					"defaultChannel": {
+						"name": "default",
+						"importance": "max",
+						"vibrationPattern": [0, 250, 250, 250],
+						"sound": true
+					}
+				}
+			]
+		],
+		"experiments": {
+			"typedRoutes": true
+		},
+		"owner": "amir-ben-shimol"
+	}
 }
