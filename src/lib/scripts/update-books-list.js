@@ -6,7 +6,7 @@ const axios = require('axios');
 const { parseStringPromise } = require('xml2js');
 
 const API_KEY = 'Ys0aMCpm754ABIoafSezZw'; // Replace with your actual Goodreads API key
-const booksList = require('../lib/data/books-list.json'); // Adjust the path if necessary
+const booksList = require('../data/books-list.json'); // Adjust the path if necessary
 
 const fetchBookImageUrl = async (bookId) => {
 	try {

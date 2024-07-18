@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { View, Text, TextInput, Pressable, Image } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import Animated, { Easing, useSharedValue, useAnimatedStyle, withRepeat, withSequence, withTiming } from 'react-native-reanimated';
@@ -20,38 +20,44 @@ const SettingsPage: React.FC = () => {
 		);
 	}, [waveAnimation]);
 
-	const handleChange = (key: keyof User, value: string) => {
-		if (editingUser) {
-			const updatedUser = { ...editingUser, [key]: value };
+	const handleChange = useCallback(
+		(key: keyof User, value: string) => {
+			if (editingUser) {
+				const updatedUser = { ...editingUser, [key]: value };
 
-			setEditingUser(updatedUser);
-			checkIfModified(updatedUser);
-		} else {
-			const newUser = { [key]: value } as unknown as User;
+				setEditingUser(updatedUser);
+				checkIfModified(updatedUser);
+			} else {
+				const newUser = { [key]: value } as unknown as User;
 
-			setEditingUser(newUser);
-			setIsModified(true);
-		}
-	};
+				setEditingUser(newUser);
+				setIsModified(true);
+			}
+		},
+		[editingUser],
+	);
 
-	const checkIfModified = (updatedUser: User) => {
-		const hasChanges =
-			updatedUser.firstName !== user?.firstName ||
-			updatedUser.lastName !== user?.lastName ||
-			updatedUser.email !== user?.email ||
-			avatarUrl !== user?.avatarUrl;
+	const checkIfModified = useCallback(
+		(updatedUser: User) => {
+			const hasChanges =
+				updatedUser.firstName !== user?.firstName ||
+				updatedUser.lastName !== user?.lastName ||
+				updatedUser.email !== user?.email ||
+				avatarUrl !== user?.avatarUrl;
 
-		setIsModified(hasChanges);
-	};
+			setIsModified(hasChanges);
+		},
+		[user, avatarUrl],
+	);
 
-	const handleSave = () => {
+	const handleSave = useCallback(() => {
 		if (editingUser) {
 			setUser({ ...editingUser, avatarUrl });
 			setIsModified(false);
 		}
-	};
+	}, [editingUser, avatarUrl, setUser]);
 
-	const handleImagePicker = async () => {
+	const handleImagePicker = useCallback(async () => {
 		const result = await ImagePicker.launchImageLibraryAsync({
 			mediaTypes: ImagePicker.MediaTypeOptions.Images,
 			allowsEditing: true,
@@ -64,7 +70,7 @@ const SettingsPage: React.FC = () => {
 			setUser({ ...editingUser, avatarUrl: result.assets[0].uri } as User);
 			// checkIfModified({ ...editingUser, avatarUrl: result.assets[0].uri } as User);
 		}
-	};
+	}, [editingUser, setUser]);
 
 	const animatedStyle = useAnimatedStyle(() => {
 		return {
@@ -125,4 +131,4 @@ const SettingsPage: React.FC = () => {
 	);
 };
 
-export default SettingsPage;
+export default React.memo(SettingsPage);
