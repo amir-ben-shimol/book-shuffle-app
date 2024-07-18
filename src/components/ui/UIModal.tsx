@@ -21,7 +21,7 @@ type Props = {
 	readonly children?: React.ReactNode;
 	readonly icon?: keyof typeof icons;
 	readonly svgIconClassName?: string;
-	readonly size?: 'small' | 'medium' | 'large';
+	readonly size?: 'extraSmall' | 'small' | 'medium' | 'large';
 	readonly scrollable?: boolean;
 	readonly className?: string;
 	readonly style?: ViewStyle;
@@ -61,6 +61,9 @@ export const UIModal = (props: Props) => {
 
 	const snapPoints = useMemo(() => {
 		switch (props.size) {
+			case 'extraSmall': {
+				return ['40%'];
+			}
 			case 'small': {
 				return ['50%'];
 			}

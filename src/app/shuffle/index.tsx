@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { View, Text } from 'react-native';
 import { ThemedButton } from 'react-native-really-awesome-button';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -53,26 +53,28 @@ const ShuffleScreen = () => {
 		};
 	});
 
-	const onShuffle = () => {
+	const onShuffle = useCallback(() => {
 		setSelectedShuffleBook(undefined);
 		setFireConfetti(false);
 
 		Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
 
-		const randomIndex = Math.floor(Math.random() * booksList.length);
+		const filteredBooksList = booksList.filter((book) => book.bookshelves.includes('to-read'));
 
-		if (booksList[randomIndex]) {
-			setSelectedShuffleBook(booksList[randomIndex]);
+		const randomIndex = Math.floor(Math.random() * filteredBooksList.length);
+
+		if (filteredBooksList[randomIndex]) {
+			setSelectedShuffleBook(filteredBooksList[randomIndex]);
 		}
-	};
+	}, [booksList]);
 
-	const onResetShuffle = () => {
+	const onResetShuffle = useCallback(() => {
 		setSelectedShuffleBook(undefined);
 		fadeInSlowOpacity.value = 0;
 		fadeInFastOpacity.value = 0;
 		fadeInTitleOpacity.value = 0;
 		fadeInAuthorOpacity.value = 0;
-	};
+	}, [fadeInSlowOpacity, fadeInFastOpacity, fadeInTitleOpacity, fadeInAuthorOpacity]);
 
 	return (
 		<View className={`relative -mx-4 flex h-full flex-1 items-center bg-slate-100 ${selectedShuffleBook ? 'justify-start' : 'justify-center'}`}>
@@ -113,12 +115,12 @@ const ShuffleScreen = () => {
 					activityColor="#fff"
 					borderColor="#60a5fa"
 					textSize={30}
-					progressLoadingTime={7500}
+					progressLoadingTime={4000}
 					onPress={async () => {
 						onLongHaptics();
 
 						await new Promise((resolve) => {
-							setTimeout(resolve, 5000);
+							setTimeout(resolve, 2500);
 							Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
 						});
 						onShuffle();
@@ -131,4 +133,4 @@ const ShuffleScreen = () => {
 	);
 };
 
-export default ShuffleScreen;
+export default React.memo(ShuffleScreen);
