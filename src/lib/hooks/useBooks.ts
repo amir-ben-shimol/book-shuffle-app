@@ -9,7 +9,6 @@ export const useBook = () => {
 	const fetchBookImageUrl = async (bookId: number): Promise<string | undefined> => {
 		try {
 			const response = await BackendService.get<string>(`https://www.goodreads.com/book/show/${bookId}.xml?key=${API_KEY}`);
-
 			const result = await parseStringPromise(response);
 			const imageUrl = result?.GoodreadsResponse?.book?.[0]?.image_url?.[0];
 
@@ -21,5 +20,21 @@ export const useBook = () => {
 		}
 	};
 
-	return { fetchBookImageUrl };
+	const getBookDescription = async (bookId: number): Promise<string | undefined> => {
+		try {
+			const response = await BackendService.get<string>(`https://www.goodreads.com/book/show.xml?key=${API_KEY}&id=${bookId}`);
+			const result = await parseStringPromise(response);
+			const description = result?.GoodreadsResponse?.book?.[0]?.description?.[0];
+
+			console.log('description', description);
+
+			return description || undefined;
+		} catch (error) {
+			console.error('Error fetching book description:', error);
+
+			return undefined;
+		}
+	};
+
+	return { fetchBookImageUrl, getBookDescription };
 };

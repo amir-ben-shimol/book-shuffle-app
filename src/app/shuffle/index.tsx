@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { ThemedButton } from 'react-native-really-awesome-button';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import ConfettiCannon from 'react-native-confetti-cannon';
@@ -8,11 +8,14 @@ import Animated, { useSharedValue, useAnimatedStyle, withDelay, withTiming } fro
 import type { Book } from '@/lib/types/ui/book';
 import { useBooksStore } from '@/lib/store/useBooksStore';
 import { onLongHaptics } from '@/lib/utils/haptics';
+import { UIRating } from '@/ui/UIRating';
+import { BookInfoModal } from '@/modals/BookInfoModal';
 
 const ShuffleScreen = () => {
 	const { booksList } = useBooksStore();
 	const [selectedShuffleBook, setSelectedShuffleBook] = useState<Book | undefined>(undefined);
 	const [fireConfetti, setFireConfetti] = useState(false);
+	const [isModalOpen, setIsModalOpen] = useState(false);
 
 	const fadeInSlowOpacity = useSharedValue(0);
 	const fadeInTitleOpacity = useSharedValue(0);
@@ -68,15 +71,16 @@ const ShuffleScreen = () => {
 		fadeInAuthorOpacity.value = 0;
 	}, [fadeInSlowOpacity, fadeInFastOpacity, fadeInTitleOpacity, fadeInAuthorOpacity]);
 
+	useEffect(() => {
+		onResetShuffle();
+	}, []);
+
 	return (
 		<View className={`relative -mx-4 flex h-full flex-1 items-center bg-slate-100 ${selectedShuffleBook ? 'justify-start' : 'justify-center'}`}>
 			{selectedShuffleBook ? (
 				<>
-					<View className="mt-10 flex items-center justify-center">
-						<Animated.Text className="mb-4 text-lg font-medium text-gray-600" style={fadeInTitleStyle}>
-							Your book is ready! 🎉
-						</Animated.Text>
-						<Animated.Text className="text-center text-4xl font-bold text-gray-600" style={fadeInTitleStyle}>
+					<View className="mt-6 flex items-center justify-center">
+						<Animated.Text className="text-center text-4xl font-bold text-blue-500" style={fadeInTitleStyle}>
 							{selectedShuffleBook.title}
 						</Animated.Text>
 						<Animated.Text className="mb-4 text-xl font-semibold text-gray-600" style={fadeInAuthorStyle}>
@@ -90,12 +94,30 @@ const ShuffleScreen = () => {
 						resizeMode="contain"
 					/>
 					{fireConfetti && <ConfettiCannon count={500} origin={{ x: -10, y: 0 }} fallSpeed={2000} />}
-					<Animated.View style={[{ position: 'absolute', bottom: 30, alignItems: 'center' }, fadeInSlowStyle]}>
-						<Text className="mb-2 text-lg font-medium text-gray-600">Not happy with the choice? 😫</Text>
-						<ThemedButton name="bruce" backgroundColor="#d1d5db" size="icon" textSize={16} progressLoadingTime={7500} onPress={onResetShuffle}>
-							<Icon name="redo" color="white" size={18} />
+					<Animated.View style={fadeInFastStyle} className="flex items-center justify-center">
+						<UIRating className="my-2 bg-slate-100" tintColor="#f1f5f9" rating={selectedShuffleBook?.averageRating ?? 0} />
+						<ThemedButton
+							name="bruce"
+							type="messenger"
+							backgroundColor="#60a5fa"
+							activityColor="#fff"
+							borderColor="#60a5fa"
+							size="small"
+							textSize={14}
+							onPress={() => setIsModalOpen(true)}
+						>
+							View details
 						</ThemedButton>
 					</Animated.View>
+
+					<Animated.View style={[fadeInSlowStyle]} className="mb-4 mt-auto flex flex-row items-center">
+						<Text className="text-lg font-medium text-gray-600">Not happy with the choice? 😫</Text>
+						<TouchableOpacity className="ml-2 rounded-full bg-gray-400 p-2" onPress={onResetShuffle}>
+							<Icon name="redo" color="white" size={14} />
+						</TouchableOpacity>
+					</Animated.View>
+
+					<BookInfoModal book={selectedShuffleBook} isVisible={isModalOpen} onClose={() => setIsModalOpen(false)} />
 				</>
 			) : (
 				<ThemedButton
