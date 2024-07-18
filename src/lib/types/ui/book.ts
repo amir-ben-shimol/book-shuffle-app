@@ -26,3 +26,9 @@ export type Book = {
 };
 
 export type FilterTabs = 'all' | 'to-read';
+
+export type Filters = {
+	readonly yearStart: string;
+	readonly yearEnd: string;
+	readonly minimumRating: number;
+};

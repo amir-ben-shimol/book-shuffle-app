@@ -8,7 +8,7 @@ import Searchbar, { type SearchbarHandle } from './components/Searchbar';
 import Filterbar from './components/Filterbar';
 
 const HomeScreen = () => {
-	const { booksList, filterBooksQuery, selectedFilterTab } = useBooksStore();
+	const { booksList, filterBooksQuery, selectedFilterTab, allBooksFilters } = useBooksStore();
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [selectedBook, setSelectedBook] = useState<Book | undefined>(undefined);
 
@@ -18,8 +18,16 @@ const HomeScreen = () => {
 	const filteredBooksList = useMemo(() => {
 		return booksList
 			.filter((book) => book.title.toLowerCase().includes(deferredQuery.toLowerCase()))
-			.filter((book) => (selectedFilterTab === 'to-read' ? book.bookshelves.includes('to-read') || book.exclusiveShelf.includes('to-read') : true));
-	}, [booksList, deferredQuery, selectedFilterTab]);
+			.filter((book) => (selectedFilterTab === 'to-read' ? book.bookshelves.includes('to-read') || book.exclusiveShelf.includes('to-read') : true))
+			.filter((book) => {
+				const yearPublished = book.yearPublished || 0;
+				const averageRating = book.averageRating || 0;
+
+				return (
+					yearPublished >= +allBooksFilters.yearStart && yearPublished <= +allBooksFilters.yearEnd && averageRating >= allBooksFilters.minimumRating
+				);
+			});
+	}, [booksList, deferredQuery, selectedFilterTab, allBooksFilters]);
 
 	const onBookClick = useCallback((book: Book) => {
 		Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
