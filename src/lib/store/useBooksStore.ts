@@ -1,13 +1,14 @@
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import type { Book, FilterTabs } from '../types/ui/book';
+import type { Book, Filters, FilterTabs } from '../types/ui/book';
 
 type State = {
 	booksList: Book[];
 	filterBooksQuery: string;
 	selectedFilterTab: FilterTabs;
 	selectedBook: Book | null;
+	allBooksFilters: Filters;
 };
 
 type Actions = {
@@ -16,6 +17,8 @@ type Actions = {
 	setFilterTab: (tab: FilterTabs) => void;
 	onAddBook: (book: Book) => void;
 	setSelectedBook: (book: Book | null) => void;
+	setAllBooksFilters: (filters: Filters) => void;
+	resetAllBooksFilters: () => void;
 	resetStore: () => void;
 };
 
@@ -28,6 +31,11 @@ const useBooksStore = create<BooksStore>()(
 			filterBooksQuery: '',
 			selectedFilterTab: 'all',
 			selectedBook: null,
+			allBooksFilters: {
+				yearStart: '',
+				yearEnd: '2024',
+				minimumRating: 0,
+			},
 			setBooksList: (books) => {
 				set({
 					booksList: books,
@@ -54,12 +62,31 @@ const useBooksStore = create<BooksStore>()(
 					selectedBook: book,
 				});
 			},
+			setAllBooksFilters: (filters) => {
+				set({
+					allBooksFilters: filters,
+				});
+			},
+			resetAllBooksFilters: () => {
+				set({
+					allBooksFilters: {
+						yearStart: '',
+						yearEnd: '2024',
+						minimumRating: 0,
+					},
+				});
+			},
 			resetStore: () => {
 				set({
 					booksList: [],
 					filterBooksQuery: '',
 					selectedFilterTab: 'all',
 					selectedBook: null,
+					allBooksFilters: {
+						yearStart: '',
+						yearEnd: '',
+						minimumRating: 0,
+					},
 				});
 			},
 		}),

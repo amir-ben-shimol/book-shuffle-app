@@ -54,7 +54,7 @@ export const BookInfoModal = (props: Props) => {
 			{bookDescription && (
 				<View className="px-4 pb-4">
 					<Text className="text-lg font-semibold text-gray-600">Book reviews:</Text>
-					<UIRating rating={props.book?.averageRating ?? 0} />
+					<UIRating rating={props.book?.averageRating ?? 0} readonly />
 
 					<RenderHtml contentWidth={100} source={{ html: bookDescription }} />
 				</View>
