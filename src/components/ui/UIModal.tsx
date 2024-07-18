@@ -21,7 +21,7 @@ type Props = {
 	readonly children?: React.ReactNode;
 	readonly icon?: keyof typeof icons;
 	readonly svgIconClassName?: string;
-	readonly size?: 'extraSmall' | 'small' | 'medium' | 'large';
+	readonly size?: 'smallToBig' | 'small' | 'medium' | 'large';
 	readonly scrollable?: boolean;
 	readonly className?: string;
 	readonly style?: ViewStyle;
@@ -61,8 +61,8 @@ export const UIModal = (props: Props) => {
 
 	const snapPoints = useMemo(() => {
 		switch (props.size) {
-			case 'extraSmall': {
-				return ['40%'];
+			case 'smallToBig': {
+				return ['45%', '91%'];
 			}
 			case 'small': {
 				return ['50%'];
@@ -159,8 +159,10 @@ export const UIModal = (props: Props) => {
 			backdropComponent={(props) => <CustomBackdrop {...props} />}
 			onDismiss={onDismiss}
 		>
-			<View className={`flex-row items-center justify-between px-3 pb-4 ${headerShadow ? 'shadow' : ''}`} style={{ backgroundColor: 'white' }}>
-				<UITitle size="small">{props.modalHeaderTitle}</UITitle>
+			<View className={`flex-row items-center justify-between px-3 pb-4 ${headerShadow ? 'shadow' : ''} bg-white`}>
+				<Text className="mr-2 flex-1 flex-shrink">
+					<UITitle size="small">{props.modalHeaderTitle}</UITitle>
+				</Text>
 				<TouchableOpacity className="rounded-full bg-gray-300 p-2" onPress={() => bottomSheetModalRef.current?.dismiss()}>
 					<UISvg name="close" className="h-3 w-3 fill-purpleText" />
 				</TouchableOpacity>

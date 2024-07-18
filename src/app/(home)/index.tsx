@@ -1,5 +1,6 @@
 import React, { useState, useDeferredValue, useMemo, useRef, useCallback } from 'react';
 import { View, Image, TouchableOpacity, Text, FlatList } from 'react-native';
+import * as Haptics from 'expo-haptics';
 import type { Book } from '@/lib/types/ui/book';
 import { BookInfoModal } from '@/modals/BookInfoModal';
 import { useBooksStore } from '@/lib/store/useBooksStore';
@@ -7,8 +8,9 @@ import Searchbar, { type SearchbarHandle } from './components/Searchbar';
 import Filterbar from './components/Filterbar';
 
 const HomeScreen = () => {
-	const { booksList, filterBooksQuery, selectedFilterTab, setSelectedBook } = useBooksStore();
+	const { booksList, filterBooksQuery, selectedFilterTab } = useBooksStore();
 	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [selectedBook, setSelectedBook] = useState<Book | undefined>(undefined);
 
 	const deferredQuery = useDeferredValue(filterBooksQuery);
 	const searchbarRef = useRef<SearchbarHandle>(null);
@@ -19,13 +21,11 @@ const HomeScreen = () => {
 			.filter((book) => (selectedFilterTab === 'to-read' ? book.bookshelves.includes('to-read') || book.exclusiveShelf.includes('to-read') : true));
 	}, [booksList, deferredQuery, selectedFilterTab]);
 
-	const onBookClick = useCallback(
-		(book: Book) => {
-			setIsModalOpen(true);
-			setSelectedBook(book);
-		},
-		[setSelectedBook],
-	);
+	const onBookClick = useCallback((book: Book) => {
+		Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+		setIsModalOpen(true);
+		setSelectedBook(book);
+	}, []);
 
 	const BookItem = React.memo(({ item }: { item: Book }) => (
 		<TouchableOpacity
@@ -65,9 +65,12 @@ const HomeScreen = () => {
 				numColumns={3}
 				initialNumToRender={12}
 				maxToRenderPerBatch={12}
+				windowSize={21}
+				updateCellsBatchingPeriod={50}
+				removeClippedSubviews
 				onScroll={onBlurSearchInput}
 			/>
-			<BookInfoModal isVisible={isModalOpen} onClose={() => setIsModalOpen(false)} />
+			<BookInfoModal book={selectedBook} isVisible={isModalOpen} onClose={() => setIsModalOpen(false)} />
 		</View>
 	);
 };
