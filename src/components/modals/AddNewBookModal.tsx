@@ -81,7 +81,7 @@ export const AddNewBookModal = (props: Props) => {
 		<UIModal modalHeaderTitle="Add your new book 😝" size={isFocused ? 'large' : 'small'} isOpen={props.isVisible} onClose={onClose}>
 			<View className="w-full p-4">
 				<View className="mb-4 flex flex-row justify-between">
-					<View className="flex w-[48%] justify-between">
+					<View className="flex h-[200px] w-[48%] justify-between">
 						<TextInput
 							value={newBook.title}
 							className="mb-4 rounded border border-gray-300 p-2"
@@ -90,6 +90,7 @@ export const AddNewBookModal = (props: Props) => {
 							onBlur={onBlurred}
 							onChangeText={(text) => handleChange('title', text)}
 						/>
+
 						<TextInput
 							value={newBook.author}
 							className="mb-4 rounded border border-gray-300 p-2"
@@ -107,6 +108,14 @@ export const AddNewBookModal = (props: Props) => {
 							onFocus={onFocused}
 							onBlur={onBlurred}
 							onChangeText={(text) => handleChange('numberOfPages', text)}
+						/>
+						<TextInput
+							value={newBook.spoiler}
+							className="rounded border border-gray-300 p-2"
+							placeholder="Spoiler"
+							onFocus={onFocused}
+							onBlur={onBlurred}
+							onChangeText={(text) => handleChange('spoiler', text)}
 						/>
 					</View>
 

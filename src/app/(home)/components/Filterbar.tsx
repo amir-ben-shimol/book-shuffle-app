@@ -7,7 +7,11 @@ import type { FilterTabs } from '@/lib/types/ui/book';
 import { useBooksStore } from '@/lib/store/useBooksStore';
 import { AddNewBookModal } from '@/modals/AddNewBookModal';
 
-const Filterbar = () => {
+type Props = {
+	readonly onBlurSearchInput: VoidFunction;
+};
+
+const Filterbar = (props: Props) => {
 	const { selectedFilterTab, setFilterTab } = useBooksStore();
 	const [filterTabState, setFilterTabState] = useState<FilterTabs>(selectedFilterTab);
 	const translateX = useSharedValue(selectedFilterTab === 'all' ? -40 : 25);
@@ -36,9 +40,14 @@ const Filterbar = () => {
 		};
 	});
 
+	const onAddNewBook = () => {
+		setIsAddNewBookModalVisible(true);
+		props.onBlurSearchInput();
+	};
+
 	return (
 		<View className="mb-4 flex w-full flex-row items-center justify-between">
-			<Pressable onPress={() => setIsAddNewBookModalVisible(true)}>
+			<Pressable onPress={onAddNewBook}>
 				<Icon name="add" color="gray" size={24} />
 			</Pressable>
 

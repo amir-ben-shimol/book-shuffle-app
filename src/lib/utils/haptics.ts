@@ -2,7 +2,7 @@ import * as Haptics from 'expo-haptics';
 
 export const onLongHaptics = () => {
 	const startTime = Date.now();
-	const duration = 5000; // Total duration in milliseconds
+	const duration = 2500; // Total duration in milliseconds
 	const startInterval = 150; // Start interval in milliseconds
 	const endInterval = 50; // End interval in milliseconds
 
