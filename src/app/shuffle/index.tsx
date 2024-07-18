@@ -27,31 +27,23 @@ const ShuffleScreen = () => {
 			fadeInSlowOpacity.value = withDelay(4000, withTiming(1, { duration: 500 }));
 			setFireConfetti(true);
 		}
-	}, [selectedShuffleBook]);
+	}, [selectedShuffleBook, fadeInAuthorOpacity, fadeInFastOpacity, fadeInSlowOpacity, fadeInTitleOpacity]);
 
-	const fadeInSlowStyle = useAnimatedStyle(() => {
-		return {
-			opacity: fadeInSlowOpacity.value,
-		};
-	});
+	const fadeInSlowStyle = useAnimatedStyle(() => ({
+		opacity: fadeInSlowOpacity.value,
+	}));
 
-	const fadeInFastStyle = useAnimatedStyle(() => {
-		return {
-			opacity: fadeInFastOpacity.value,
-		};
-	});
+	const fadeInFastStyle = useAnimatedStyle(() => ({
+		opacity: fadeInFastOpacity.value,
+	}));
 
-	const fadeInTitleStyle = useAnimatedStyle(() => {
-		return {
-			opacity: fadeInTitleOpacity.value,
-		};
-	});
+	const fadeInTitleStyle = useAnimatedStyle(() => ({
+		opacity: fadeInTitleOpacity.value,
+	}));
 
-	const fadeInAuthorStyle = useAnimatedStyle(() => {
-		return {
-			opacity: fadeInAuthorOpacity.value,
-		};
-	});
+	const fadeInAuthorStyle = useAnimatedStyle(() => ({
+		opacity: fadeInAuthorOpacity.value,
+	}));
 
 	const onShuffle = useCallback(() => {
 		setSelectedShuffleBook(undefined);
