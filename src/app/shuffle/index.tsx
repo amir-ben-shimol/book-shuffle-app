@@ -95,7 +95,13 @@ const ShuffleScreen = () => {
 					/>
 					{fireConfetti && <ConfettiCannon count={500} origin={{ x: -10, y: 0 }} fallSpeed={2000} />}
 					<Animated.View style={fadeInFastStyle} className="flex items-center justify-center">
-						<UIRating className="my-2 bg-slate-100" tintColor="#f1f5f9" rating={selectedShuffleBook?.averageRating ?? 0} />
+						<UIRating
+							className="my-2 bg-slate-100"
+							imageSize={45}
+							showRating
+							tintColor="#f1f5f9"
+							rating={selectedShuffleBook?.averageRating ?? 0}
+						/>
 						<ThemedButton
 							name="bruce"
 							type="messenger"
