@@ -52,6 +52,7 @@ const BottomTabsNavigator: React.FC = () => {
 					tabBarActiveTintColor: '#93c5fd',
 					tabBarIconStyle: { marginBottom: -15 },
 					headerShown: false,
+					unmountOnBlur: true,
 				}}
 			>
 				<Tabs.Screen
@@ -60,6 +61,7 @@ const BottomTabsNavigator: React.FC = () => {
 						tabBarIcon: ({ color, size }) => <Icon name="home" color={color} size={size} />,
 						tabBarLabel: 'Home',
 						tabBarLabelStyle: { fontSize: 12, position: 'absolute', bottom: -10, fontWeight: '500' },
+						unmountOnBlur: true,
 					}}
 				/>
 				<Tabs.Screen
@@ -79,6 +81,7 @@ const BottomTabsNavigator: React.FC = () => {
 						tabBarLabel: 'Shuffle',
 						tabBarLabelStyle: { fontSize: 12, position: 'absolute', bottom: -10, fontWeight: '500' },
 						headerTintColor: 'black',
+						unmountOnBlur: true,
 					}}
 				/>
 				<Tabs.Screen

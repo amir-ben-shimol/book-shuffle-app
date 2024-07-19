@@ -20,12 +20,51 @@ const HomeScreen = () => {
 			.filter((book) => book.title.toLowerCase().includes(deferredQuery.toLowerCase()))
 			.filter((book) => (selectedFilterTab === 'to-read' ? book.bookshelves.includes('to-read') || book.exclusiveShelf.includes('to-read') : true))
 			.filter((book) => {
-				const yearPublished = book.yearPublished || 0;
-				const averageRating = book.averageRating || 0;
+				const numberOfPages = book.numberOfPages;
 
-				return (
-					yearPublished >= +allBooksFilters.yearStart && yearPublished <= +allBooksFilters.yearEnd && averageRating >= allBooksFilters.minimumRating
-				);
+				if (numberOfPages === undefined) {
+					return true;
+				}
+
+				const maxNumberOfPages = parseInt(allBooksFilters.maxNumberOfPages, 10);
+
+				if (maxNumberOfPages === 0) {
+					return true;
+				}
+
+				switch (allBooksFilters.maxNumberOfPages) {
+					case 'all': {
+						return true;
+					}
+					case 'up-to-200': {
+						return numberOfPages <= 200 && numberOfPages > 0;
+					}
+					case '200-400': {
+						return numberOfPages <= 400 && numberOfPages > 200;
+					}
+					case '400-500': {
+						return numberOfPages <= 500 && numberOfPages > 400;
+					}
+					case '500-600': {
+						return numberOfPages <= 600 && numberOfPages > 500;
+					}
+					case '600-800': {
+						return numberOfPages <= 800 && numberOfPages > 600;
+					}
+					case '800+': {
+						return numberOfPages >= 800;
+					}
+					default: {
+						return true;
+					}
+				}
+			})
+			.filter((book) => {
+				if (allBooksFilters.minimumRating === 0) {
+					return true;
+				}
+
+				return book.averageRating >= allBooksFilters.minimumRating;
 			});
 	}, [booksList, deferredQuery, selectedFilterTab, allBooksFilters]);
 
@@ -59,14 +98,18 @@ const HomeScreen = () => {
 		searchbarRef.current?.blurInput();
 	}, []);
 
+	const onUpdateBook = (book: Book) => {
+		setSelectedBook(book);
+	};
+
 	return (
-		<View className="flex flex-1 items-center justify-center">
+		<View className="flex flex-1">
 			<Searchbar ref={searchbarRef} />
 			<Filterbar onBlurSearchInput={onBlurSearchInput} />
 			<FlatList
 				data={filteredBooksList}
 				columnWrapperStyle={{ justifyContent: 'space-between' }}
-				className="w-full"
+				className="h-full w-full"
 				scrollEventThrottle={16}
 				renderItem={renderBook}
 				keyExtractor={(item) => item.bookId.toString()}
@@ -78,7 +121,7 @@ const HomeScreen = () => {
 				removeClippedSubviews
 				onScroll={onBlurSearchInput}
 			/>
-			<BookInfoModal book={selectedBook} isVisible={isModalOpen} onClose={() => setIsModalOpen(false)} />
+			<BookInfoModal book={selectedBook} isVisible={isModalOpen} onUpdateBook={onUpdateBook} onClose={() => setIsModalOpen(false)} />
 		</View>
 	);
 };

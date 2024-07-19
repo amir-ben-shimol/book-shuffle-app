@@ -21,8 +21,6 @@ export const useBook = () => {
 	};
 
 	const getBookDescription = async (bookId: number): Promise<string | undefined> => {
-		console.log('env', process.env.EXPO_PUBLIC_GOODREADS_API_KEY);
-
 		try {
 			const response = await BackendService.get<string>(
 				`${GOODREAD_BASE_URL}/book/show.xml?key=${process.env.EXPO_PUBLIC_GOODREADS_API_KEY}&id=${bookId}`,

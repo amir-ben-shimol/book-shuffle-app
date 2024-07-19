@@ -155,7 +155,7 @@ export const UIModal = (props: Props) => {
 			enableOverDrag={false}
 			snapPoints={snapPoints}
 			enablePanDownToClose
-			stackBehavior="push"
+			stackBehavior="replace"
 			backdropComponent={(props) => <CustomBackdrop {...props} />}
 			onDismiss={onDismiss}
 		>

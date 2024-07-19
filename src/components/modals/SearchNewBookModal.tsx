@@ -1,5 +1,7 @@
 import React, { useState, useCallback } from 'react';
-import { View, Text, TextInput, FlatList, TouchableOpacity, Image } from 'react-native';
+import * as Haptics from 'expo-haptics';
+import { View, Text, TextInput, FlatList, TouchableOpacity, Image, Pressable } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import { UIModal } from '@/ui/UIModal';
 import type { Book } from '@/lib/types/ui/book';
 import { debounce } from '@/lib/utils/debounce';
@@ -17,6 +19,7 @@ export const SearchNewBookModal = (props: Props) => {
 	const [results, setResults] = useState<Book[]>([]);
 	const { searchBooks } = useBook();
 	const [selectedBook, setSelectedBook] = useState<Book | undefined>(undefined);
+	const [isFocused, setIsFocused] = useState(false);
 	const [isBookInfoModalVisible, setIsBookInfoModalVisible] = useState(false);
 
 	const debouncedSearchBooks = useCallback(
@@ -29,8 +32,21 @@ export const SearchNewBookModal = (props: Props) => {
 				setResults([]);
 			}
 		}, 500),
-		[],
+		[searchBooks],
 	);
+
+	const handleClear = () => {
+		setQuery('');
+		setResults([]);
+	};
+
+	const handleFocus = () => {
+		setIsFocused(true);
+	};
+
+	const handleBlur = () => {
+		setIsFocused(false);
+	};
 
 	const handleChange = (text: string) => {
 		setQuery(text);
@@ -44,6 +60,7 @@ export const SearchNewBookModal = (props: Props) => {
 	};
 
 	const handleBookSelect = (book: Book) => {
+		Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Soft);
 		setSelectedBook(book);
 		setIsBookInfoModalVisible(true);
 	};
@@ -52,7 +69,25 @@ export const SearchNewBookModal = (props: Props) => {
 		<>
 			<UIModal scrollable={false} modalHeaderTitle="Search your new book 😝" size="large" isOpen={props.isVisible} onClose={onClose}>
 				<View className="w-full">
-					<TextInput value={query} className="mb-4 rounded border border-gray-300 p-2" placeholder="Title or Author" onChangeText={handleChange} />
+					<View
+						className={`mb-4 flex flex-row items-center rounded border bg-gray-200 px-2 py-2 ${isFocused ? 'border-blue-500' : 'border-gray-200'}`}
+					>
+						<Icon name="search" color="gray" size={24} />
+						<TextInput
+							placeholder="Title or Author"
+							className="ml-2 flex-1 text-start"
+							value={query}
+							autoFocus
+							onChangeText={handleChange}
+							onFocus={handleFocus}
+							onBlur={handleBlur}
+						/>
+						{query.length > 0 && (
+							<Pressable onPress={handleClear}>
+								<Icon name="cancel" color="gray" size={18} />
+							</Pressable>
+						)}
+					</View>
 					{results.length > 0 ? (
 						<FlatList
 							data={results}
@@ -74,7 +109,7 @@ export const SearchNewBookModal = (props: Props) => {
 							)}
 						/>
 					) : (
-						<View className="flex h-4/5 items-center justify-center">
+						<View className="flex h-3/5 items-center justify-center">
 							{query.length === 0 ? (
 								<Text className="text-center text-lg text-gray-600">No results found</Text>
 							) : (
@@ -84,7 +119,13 @@ export const SearchNewBookModal = (props: Props) => {
 					)}
 				</View>
 			</UIModal>
-			<BookInfoModal book={selectedBook} canAdd isVisible={isBookInfoModalVisible} onClose={() => setIsBookInfoModalVisible(false)} />
+			<BookInfoModal
+				book={selectedBook}
+				canAdd
+				isVisible={isBookInfoModalVisible}
+				onSuccessfulAdd={onClose}
+				onClose={() => setIsBookInfoModalVisible(false)}
+			/>
 		</>
 	);
 };

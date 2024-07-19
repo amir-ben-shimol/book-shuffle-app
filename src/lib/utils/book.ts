@@ -28,6 +28,8 @@ export const convertToBookArray = (jsonData: any[]): Book[] => {
 			readCount: item['Read Count'],
 			ownedCopies: item['Owned Copies'],
 			bookCoverUrl: item['bookCoverUrl'],
+			goodreadsLink: item['goodreadsLink'],
+			description: item['description'],
 		};
 	});
 };

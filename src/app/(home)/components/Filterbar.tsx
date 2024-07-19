@@ -5,20 +5,18 @@ import * as Haptics from 'expo-haptics';
 import Animated, { useSharedValue, useAnimatedStyle, withTiming } from 'react-native-reanimated';
 import type { FilterTabs } from '@/lib/types/ui/book';
 import { useBooksStore } from '@/lib/store/useBooksStore';
-import { UIFilter } from '@/ui/UIFilter';
 import { SearchNewBookModal } from '@/modals/SearchNewBookModal';
+import { FilterModal } from '@/modals/FilterModal';
 
 type Props = {
 	readonly onBlurSearchInput: VoidFunction;
 };
 
 const Filterbar = (props: Props) => {
-	const { selectedFilterTab, setFilterTab } = useBooksStore();
+	const { selectedFilterTab, allBooksFilters, setFilterTab } = useBooksStore();
 	const [filterTabState, setFilterTabState] = useState<FilterTabs>(selectedFilterTab);
 	const [isFilterVisible, setIsFilterVisible] = useState(false);
 	const translateX = useSharedValue(selectedFilterTab === 'all' ? -40 : 25);
-	const backdropOpacity = useSharedValue(0);
-	const filterOpacity = useSharedValue(0);
 	const [isAddNewBookModalVisible, setIsAddNewBookModalVisible] = useState(false);
 
 	const onCloseAddNewBookModal = () => {
@@ -44,21 +42,12 @@ const Filterbar = (props: Props) => {
 		};
 	});
 
+	const areFiltersApplied = allBooksFilters.minimumRating !== 0 || allBooksFilters.maxNumberOfPages !== 'all';
+
 	const onAddNewBook = () => {
+		Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
 		setIsAddNewBookModalVisible(true);
 		props.onBlurSearchInput();
-	};
-
-	const onToggleFilter = () => {
-		if (isFilterVisible) {
-			backdropOpacity.value = withTiming(0, { duration: 200 });
-			filterOpacity.value = withTiming(0, { duration: 200 });
-			setTimeout(() => setIsFilterVisible(false), 200);
-		} else {
-			setIsFilterVisible(true);
-			backdropOpacity.value = withTiming(1, { duration: 200 });
-			filterOpacity.value = withTiming(1, { duration: 200 });
-		}
 	};
 
 	return (
@@ -78,13 +67,18 @@ const Filterbar = (props: Props) => {
 					<Animated.View className="absolute bottom-0 h-[2px] w-16 bg-blue-500" style={animatedTranslateStyle} />
 				</View>
 
-				<Pressable className="relative" onPress={onToggleFilter}>
+				<Pressable className="relative" onPress={() => setIsFilterVisible(true)}>
 					<Icon name="sort" color="gray" size={24} />
+					{areFiltersApplied && (
+						<View className="absolute right-6 top-0">
+							<Icon name="circle" color="red" size={12} />
+						</View>
+					)}
 				</Pressable>
 
 				<SearchNewBookModal isVisible={isAddNewBookModalVisible} onClose={onCloseAddNewBookModal} />
 			</View>
-			<UIFilter isVisible={isFilterVisible} onClose={() => setIsFilterVisible(false)} />
+			<FilterModal type="allBooks" isVisible={isFilterVisible} onClose={() => setIsFilterVisible(false)} />
 		</>
 	);
 };
