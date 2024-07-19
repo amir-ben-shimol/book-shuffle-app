@@ -99,14 +99,9 @@ export const BookInfoModal = (props: Props) => {
 						<Text className="flex-shrink text-lg text-gray-600">{props.book?.numberOfPages}</Text>
 					</View>
 
-					{props.canAdd ? (
+					{props.canAdd && (
 						<Pressable className="mb-2 flex self-start rounded bg-blue-300 p-2" onPress={onAddNewBook}>
 							<Text className="text-lg font-semibold text-white">Add to your library 📚</Text>
-						</Pressable>
-					) : (
-						<Pressable className="my-2 flex flex-row items-center self-start rounded bg-red-400 px-4 py-2" onPress={onRemoveExistingBook}>
-							<Icon name="delete" color="white" size={20} />
-							<Text className="text-l font-semibold text-white">Remove</Text>
 						</Pressable>
 					)}
 				</View>
@@ -140,6 +135,12 @@ export const BookInfoModal = (props: Props) => {
 
 					<RenderHtml contentWidth={100} source={{ html: bookDescription }} />
 				</View>
+			)}
+			{!props.canAdd && (
+				<Pressable className="my-2 flex flex-row items-center self-start rounded bg-red-400 px-4 py-2" onPress={onRemoveExistingBook}>
+					<Icon name="delete" color="white" size={20} />
+					<Text className="text-l font-semibold text-white">Remove</Text>
+				</Pressable>
 			)}
 		</UIModal>
 	);
