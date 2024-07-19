@@ -5,15 +5,15 @@ import * as Haptics from 'expo-haptics';
 import Animated, { useSharedValue, useAnimatedStyle, withTiming } from 'react-native-reanimated';
 import type { FilterTabs } from '@/lib/types/ui/book';
 import { useBooksStore } from '@/lib/store/useBooksStore';
-import { AddNewBookModal } from '@/modals/AddNewBookModal';
 import { UIFilter } from '@/ui/UIFilter';
+import { SearchNewBookModal } from '@/modals/SearchNewBookModal';
 
 type Props = {
 	readonly onBlurSearchInput: VoidFunction;
 };
 
 const Filterbar = (props: Props) => {
-	const { selectedFilterTab, allBooksFilters, setFilterTab } = useBooksStore();
+	const { selectedFilterTab, setFilterTab } = useBooksStore();
 	const [filterTabState, setFilterTabState] = useState<FilterTabs>(selectedFilterTab);
 	const [isFilterVisible, setIsFilterVisible] = useState(false);
 	const translateX = useSharedValue(selectedFilterTab === 'all' ? -40 : 25);
@@ -61,8 +61,6 @@ const Filterbar = (props: Props) => {
 		}
 	};
 
-	console.log('allBooksFilters', allBooksFilters);
-
 	return (
 		<>
 			<View className="z-10 mb-4 flex w-full flex-row items-center justify-between">
@@ -84,20 +82,7 @@ const Filterbar = (props: Props) => {
 					<Icon name="sort" color="gray" size={24} />
 				</Pressable>
 
-				{/* {isFilterVisible && (
-				<>
-					<Animated.View className="absolute z-50 flex-1 bg-black" style={[backdropAnimatedStyle, { zIndex: 9, opacity: 0.5 }]}>
-						<TouchableOpacity className="absolute z-50 flex-1 bg-black" onPress={onBackdropPress} />
-					</Animated.View>
-					<Animated.View className="absolute right-4 top-4 w-[300px] rounded bg-white p-2 shadow-lg" style={[filterAnimatedStyle, { zIndex: 10 }]}>
-						<Text>Filter Option 1</Text>
-						<Text>Filter Option 2</Text>
-						<Text>Filter Option 3</Text>
-						<Text>Filter Option 4</Text>
-					</Animated.View>
-				</>
-			)} */}
-				<AddNewBookModal isVisible={isAddNewBookModalVisible} onClose={onCloseAddNewBookModal} />
+				<SearchNewBookModal isVisible={isAddNewBookModalVisible} onClose={onCloseAddNewBookModal} />
 			</View>
 			<UIFilter isVisible={isFilterVisible} onClose={() => setIsFilterVisible(false)} />
 		</>

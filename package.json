@@ -4,7 +4,7 @@
 	"version": "1.0.0",
 	"private": true,
 	"scripts": {
-		"dev": "expo start",
+		"dev": "cross-env expo start",
 		"reset-project": "node ./scripts/reset-project.js",
 		"android": "expo start --android",
 		"ios": "expo start --ios",
@@ -66,6 +66,7 @@
 		"@types/xml2js": "0.4.14",
 		"@typescript-eslint/eslint-plugin": "6.18.1",
 		"@typescript-eslint/parser": "6.18.1",
+		"cross-env": "7.0.3",
 		"eslint": "8.57.0",
 		"eslint-config-prettier": "9.1.0",
 		"eslint-plugin-deprecation": "1.5.0",

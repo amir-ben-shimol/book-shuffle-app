@@ -18,7 +18,10 @@
 
 		"preview": {
 			"extends": "production",
-			"distribution": "internal"
+			"distribution": "internal",
+			"env": {
+				"EXPO_PUBLIC_GOODREADS_API_KEY": "Ys0aMCpm754ABIoafSezZw"
+			}
 		}
 	},
 	"submit": {

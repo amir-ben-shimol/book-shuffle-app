@@ -16,6 +16,7 @@ type Actions = {
 	setFilterBooksQuery: (query: string) => void;
 	setFilterTab: (tab: FilterTabs) => void;
 	onAddBook: (book: Book) => void;
+	onRemoveBook: (bookId: number) => void;
 	setSelectedBook: (book: Book | null) => void;
 	setAllBooksFilters: (filters: Filters) => void;
 	resetAllBooksFilters: () => void;
@@ -55,6 +56,11 @@ const useBooksStore = create<BooksStore>()(
 			onAddBook: (book) => {
 				set((state) => ({
 					booksList: [...state.booksList, book],
+				}));
+			},
+			onRemoveBook: (bookId) => {
+				set((state) => ({
+					booksList: state.booksList.filter((book) => book.bookId !== bookId),
 				}));
 			},
 			setSelectedBook: (book) => {

@@ -66,7 +66,7 @@ export const UIFilter = (props: Props) => {
 					</View>
 					<View className="mb-4">
 						<Text className="mb-2">Minimum rating</Text>
-						<UIRating rating={minimumRating} onChange={onSetMinimumRating} />
+						<UIRating rating={minimumRating} showRating imageSize={45} onChange={onSetMinimumRating} />
 					</View>
 					<Button title="Apply Filters" onPress={handleApplyFilter} />
 					<Button title="Reset Filters" onPress={handleResetFilters} />

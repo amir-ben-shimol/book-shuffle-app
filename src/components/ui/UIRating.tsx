@@ -9,6 +9,8 @@ type Props = {
 	readonly tintColor?: string;
 	readonly readonly?: boolean;
 	readonly style?: ViewStyle;
+	readonly showRating?: boolean;
+	readonly imageSize?: number;
 	readonly onChange?: (rating: number) => void;
 };
 
@@ -28,9 +30,9 @@ export const UIRating = React.memo((props: Props) => {
 		tintColor: props.tintColor,
 		type: 'star',
 		startingValue: props.rating ?? currentRating,
-		showRating: true,
+		showRating: props.showRating,
 		showReadOnlyText: false,
-		imageSize: props.readonly ? 30 : 45,
+		imageSize: props.imageSize ?? 30,
 		fractions: 2,
 		style: { paddingVertical: 10 } as any,
 		readonly: props.readonly,
