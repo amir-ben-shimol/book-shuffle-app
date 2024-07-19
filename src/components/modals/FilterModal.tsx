@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import Modal from 'react-native-modal';
 import { Picker } from '@react-native-picker/picker';
 import { useBooksStore } from '@/lib/store/useBooksStore';
@@ -95,8 +95,14 @@ export const FilterModal = (props: Props) => {
 						</Picker>
 					</View>
 
-					<Button title="Apply Filters" onPress={handleApplyFilter} />
-					<Button title="Reset Filters" onPress={handleResetFilters} />
+					<View className="flex w-full flex-row items-center justify-between">
+						<TouchableOpacity className="rounded bg-blue-400 px-4 py-4" onPress={handleApplyFilter}>
+							<Text className="font-semibold text-white">Apply</Text>
+						</TouchableOpacity>
+						<TouchableOpacity className="rounded bg-gray-400 px-4 py-4" onPress={handleResetFilters}>
+							<Text className="font-semibold text-white">Reset</Text>
+						</TouchableOpacity>
+					</View>
 				</View>
 			</Modal>
 		</View>

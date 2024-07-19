@@ -47,7 +47,7 @@ const RootLayout: React.FC = () => {
 	}
 
 	return (
-		<GestureHandlerRootView className="flex-1 pb-8">
+		<GestureHandlerRootView className="flex-1 bg-white pb-8">
 			<BottomSheetModalProvider>
 				<BottomTabsNavigator />
 			</BottomSheetModalProvider>

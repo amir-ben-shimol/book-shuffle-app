@@ -1,12 +1,11 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import * as Haptics from 'expo-haptics';
-import { View, Text, TextInput, FlatList, TouchableOpacity, Image, Pressable } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import { View, Text, FlatList, TouchableOpacity, Image } from 'react-native';
 import { UIModal } from '@/ui/UIModal';
 import type { Book } from '@/lib/types/ui/book';
-import { debounce } from '@/lib/utils/debounce';
+import { UIInput } from '@/ui/UIInput';
 import { useBook } from '@/lib/hooks/useBooks';
-import { UIRating } from '@/ui/UIRating';
+// import { UIRating } from '@/ui/UIRating';
 import { BookInfoModal } from './BookInfoModal';
 
 type Props = {
@@ -15,42 +14,22 @@ type Props = {
 };
 
 export const SearchNewBookModal = (props: Props) => {
-	const [query, setQuery] = useState('');
-	const [results, setResults] = useState<Book[]>([]);
 	const { searchBooks } = useBook();
+	const [query, setQuery] = useState('');
+	const [isLoading, setIsLoading] = useState(false);
+	const [results, setResults] = useState<Book[]>([]);
 	const [selectedBook, setSelectedBook] = useState<Book | undefined>(undefined);
-	const [isFocused, setIsFocused] = useState(false);
 	const [isBookInfoModalVisible, setIsBookInfoModalVisible] = useState(false);
 
-	const debouncedSearchBooks = useCallback(
-		debounce(async (query: string) => {
-			if (query) {
-				const searchResults = await searchBooks(query);
+	const onFetchBooks = async (query: string) => {
+		try {
+			setIsLoading(true);
+			const searchResults = await searchBooks(query);
 
-				setResults(searchResults);
-			} else {
-				setResults([]);
-			}
-		}, 500),
-		[searchBooks],
-	);
-
-	const handleClear = () => {
-		setQuery('');
-		setResults([]);
-	};
-
-	const handleFocus = () => {
-		setIsFocused(true);
-	};
-
-	const handleBlur = () => {
-		setIsFocused(false);
-	};
-
-	const handleChange = (text: string) => {
-		setQuery(text);
-		debouncedSearchBooks(text);
+			setResults(searchResults);
+		} finally {
+			setIsLoading(false);
+		}
 	};
 
 	const onClose = () => {
@@ -69,40 +48,22 @@ export const SearchNewBookModal = (props: Props) => {
 		<>
 			<UIModal scrollable={false} modalHeaderTitle="Search your new book 😝" size="large" isOpen={props.isVisible} onClose={onClose}>
 				<View className="w-full">
-					<View
-						className={`mb-4 flex flex-row items-center rounded border bg-gray-200 px-2 py-2 ${isFocused ? 'border-blue-500' : 'border-gray-200'}`}
-					>
-						<Icon name="search" color="gray" size={24} />
-						<TextInput
-							placeholder="Title or Author"
-							className="ml-2 flex-1 text-start"
-							value={query}
-							autoFocus
-							onChangeText={handleChange}
-							onFocus={handleFocus}
-							onBlur={handleBlur}
-						/>
-						{query.length > 0 && (
-							<Pressable onPress={handleClear}>
-								<Icon name="cancel" color="gray" size={18} />
-							</Pressable>
-						)}
-					</View>
+					<UIInput placeholder="Title or Author" value={query} autoFocus debounceDelay={1000} debounceCallback={onFetchBooks} />
 					{results.length > 0 ? (
 						<FlatList
 							data={results}
 							keyExtractor={(item) => item.bookId.toString()}
-							className="w-full pb-4"
+							className="w-full"
 							renderItem={({ item }) => (
-								<TouchableOpacity className="mb-4 flex flex-row items-center" onPress={() => handleBookSelect(item)}>
-									<Image source={{ uri: item.bookCoverUrl }} className="mr-4 h-20 w-14" />
-									<View>
-										<Text className="text-lg font-bold">{item.title}</Text>
+								<TouchableOpacity className="mb-4 flex flex-row items-start" onPress={() => handleBookSelect(item)}>
+									<Image source={{ uri: item.bookCoverUrl }} className="mr-4 h-36 w-24" />
+									<View className="flex flex-1">
+										<Text className="-mt-1 text-lg font-bold">{item.title}</Text>
 										<Text className="text-sm text-gray-600">{item.author}</Text>
-										<View className="flex flex-row items-center">
+										{/* <View className="flex flex-row items-center">
 											<Text className="text-sm text-gray-600">Rating</Text>
 											<UIRating imageSize={15} rating={item.averageRating} />
-										</View>
+										</View> */}
 										<Text className="text-sm text-gray-600">{`Year: ${item.yearPublished}`}</Text>
 									</View>
 								</TouchableOpacity>
@@ -110,11 +71,11 @@ export const SearchNewBookModal = (props: Props) => {
 						/>
 					) : (
 						<View className="flex h-3/5 items-center justify-center">
-							{query.length === 0 ? (
+							{results.length === 0 && !isLoading ? (
 								<Text className="text-center text-lg text-gray-600">No results found</Text>
-							) : (
+							) : isLoading ? (
 								<Image source={require('@/assets/gifs/book-loader.gif')} className="h-48 w-48" />
-							)}
+							) : null}
 						</View>
 					)}
 				</View>

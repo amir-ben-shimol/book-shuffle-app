@@ -65,12 +65,15 @@ const Searchbar = forwardRef<SearchbarHandle>((_props, ref) => {
 				)}
 			</Pressable>
 
-			<View className={`flex flex-1 flex-row items-center rounded border bg-gray-200 px-2 py-2 ${isFocused ? 'border-blue-500' : 'border-gray-200'}`}>
+			<View
+				className={`flex flex-1 flex-row items-center rounded border bg-gray-200 px-2 py-2 transition-all ${isFocused ? 'border-blue-500' : 'border-gray-200'}`}
+			>
 				<Icon name="search" color="gray" size={24} />
 				<TextInput
 					ref={textInputRef}
 					placeholder="Search for books"
 					className="ml-2 flex-1 text-start"
+					placeholderTextColor="gray"
 					value={searchInputValueState}
 					onChangeText={onSearch}
 					onFocus={handleFocus}
