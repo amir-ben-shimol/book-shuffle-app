@@ -16,6 +16,7 @@ type Actions = {
 	setFilterBooksQuery: (query: string) => void;
 	setFilterTab: (tab: FilterTabs) => void;
 	onAddBook: (book: Book) => void;
+	onUpdateBook: (book: Book) => void;
 	onRemoveBook: (bookId: number) => void;
 	setSelectedBook: (book: Book | null) => void;
 	setAllBooksFilters: (filters: Filters) => void;
@@ -36,11 +37,17 @@ const useBooksStore = create<BooksStore>()(
 				yearStart: '',
 				yearEnd: '2024',
 				minimumRating: 0,
+				maxNumberOfPages: 'all',
 			},
 			setBooksList: (books) => {
-				set({
+				//ensure that it delete all books before adding new ones
+				set(() => ({
+					booksList: [],
+				}));
+
+				set(() => ({
 					booksList: books,
-				});
+				}));
 			},
 			setFilterBooksQuery: (query) => {
 				set({
@@ -56,6 +63,11 @@ const useBooksStore = create<BooksStore>()(
 			onAddBook: (book) => {
 				set((state) => ({
 					booksList: [...state.booksList, book],
+				}));
+			},
+			onUpdateBook: (book) => {
+				set((state) => ({
+					booksList: state.booksList.map((b) => (b.bookId === book.bookId ? book : b)),
 				}));
 			},
 			onRemoveBook: (bookId) => {
@@ -76,9 +88,8 @@ const useBooksStore = create<BooksStore>()(
 			resetAllBooksFilters: () => {
 				set({
 					allBooksFilters: {
-						yearStart: '',
-						yearEnd: '2024',
 						minimumRating: 0,
+						maxNumberOfPages: 'all',
 					},
 				});
 			},
@@ -89,9 +100,8 @@ const useBooksStore = create<BooksStore>()(
 					selectedFilterTab: 'all',
 					selectedBook: null,
 					allBooksFilters: {
-						yearStart: '',
-						yearEnd: '',
 						minimumRating: 0,
+						maxNumberOfPages: 'all',
 					},
 				});
 			},

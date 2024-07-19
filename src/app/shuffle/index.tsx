@@ -1,21 +1,29 @@
+/* eslint-disable max-lines */
 import React, { useState, useEffect, useCallback } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity, Pressable } from 'react-native';
 import { ThemedButton } from 'react-native-really-awesome-button';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import ConfettiCannon from 'react-native-confetti-cannon';
 import * as Haptics from 'expo-haptics';
 import Animated, { useSharedValue, useAnimatedStyle, withDelay, withTiming } from 'react-native-reanimated';
-import type { Book } from '@/lib/types/ui/book';
+import type { Filters, Book } from '@/lib/types/ui/book';
 import { useBooksStore } from '@/lib/store/useBooksStore';
 import { onLongHaptics } from '@/lib/utils/haptics';
 import { UIRating } from '@/ui/UIRating';
 import { BookInfoModal } from '@/modals/BookInfoModal';
+import { FilterModal } from '@/modals/FilterModal';
 
 const ShuffleScreen = () => {
 	const { booksList } = useBooksStore();
 	const [selectedShuffleBook, setSelectedShuffleBook] = useState<Book | undefined>(undefined);
 	const [fireConfetti, setFireConfetti] = useState(false);
 	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [isFilterVisible, setIsFilterVisible] = useState(false);
+
+	const [filters, setFilters] = useState<Filters>({
+		minimumRating: 0,
+		maxNumberOfPages: 'all',
+	});
 
 	const fadeInSlowOpacity = useSharedValue(0);
 	const fadeInTitleOpacity = useSharedValue(0);
@@ -48,32 +56,91 @@ const ShuffleScreen = () => {
 		opacity: fadeInAuthorOpacity.value,
 	}));
 
+	const areFiltersApplied = filters.minimumRating !== 0 || filters.maxNumberOfPages !== 'all';
+
 	const onShuffle = useCallback(() => {
 		setSelectedShuffleBook(undefined);
 		setFireConfetti(false);
 
 		Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
 
-		const filteredBooksList = booksList.filter((book) => book.bookshelves.includes('to-read'));
+		const filteredBooksList = booksList
+			.filter((book) => book.bookshelves.includes('to-read'))
+			.filter((book) => {
+				if (filters.minimumRating === 0) {
+					return true;
+				}
+
+				return book.averageRating >= filters.minimumRating;
+			})
+			.filter((book) => {
+				const numberOfPages = book.numberOfPages;
+
+				if (numberOfPages === undefined) {
+					return true;
+				}
+
+				const maxNumberOfPages = parseInt(filters.maxNumberOfPages, 10);
+
+				if (maxNumberOfPages === 0) {
+					return true;
+				}
+
+				switch (filters.maxNumberOfPages) {
+					case 'all': {
+						return true;
+					}
+					case 'up-to-200': {
+						return numberOfPages <= 200 && numberOfPages > 0;
+					}
+					case '200-400': {
+						return numberOfPages <= 400 && numberOfPages > 200;
+					}
+					case '400-500': {
+						return numberOfPages <= 500 && numberOfPages > 400;
+					}
+					case '500-600': {
+						return numberOfPages <= 600 && numberOfPages > 500;
+					}
+					case '600-800': {
+						return numberOfPages <= 800 && numberOfPages > 600;
+					}
+					case '800+': {
+						return numberOfPages >= 800;
+					}
+					default: {
+						return true;
+					}
+				}
+			});
 
 		const randomIndex = Math.floor(Math.random() * filteredBooksList.length);
 
 		if (filteredBooksList[randomIndex]) {
 			setSelectedShuffleBook(filteredBooksList[randomIndex]);
 		}
-	}, [booksList]);
+	}, [booksList, filters]);
 
 	const onResetShuffle = useCallback(() => {
 		setSelectedShuffleBook(undefined);
+		setFireConfetti(false);
+
 		fadeInSlowOpacity.value = 0;
 		fadeInFastOpacity.value = 0;
 		fadeInTitleOpacity.value = 0;
 		fadeInAuthorOpacity.value = 0;
-	}, [fadeInSlowOpacity, fadeInFastOpacity, fadeInTitleOpacity, fadeInAuthorOpacity]);
+	}, [fadeInSlowOpacity, fadeInFastOpacity, fadeInTitleOpacity, fadeInAuthorOpacity, filters]);
 
-	useEffect(() => {
-		onResetShuffle();
+	const onApplyFilters = useCallback((filters: Filters) => {
+		setFilters(filters);
 	}, []);
+
+	const onResetFilters = () => {
+		setFilters({
+			minimumRating: 0,
+			maxNumberOfPages: 'all',
+		});
+	};
 
 	return (
 		<View className={`relative -mx-4 flex h-full flex-1 items-center bg-slate-100 ${selectedShuffleBook ? 'justify-start' : 'justify-center'}`}>
@@ -116,8 +183,7 @@ const ShuffleScreen = () => {
 						</ThemedButton>
 					</Animated.View>
 
-					<Animated.View style={[fadeInSlowStyle]} className="mb-4 mt-auto flex flex-row items-center">
-						<Text className="text-lg font-medium text-gray-600">Not happy with the choice? 😫</Text>
+					<Animated.View style={[fadeInSlowStyle]} className="mb-4 mr-4 mt-auto flex flex-row items-center self-end">
 						<TouchableOpacity className="ml-2 rounded-full bg-gray-400 p-2" onPress={onResetShuffle}>
 							<Icon name="redo" color="white" size={14} />
 						</TouchableOpacity>
@@ -126,29 +192,49 @@ const ShuffleScreen = () => {
 					<BookInfoModal book={selectedShuffleBook} isVisible={isModalOpen} onClose={() => setIsModalOpen(false)} />
 				</>
 			) : (
-				<ThemedButton
-					progress
-					name="bruce"
-					type="messenger"
-					size="large"
-					backgroundColor="#60a5fa"
-					activityColor="#fff"
-					borderColor="#60a5fa"
-					textSize={30}
-					progressLoadingTime={4000}
-					onPress={async () => {
-						onLongHaptics();
+				<>
+					<Pressable className="absolute right-4 top-4" onPress={() => setIsFilterVisible(true)}>
+						<Icon name="sort" color="gray" size={24} />
+						{areFiltersApplied && (
+							<View className="absolute right-6 top-0">
+								<Icon name="circle" color="red" size={12} />
+							</View>
+						)}
+					</Pressable>
 
-						await new Promise((resolve) => {
-							setTimeout(resolve, 2500);
-							Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-						});
-						onShuffle();
-					}}
-				>
-					Find my book!
-				</ThemedButton>
+					<ThemedButton
+						progress
+						name="bruce"
+						type="messenger"
+						size="large"
+						backgroundColor="#60a5fa"
+						activityColor="#fff"
+						borderColor="#60a5fa"
+						textSize={30}
+						progressLoadingTime={4000}
+						onPress={async () => {
+							onLongHaptics();
+
+							await new Promise((resolve) => {
+								setTimeout(resolve, 2500);
+								Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+							});
+							onShuffle();
+						}}
+					>
+						Find my book!
+					</ThemedButton>
+				</>
 			)}
+
+			<FilterModal
+				type="shuffle"
+				filters={filters}
+				isVisible={isFilterVisible}
+				onClose={() => setIsFilterVisible(false)}
+				onApplyFilters={onApplyFilters}
+				onResetFilters={onResetFilters}
+			/>
 		</View>
 	);
 };

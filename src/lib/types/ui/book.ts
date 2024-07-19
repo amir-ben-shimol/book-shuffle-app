@@ -23,12 +23,13 @@ export type Book = {
 	readonly readCount: number;
 	readonly ownedCopies: number;
 	readonly bookCoverUrl?: string;
+	readonly goodreadsLink?: string;
+	readonly description?: string;
 };
 
 export type FilterTabs = 'all' | 'to-read';
 
 export type Filters = {
-	readonly yearStart: string;
-	readonly yearEnd: string;
 	readonly minimumRating: number;
+	readonly maxNumberOfPages: string;
 };

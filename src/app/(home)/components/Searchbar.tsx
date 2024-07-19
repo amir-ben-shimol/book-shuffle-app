@@ -15,7 +15,7 @@ export type SearchbarHandle = {
 const Searchbar = forwardRef<SearchbarHandle>((_props, ref) => {
 	const { user } = useUserStore();
 	const { filterBooksQuery, setFilterBooksQuery } = useBooksStore();
-	const [searchInputValueState, setSearchInputValueState] = useState('');
+	const [searchInputValueState, setSearchInputValueState] = useState(filterBooksQuery);
 	const [isFocused, setIsFocused] = useState(false);
 	const textInputRef = useRef<TextInput>(null);
 

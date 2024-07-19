@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { View, Text, TextInput, Pressable, Image } from 'react-native';
-import * as ImagePicker from 'expo-image-picker';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import Animated, { Easing, useSharedValue, useAnimatedStyle, withRepeat, withSequence, withTiming } from 'react-native-reanimated';
 import { useUserStore } from '@/lib/store/useUserStore';
 import type { User } from '@/lib/types/ui/user';
+import { launchImagePicker } from '@/lib/utils/image-picker';
 
 const SettingsPage: React.FC = () => {
 	const { user, setUser } = useUserStore();
@@ -58,18 +59,12 @@ const SettingsPage: React.FC = () => {
 	}, [editingUser, avatarUrl, setUser]);
 
 	const handleImagePicker = useCallback(async () => {
-		const result = await ImagePicker.launchImageLibraryAsync({
-			mediaTypes: ImagePicker.MediaTypeOptions.Images,
-			allowsEditing: true,
-			aspect: [1, 1],
-			quality: 1,
-		});
+		const uploadedImage = await launchImagePicker();
 
-		if (!result.canceled && result.assets[0]) {
-			setAvatarUrl(result.assets[0].uri);
-			setUser({ ...editingUser, avatarUrl: result.assets[0].uri } as User);
-			// checkIfModified({ ...editingUser, avatarUrl: result.assets[0].uri } as User);
-		}
+		if (!uploadedImage) return;
+
+		setAvatarUrl(uploadedImage);
+		setUser({ ...editingUser, avatarUrl: uploadedImage } as User);
 	}, [editingUser, setUser]);
 
 	const animatedStyle = useAnimatedStyle(() => {
@@ -78,6 +73,11 @@ const SettingsPage: React.FC = () => {
 		};
 	});
 
+	const onClearAsyncStorage = () => {
+		AsyncStorage.clear();
+		console.log('AsyncStorage cleared');
+	};
+
 	return (
 		<View className="flex-1 bg-gray-100 p-4">
 			<View className="mb-4 flex flex-row items-center">
@@ -85,16 +85,14 @@ const SettingsPage: React.FC = () => {
 				<Animated.Text style={[animatedStyle, { fontSize: 30 }]}>👋</Animated.Text>
 			</View>
 
-			<Pressable onPress={handleImagePicker}>
-				<View className="mb-4 items-center">
-					{avatarUrl ? (
-						<Image source={{ uri: avatarUrl }} className="h-24 w-24 rounded-full" />
-					) : (
-						<View className="flex h-24 w-24 items-center justify-center rounded-full bg-gray-300">
-							<Text className="text-gray-600">Upload Avatar</Text>
-						</View>
-					)}
-				</View>
+			<Pressable className="self-center shadow-lg" onPress={handleImagePicker}>
+				{avatarUrl ? (
+					<Image source={{ uri: avatarUrl }} className="h-24 w-24 rounded-full" />
+				) : (
+					<View className="flex h-24 w-24 items-center justify-center rounded-full bg-gray-300">
+						<Text className="text-gray-600">Upload Avatar</Text>
+					</View>
+				)}
 			</Pressable>
 
 			<View className="mb-4">
@@ -115,16 +113,11 @@ const SettingsPage: React.FC = () => {
 				/>
 			</View>
 
-			<View className="mb-4">
-				<Text className="mb-2">Email</Text>
-				<TextInput
-					className="rounded border border-gray-300 bg-white p-2"
-					value={editingUser?.email}
-					onChangeText={(text) => handleChange('email', text)}
-				/>
-			</View>
+			<Pressable className="my-8 items-center rounded bg-red-500 p-2" onPress={onClearAsyncStorage}>
+				<Text className="font-semibold text-white">Clear storage</Text>
+			</Pressable>
 
-			<Pressable className={`items-center rounded p-2 ${isModified ? 'bg-blue-500' : 'bg-gray-500'}`} disabled={!isModified} onPress={handleSave}>
+			<Pressable className={`my-8 items-center rounded p-2 ${isModified ? 'bg-blue-500' : 'bg-gray-500'}`} disabled={!isModified} onPress={handleSave}>
 				<Text className="font-semibold text-white">Save</Text>
 			</Pressable>
 		</View>
