@@ -1,10 +1,11 @@
-import React, { useState, useDeferredValue, useMemo, useRef, useCallback } from 'react';
+import React, { useState, useDeferredValue, useMemo, useCallback } from 'react';
 import { View, Image, TouchableOpacity, Text, FlatList } from 'react-native';
 import * as Haptics from 'expo-haptics';
 import type { Book } from '@/lib/types/ui/book';
 import { BookInfoModal } from '@/modals/BookInfoModal';
+import { onBlurActiveInput } from '@/lib/utils/input';
 import { useBooksStore } from '@/lib/store/useBooksStore';
-import Searchbar, { type SearchbarHandle } from './components/Searchbar';
+import Searchbar from './components/Searchbar';
 import Filterbar from './components/Filterbar';
 
 const HomeScreen = () => {
@@ -13,7 +14,6 @@ const HomeScreen = () => {
 	const [selectedBook, setSelectedBook] = useState<Book | undefined>(undefined);
 
 	const deferredQuery = useDeferredValue(filterBooksQuery);
-	const searchbarRef = useRef<SearchbarHandle>(null);
 
 	const filteredBooksList = useMemo(() => {
 		return booksList
@@ -79,7 +79,6 @@ const HomeScreen = () => {
 			key={item.bookId}
 			className="relative mb-4 w-[31%] overflow-hidden"
 			onPress={() => {
-				onBlurSearchInput();
 				onBookClick(item);
 			}}
 		>
@@ -94,18 +93,14 @@ const HomeScreen = () => {
 
 	const renderBook = useCallback(({ item }: { item: Book }) => <BookItem item={item} />, []);
 
-	const onBlurSearchInput = useCallback(() => {
-		searchbarRef.current?.blurInput();
-	}, []);
-
 	const onUpdateBook = (book: Book) => {
 		setSelectedBook(book);
 	};
 
 	return (
 		<View className="flex flex-1">
-			<Searchbar ref={searchbarRef} />
-			<Filterbar onBlurSearchInput={onBlurSearchInput} />
+			<Searchbar />
+			<Filterbar />
 			<FlatList
 				data={filteredBooksList}
 				columnWrapperStyle={{ justifyContent: 'space-between' }}
@@ -119,7 +114,7 @@ const HomeScreen = () => {
 				windowSize={21}
 				updateCellsBatchingPeriod={50}
 				removeClippedSubviews
-				onScroll={onBlurSearchInput}
+				onTouchStart={onBlurActiveInput}
 			/>
 			<BookInfoModal book={selectedBook} isVisible={isModalOpen} onUpdateBook={onUpdateBook} onClose={() => setIsModalOpen(false)} />
 		</View>

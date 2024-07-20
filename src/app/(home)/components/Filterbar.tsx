@@ -7,12 +7,9 @@ import type { FilterTabs } from '@/lib/types/ui/book';
 import { useBooksStore } from '@/lib/store/useBooksStore';
 import { SearchNewBookModal } from '@/modals/SearchNewBookModal';
 import { FilterModal } from '@/modals/FilterModal';
+import { onBlurActiveInput } from '@/lib/utils/input';
 
-type Props = {
-	readonly onBlurSearchInput: VoidFunction;
-};
-
-const Filterbar = (props: Props) => {
+const Filterbar = () => {
 	const { selectedFilterTab, allBooksFilters, setFilterTab } = useBooksStore();
 	const [filterTabState, setFilterTabState] = useState<FilterTabs>(selectedFilterTab);
 	const [isFilterVisible, setIsFilterVisible] = useState(false);
@@ -47,7 +44,12 @@ const Filterbar = (props: Props) => {
 	const onAddNewBook = () => {
 		Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
 		setIsAddNewBookModalVisible(true);
-		props.onBlurSearchInput();
+		onBlurActiveInput();
+	};
+
+	const onOpenFilterModal = () => {
+		setIsFilterVisible(true);
+		onBlurActiveInput();
 	};
 
 	return (
@@ -67,7 +69,7 @@ const Filterbar = (props: Props) => {
 					<Animated.View className="absolute bottom-0 h-[2px] w-16 bg-blue-500" style={animatedTranslateStyle} />
 				</View>
 
-				<Pressable className="relative" onPress={() => setIsFilterVisible(true)}>
+				<Pressable className="relative" onPress={onOpenFilterModal}>
 					<Icon name="sort" color="gray" size={24} />
 					{areFiltersApplied && (
 						<View className="absolute right-6 top-0">

@@ -33,3 +33,9 @@ export type Filters = {
 	readonly minimumRating: number;
 	readonly maxNumberOfPages: string;
 };
+
+export type DescriptionAndReviewsCount = {
+	readonly description: string;
+	readonly textReviewsCount: string;
+	readonly ratingsCount: string;
+};
