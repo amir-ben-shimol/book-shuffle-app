@@ -21,7 +21,7 @@ type Props = {
 	readonly children?: React.ReactNode;
 	readonly icon?: keyof typeof icons;
 	readonly svgIconClassName?: string;
-	readonly size?: 'smallToBig' | 'bigToSmall' | 'small' | 'medium' | 'large';
+	readonly size?: 'smallToBig' | 'bigToSmall' | 'small' | 'medium' | 'large' | 'full';
 	readonly scrollable?: boolean;
 	readonly className?: string;
 	readonly style?: ViewStyle;
@@ -76,6 +76,9 @@ export const UIModal = (props: Props) => {
 			}
 			case 'large': {
 				return ['80%'];
+			}
+			case 'full': {
+				return ['100%'];
 			}
 			default: {
 				return ['75%'];
@@ -160,6 +163,7 @@ export const UIModal = (props: Props) => {
 			snapPoints={snapPoints}
 			enablePanDownToClose
 			stackBehavior="push"
+			handleComponent={props.noHeader ? null : undefined}
 			backdropComponent={(props) => <CustomBackdrop {...props} />}
 			onDismiss={onDismiss}
 		>

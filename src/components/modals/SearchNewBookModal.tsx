@@ -5,6 +5,7 @@ import { UIModal } from '@/ui/UIModal';
 import type { Book } from '@/lib/types/ui/book';
 import { UIInput } from '@/ui/UIInput';
 import { useBook } from '@/lib/hooks/useBooks';
+import { getImageDominantColor } from '@/lib/utils/image';
 // import { UIRating } from '@/ui/UIRating';
 import { onBlurActiveInput } from '@/lib/utils/input';
 import { BookInfoModal } from './BookInfoModal';
@@ -20,6 +21,15 @@ export const SearchNewBookModal = (props: Props) => {
 	const [results, setResults] = useState<Book[]>([]);
 	const [selectedBook, setSelectedBook] = useState<Book | undefined>(undefined);
 	const [isBookInfoModalVisible, setIsBookInfoModalVisible] = useState(false);
+	const [bookCoverBackgroundColors, setBookCoverBackgroundColors] = useState<string[]>(['#1e293b', '#404040']);
+
+	const fetchBookCoverColors = async (bookCoverImage: string) => {
+		const colors = await getImageDominantColor(bookCoverImage);
+
+		if (colors.length > 0) {
+			setBookCoverBackgroundColors(colors);
+		}
+	};
 
 	const onFetchBooks = async (query: string) => {
 		try {
@@ -41,9 +51,14 @@ export const SearchNewBookModal = (props: Props) => {
 		setResults([]);
 	};
 
-	const handleBookSelect = (book: Book) => {
+	const handleBookSelect = async (book: Book) => {
 		Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Soft);
 		setSelectedBook(book);
+
+		if (book.bookCoverUrl) {
+			await fetchBookCoverColors(book.bookCoverUrl);
+		}
+
 		setIsBookInfoModalVisible(true);
 	};
 
@@ -97,6 +112,7 @@ export const SearchNewBookModal = (props: Props) => {
 				book={selectedBook}
 				canAdd
 				isVisible={isBookInfoModalVisible}
+				bookCoverBackgroundColors={bookCoverBackgroundColors}
 				onSuccessfulAdd={onClose}
 				onClose={() => setIsBookInfoModalVisible(false)}
 			/>

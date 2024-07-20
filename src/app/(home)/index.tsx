@@ -3,6 +3,7 @@ import { View, Image, TouchableOpacity, Text, FlatList } from 'react-native';
 import * as Haptics from 'expo-haptics';
 import type { Book } from '@/lib/types/ui/book';
 import { BookInfoModal } from '@/modals/BookInfoModal';
+import { getImageDominantColor } from '@/lib/utils/image';
 import { onBlurActiveInput } from '@/lib/utils/input';
 import { useBooksStore } from '@/lib/store/useBooksStore';
 import Searchbar from './components/Searchbar';
@@ -12,6 +13,15 @@ const HomeScreen = () => {
 	const { booksList, filterBooksQuery, selectedFilterTab, allBooksFilters } = useBooksStore();
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [selectedBook, setSelectedBook] = useState<Book | undefined>(undefined);
+	const [bookCoverBackgroundColors, setBookCoverBackgroundColors] = useState<string[]>(['#1e293b', '#404040']);
+
+	const fetchBookCoverColors = async (bookCoverImage: string) => {
+		const colors = await getImageDominantColor(bookCoverImage);
+
+		if (colors.length > 0) {
+			setBookCoverBackgroundColors(colors);
+		}
+	};
 
 	const deferredQuery = useDeferredValue(filterBooksQuery);
 
@@ -68,10 +78,15 @@ const HomeScreen = () => {
 			});
 	}, [booksList, deferredQuery, selectedFilterTab, allBooksFilters]);
 
-	const onBookClick = useCallback((book: Book) => {
+	const onBookClick = useCallback(async (book: Book) => {
 		Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-		setIsModalOpen(true);
 		setSelectedBook(book);
+
+		if (book.bookCoverUrl) {
+			await fetchBookCoverColors(book.bookCoverUrl);
+		}
+
+		setIsModalOpen(true);
 	}, []);
 
 	const BookItem = React.memo(({ item }: { item: Book }) => (
@@ -116,7 +131,13 @@ const HomeScreen = () => {
 				removeClippedSubviews
 				onTouchStart={onBlurActiveInput}
 			/>
-			<BookInfoModal book={selectedBook} isVisible={isModalOpen} onUpdateBook={onUpdateBook} onClose={() => setIsModalOpen(false)} />
+			<BookInfoModal
+				book={selectedBook}
+				isVisible={isModalOpen}
+				bookCoverBackgroundColors={bookCoverBackgroundColors}
+				onUpdateBook={onUpdateBook}
+				onClose={() => setIsModalOpen(false)}
+			/>
 		</View>
 	);
 };
