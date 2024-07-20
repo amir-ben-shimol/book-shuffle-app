@@ -1,55 +1,22 @@
-import React, { useState, useRef, forwardRef, useImperativeHandle, useCallback } from 'react';
-import { View, TextInput, Image, Pressable, Keyboard } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import React from 'react';
+import { View, Image, Pressable } from 'react-native';
 import { router } from 'expo-router';
-import * as Haptics from 'expo-haptics';
 import { useBooksStore } from '@/lib/store/useBooksStore';
 import { useUserStore } from '@/lib/store/useUserStore';
 import { UISvg } from '@/ui/UISvg';
-import { debounce } from '@/lib/utils/debounce';
+import { UIInput } from '@/ui/UIInput';
 
-export type SearchbarHandle = {
-	blurInput: () => void;
-};
-
-const Searchbar = forwardRef<SearchbarHandle>((_props, ref) => {
+const Searchbar = () => {
 	const { user } = useUserStore();
-	const { filterBooksQuery, setFilterBooksQuery } = useBooksStore();
-	const [searchInputValueState, setSearchInputValueState] = useState(filterBooksQuery);
-	const [isFocused, setIsFocused] = useState(false);
-	const textInputRef = useRef<TextInput>(null);
+	const { setFilterBooksQuery } = useBooksStore();
 
-	const debouncedSetFilterBooksQuery = useCallback(
-		debounce((query: string) => {
-			setFilterBooksQuery(query);
-		}, 300),
-		[],
-	);
-
-	const onSearch = (text: string) => {
-		setSearchInputValueState(text);
-		debouncedSetFilterBooksQuery(text);
+	const onSetFilterBooksQuery = (query: string) => {
+		setFilterBooksQuery(query);
 	};
 
-	const handleFocus = () => {
-		setIsFocused(true);
-		Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Soft);
-	};
-
-	const handleBlur = () => {
-		setIsFocused(false);
-		Keyboard.dismiss();
-	};
-
-	const handleClear = () => {
+	const onClear = () => {
 		setFilterBooksQuery('');
-		setSearchInputValueState('');
-		debouncedSetFilterBooksQuery.cancel();
 	};
-
-	useImperativeHandle(ref, () => ({
-		blurInput: handleBlur,
-	}));
 
 	const onNavigateToSettings = () => {
 		router.push('/settings');
@@ -59,13 +26,24 @@ const Searchbar = forwardRef<SearchbarHandle>((_props, ref) => {
 		<View className="my-6 flex w-full flex-row items-center border-b border-gray-200 pb-4">
 			<Pressable onPress={onNavigateToSettings}>
 				{user?.avatarUrl ? (
-					<Image source={{ uri: user.avatarUrl }} className="mr-2 h-10 w-10 rounded-full" />
+					<Image source={{ uri: user.avatarUrl }} className="mr-2 h-8 w-8 rounded-full" />
 				) : (
-					<UISvg name="profileImagePlaceholder" className="mr-2 h-10 w-10 rounded-full" />
+					<UISvg name="profileImagePlaceholder" className="mr-2 h-8 w-8 rounded-full" />
 				)}
 			</Pressable>
 
-			<View
+			<UIInput
+				placeholder="Search for books"
+				className="ml-2 flex-1 text-start"
+				placeholderTextColor="gray"
+				icon="search"
+				showClearButton
+				debounceDelay={300}
+				debounceCallback={onSetFilterBooksQuery}
+				onClear={onClear}
+			/>
+
+			{/* <View
 				className={`flex flex-1 flex-row items-center rounded border bg-gray-200 px-2 py-2 transition-all ${isFocused ? 'border-blue-500' : 'border-gray-200'}`}
 			>
 				<Icon name="search" color="gray" size={24} />
@@ -84,9 +62,9 @@ const Searchbar = forwardRef<SearchbarHandle>((_props, ref) => {
 						<Icon name="cancel" color="gray" size={18} />
 					</Pressable>
 				)}
-			</View>
+			</View> */}
 		</View>
 	);
-});
+};
 
 export default Searchbar;

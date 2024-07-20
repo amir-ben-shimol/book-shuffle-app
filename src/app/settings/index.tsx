@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { View, Text, TextInput, Pressable, Image } from 'react-native';
+import { View, Text, Pressable, Image } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Animated, { Easing, useSharedValue, useAnimatedStyle, withRepeat, withSequence, withTiming } from 'react-native-reanimated';
 import { useUserStore } from '@/lib/store/useUserStore';
 import type { User } from '@/lib/types/ui/user';
 import { launchImagePicker } from '@/lib/utils/image-picker';
+import { UIInput } from '@/ui/UIInput';
 
 const SettingsPage: React.FC = () => {
 	const { user, setUser } = useUserStore();
@@ -95,30 +96,29 @@ const SettingsPage: React.FC = () => {
 				)}
 			</Pressable>
 
-			<View className="mb-4">
-				<Text className="mb-2">First Name</Text>
-				<TextInput
-					className="rounded border border-gray-300 bg-white p-2"
-					value={editingUser?.firstName}
-					onChangeText={(text) => handleChange('firstName', text)}
-				/>
+			<View className="mt-4 flex-1">
+				<>
+					<UIInput
+						label="First Name"
+						value={editingUser?.firstName}
+						className="mb-4 border-gray-300 bg-white"
+						onChangeText={(text) => handleChange('firstName', text)}
+					/>
+
+					<UIInput
+						label="First Name"
+						className="border-gray-300 bg-white"
+						value={editingUser?.lastName}
+						onChangeText={(text) => handleChange('lastName', text)}
+					/>
+				</>
 			</View>
 
-			<View className="mb-4">
-				<Text className="mb-2">Last Name</Text>
-				<TextInput
-					className="rounded border border-gray-300 bg-white p-2"
-					value={editingUser?.lastName}
-					onChangeText={(text) => handleChange('lastName', text)}
-				/>
-			</View>
-
+			<Pressable className={`mt-4 items-center rounded p-2 ${isModified ? 'bg-blue-500' : 'bg-gray-500'}`} disabled={!isModified} onPress={handleSave}>
+				<Text className="font-semibold text-white">Save</Text>
+			</Pressable>
 			<Pressable className="my-8 items-center rounded bg-red-500 p-2" onPress={onClearAsyncStorage}>
 				<Text className="font-semibold text-white">Clear storage</Text>
-			</Pressable>
-
-			<Pressable className={`my-8 items-center rounded p-2 ${isModified ? 'bg-blue-500' : 'bg-gray-500'}`} disabled={!isModified} onPress={handleSave}>
-				<Text className="font-semibold text-white">Save</Text>
 			</Pressable>
 		</View>
 	);

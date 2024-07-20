@@ -21,10 +21,11 @@ type Props = {
 	readonly children?: React.ReactNode;
 	readonly icon?: keyof typeof icons;
 	readonly svgIconClassName?: string;
-	readonly size?: 'smallToBig' | 'small' | 'medium' | 'large';
+	readonly size?: 'smallToBig' | 'bigToSmall' | 'small' | 'medium' | 'large';
 	readonly scrollable?: boolean;
 	readonly className?: string;
 	readonly style?: ViewStyle;
+	readonly noHeader?: boolean;
 	readonly onClick?: () => void;
 	readonly onClose?: () => void;
 	readonly bottomButtonOnClick?: () => void;
@@ -63,6 +64,9 @@ export const UIModal = (props: Props) => {
 		switch (props.size) {
 			case 'smallToBig': {
 				return ['45%', '91%'];
+			}
+			case 'bigToSmall': {
+				return ['91%', '45%'];
 			}
 			case 'small': {
 				return ['50%'];
@@ -159,14 +163,16 @@ export const UIModal = (props: Props) => {
 			backdropComponent={(props) => <CustomBackdrop {...props} />}
 			onDismiss={onDismiss}
 		>
-			<View className={`flex-row items-center justify-between px-3 pb-4 ${headerShadow ? 'shadow' : ''} bg-white`}>
-				<Text className="mr-2 flex-1 flex-shrink">
-					<UITitle size="small">{props.modalHeaderTitle}</UITitle>
-				</Text>
-				<TouchableOpacity className="rounded-full bg-gray-300 p-2" onPress={() => bottomSheetModalRef.current?.dismiss()}>
-					<UISvg name="close" className="h-3 w-3 fill-purpleText" />
-				</TouchableOpacity>
-			</View>
+			{!props.noHeader && (
+				<View className={`flex-row items-center justify-between px-3 pb-4 ${headerShadow ? 'shadow' : ''} bg-white`}>
+					<Text className="mr-2 flex-1 flex-shrink">
+						<UITitle size="small">{props.modalHeaderTitle}</UITitle>
+					</Text>
+					<TouchableOpacity className="rounded-full bg-gray-300 p-2" onPress={() => bottomSheetModalRef.current?.dismiss()}>
+						<UISvg name="close" className="h-3 w-3 fill-purpleText" />
+					</TouchableOpacity>
+				</View>
+			)}
 			{props.scrollable === false ? (
 				<BottomSheetView className={props.className} style={[{ padding: 12 }, props.style]}>
 					<ModalBody {...props} />

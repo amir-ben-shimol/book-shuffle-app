@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { parseStringPromise } from 'xml2js';
 import { BackendService } from '../utils/backend-service';
-import type { Book } from '../types/ui/book';
+import type { Book, DescriptionAndReviewsCount } from '../types/ui/book';
 
 const GOODREAD_BASE_URL = 'https://www.goodreads.com';
 
@@ -20,16 +20,24 @@ export const useBook = () => {
 		}
 	};
 
-	const getBookDescription = async (bookId: number): Promise<string | undefined> => {
+	const getBookDescriptionAndReviewsCount = async (bookId: number): Promise<DescriptionAndReviewsCount | undefined> => {
 		try {
 			const response = await BackendService.get<string>(
 				`${GOODREAD_BASE_URL}/book/show.xml?key=${process.env.EXPO_PUBLIC_GOODREADS_API_KEY}&id=${bookId}`,
 			);
 
 			const result = await parseStringPromise(response);
+
+			console.log('result from api', result?.GoodreadsResponse?.book?.[0]);
+			const textReviewsCount = result?.GoodreadsResponse?.book?.[0]?.text_reviews_count?.[0];
+			const ratingCount = result?.GoodreadsResponse?.book?.[0]?.ratings_count?.[0];
 			const description = result?.GoodreadsResponse?.book?.[0]?.description?.[0];
 
-			return description || undefined;
+			return {
+				description: description || '',
+				textReviewsCount: textReviewsCount || '',
+				ratingsCount: ratingCount || '',
+			};
 		} catch (error) {
 			console.error('Error fetching book description:', error);
 
@@ -83,5 +91,5 @@ export const useBook = () => {
 		}
 	};
 
-	return { fetchBookImageUrl, getBookDescription, searchBooks };
+	return { fetchBookImageUrl, getBookDescriptionAndReviewsCount, searchBooks };
 };

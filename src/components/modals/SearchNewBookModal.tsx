@@ -6,6 +6,7 @@ import type { Book } from '@/lib/types/ui/book';
 import { UIInput } from '@/ui/UIInput';
 import { useBook } from '@/lib/hooks/useBooks';
 // import { UIRating } from '@/ui/UIRating';
+import { onBlurActiveInput } from '@/lib/utils/input';
 import { BookInfoModal } from './BookInfoModal';
 
 type Props = {
@@ -15,7 +16,6 @@ type Props = {
 
 export const SearchNewBookModal = (props: Props) => {
 	const { searchBooks } = useBook();
-	const [query, setQuery] = useState('');
 	const [isLoading, setIsLoading] = useState(false);
 	const [results, setResults] = useState<Book[]>([]);
 	const [selectedBook, setSelectedBook] = useState<Book | undefined>(undefined);
@@ -34,7 +34,10 @@ export const SearchNewBookModal = (props: Props) => {
 
 	const onClose = () => {
 		props.onClose();
-		setQuery('');
+		setResults([]);
+	};
+
+	const onClearInputValue = () => {
 		setResults([]);
 	};
 
@@ -46,9 +49,18 @@ export const SearchNewBookModal = (props: Props) => {
 
 	return (
 		<>
-			<UIModal scrollable={false} modalHeaderTitle="Search your new book 😝" size="large" isOpen={props.isVisible} onClose={onClose}>
+			<UIModal scrollable={false} className="pb-40" modalHeaderTitle="Search your new book 😝" size="large" isOpen={props.isVisible} onClose={onClose}>
 				<View className="w-full">
-					<UIInput placeholder="Title or Author" value={query} autoFocus debounceDelay={1000} debounceCallback={onFetchBooks} />
+					<UIInput
+						placeholder="Title or Author"
+						className="mb-4"
+						autoFocus
+						icon="search"
+						showClearButton
+						debounceDelay={1000}
+						debounceCallback={onFetchBooks}
+						onClear={onClearInputValue}
+					/>
 					{results.length > 0 ? (
 						<FlatList
 							data={results}
@@ -68,6 +80,7 @@ export const SearchNewBookModal = (props: Props) => {
 									</View>
 								</TouchableOpacity>
 							)}
+							onTouchStart={onBlurActiveInput}
 						/>
 					) : (
 						<View className="flex h-3/5 items-center justify-center">

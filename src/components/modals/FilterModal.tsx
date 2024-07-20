@@ -96,11 +96,11 @@ export const FilterModal = (props: Props) => {
 					</View>
 
 					<View className="flex w-full flex-row items-center justify-between">
-						<TouchableOpacity className="rounded bg-blue-400 px-4 py-4" onPress={handleApplyFilter}>
-							<Text className="font-semibold text-white">Apply</Text>
-						</TouchableOpacity>
-						<TouchableOpacity className="rounded bg-gray-400 px-4 py-4" onPress={handleResetFilters}>
+						<TouchableOpacity className="rounded bg-gray-400 px-8 py-4" onPress={handleResetFilters}>
 							<Text className="font-semibold text-white">Reset</Text>
+						</TouchableOpacity>
+						<TouchableOpacity className="rounded bg-blue-400 px-8 py-4" onPress={handleApplyFilter}>
+							<Text className="font-semibold text-white">Apply</Text>
 						</TouchableOpacity>
 					</View>
 				</View>

@@ -33,3 +33,22 @@ export const convertToBookArray = (jsonData: any[]): Book[] => {
 		};
 	});
 };
+
+/**
+ * Splits a title into title and subTitle based on parentheses
+ * @param fullTitle The full title to split
+ * @returns An object containing title and subTitle
+ */
+export const splitBookTitleAndSubtitle = (fullTitle: string): { title: string; subTitle: string } => {
+	const titleRegex = /(.*?)(\s*\((.*?)\))?$/;
+	const match = fullTitle.match(titleRegex);
+
+	if (match && match[1]) {
+		const title = match[1].trim();
+		const subTitle = match[3] ? match[3].trim() : '';
+
+		return { title, subTitle };
+	}
+
+	return { title: fullTitle, subTitle: '' };
+};
