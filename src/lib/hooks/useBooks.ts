@@ -28,7 +28,6 @@ export const useBook = () => {
 
 			const result = await parseStringPromise(response);
 
-			console.log('result from api', result?.GoodreadsResponse?.book?.[0]);
 			const textReviewsCount = result?.GoodreadsResponse?.book?.[0]?.text_reviews_count?.[0];
 			const ratingCount = result?.GoodreadsResponse?.book?.[0]?.ratings_count?.[0];
 			const description = result?.GoodreadsResponse?.book?.[0]?.description?.[0];

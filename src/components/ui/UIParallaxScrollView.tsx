@@ -1,16 +1,16 @@
 import type { PropsWithChildren, ReactElement } from 'react';
-import { useColorScheme, View } from 'react-native';
+import { View } from 'react-native';
 import Animated, { interpolate, useAnimatedRef, useAnimatedStyle, useScrollViewOffset } from 'react-native-reanimated';
+import { UILinearGradient } from './UILinearGradient';
 
 const HEADER_HEIGHT = 250;
 
 type Props = PropsWithChildren<{
 	headerImage: ReactElement;
-	headerBackgroundColor: { dark: string; light: string };
+	headerBackgroundColor: string[];
 }>;
 
 export const UIParallaxScrollView = ({ children, headerImage, headerBackgroundColor }: Props) => {
-	const colorScheme = useColorScheme() ?? 'light';
 	const scrollRef = useAnimatedRef<Animated.ScrollView>();
 	const scrollOffset = useScrollViewOffset(scrollRef);
 
@@ -30,10 +30,8 @@ export const UIParallaxScrollView = ({ children, headerImage, headerBackgroundCo
 	return (
 		<View className="">
 			<Animated.ScrollView ref={scrollRef} scrollEventThrottle={16}>
-				<Animated.View
-					className="flex h-[280px] items-center justify-center overflow-hidden"
-					style={[{ backgroundColor: headerBackgroundColor[colorScheme] }, headerAnimatedStyle]}
-				>
+				<Animated.View className="flex h-[280px] items-center justify-center overflow-hidden" style={[headerAnimatedStyle]}>
+					<UILinearGradient className="absolute h-full w-full" gradientColors={headerBackgroundColor} />
 					{headerImage}
 				</Animated.View>
 				<View className="flex-1 overflow-hidden">{children}</View>

@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Animated, { Easing, useSharedValue, useAnimatedStyle, withRepeat, withSequence, withTiming } from 'react-native-reanimated';
 import { useUserStore } from '@/lib/store/useUserStore';
 import type { User } from '@/lib/types/ui/user';
-import { launchImagePicker } from '@/lib/utils/image-picker';
+import { launchImagePicker } from '@/lib/utils/image';
 import { UIInput } from '@/ui/UIInput';
 
 const SettingsPage: React.FC = () => {
