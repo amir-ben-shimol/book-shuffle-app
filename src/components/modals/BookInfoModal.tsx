@@ -9,7 +9,7 @@ import { UIRating } from '@/ui/UIRating';
 import { useBook } from '@/lib/hooks/useBooks';
 import type { Book, DescriptionAndReviewsCount } from '@/lib/types/ui/book';
 import { useBooksStore } from '@/lib/store/useBooksStore';
-import { getImageDominantColor, launchImagePicker } from '@/lib/utils/image';
+import { launchImagePicker } from '@/lib/utils/image';
 import { UIParallaxScrollView } from '@/ui/UIParallaxScrollView';
 import { formatNumberWithCommas } from '@/lib/utils/format';
 import { splitBookTitleAndSubtitle } from '@/lib/utils/book';
@@ -18,6 +18,7 @@ type Props = {
 	readonly book?: Book;
 	readonly isVisible: boolean;
 	readonly canAdd?: boolean;
+	readonly bookCoverBackgroundColors: string[];
 	readonly onUpdateBook?: (book: Book) => void;
 	readonly onClose: VoidFunction;
 	readonly onSuccessfulAdd?: VoidFunction;
@@ -27,12 +28,10 @@ export const BookInfoModal = (props: Props) => {
 	const { getBookDescriptionAndReviewsCount } = useBook();
 	const { onAddBook, onUpdateBook, onRemoveBook } = useBooksStore();
 	const [bookDescriptionAndReviewsCount, setBookDescriptionAndReviewsCount] = useState<DescriptionAndReviewsCount | undefined>(undefined);
-	const [bookCoverBackgroundColors, setBookCoverBackgroundColors] = useState<string[]>(['#1e293b', '#404040']);
 
 	const onClose = () => {
 		props.onClose();
 		setBookDescriptionAndReviewsCount(undefined);
-		setBookCoverBackgroundColors(['#1e293b', '#404040']);
 	};
 
 	const onAddNewBook = () => {
@@ -55,16 +54,6 @@ export const BookInfoModal = (props: Props) => {
 		onClose();
 	};
 
-	const fetchBookCoverColors = async () => {
-		if (!props.book?.bookCoverUrl) return;
-
-		const colors = await getImageDominantColor(props.book.bookCoverUrl);
-
-		if (colors.length > 0) {
-			setBookCoverBackgroundColors(colors);
-		}
-	};
-
 	const fetchData = async () => {
 		if (!props.book) return;
 
@@ -73,8 +62,6 @@ export const BookInfoModal = (props: Props) => {
 		if (!descriptionAndReviewsCountResults) return;
 
 		setBookDescriptionAndReviewsCount(descriptionAndReviewsCountResults);
-
-		fetchBookCoverColors();
 	};
 
 	useEffect(() => {
@@ -83,17 +70,10 @@ export const BookInfoModal = (props: Props) => {
 		fetchData();
 	}, [props.book]);
 
-	const openGoodreads = (bookId?: number, goodreadsLink?: string) => {
-		const appUrl = `goodreads://book/show/${bookId}`;
-		const webUrl = goodreadsLink;
+	const openGoodreads = (goodreadsLink?: string) => {
+		if (!goodreadsLink) return;
 
-		Linking.canOpenURL(appUrl).then((supported) => {
-			if (supported) {
-				Linking.openURL(appUrl);
-			} else if (webUrl) {
-				Linking.openURL(webUrl);
-			}
-		});
+		Linking.openURL(goodreadsLink);
 	};
 
 	const onChangeBookCoverImage = async () => {
@@ -109,7 +89,7 @@ export const BookInfoModal = (props: Props) => {
 
 	const BookVocerImage = (
 		<View className="relative">
-			<Image source={{ uri: props.book?.bookCoverUrl }} className="h-[250px] w-[190px] shadow-lg" resizeMode="cover" />
+			<Image source={{ uri: props.book?.bookCoverUrl }} className="h-[280px] w-[190px]" resizeMode="cover" />
 			{props.onUpdateBook && (
 				<Pressable className="absolute right-1 top-1 self-end" onPress={onChangeBookCoverImage}>
 					<Icon name="edit" color="gray" size={20} />
@@ -125,11 +105,14 @@ export const BookInfoModal = (props: Props) => {
 			className="p-0"
 			noHeader
 			modalHeaderTitle={props.book?.title ?? ''}
-			size={props.canAdd ? 'large' : 'smallToBig'}
+			size={props.canAdd ? 'large' : 'full'}
 			onClose={onClose}
 		>
-			<UIParallaxScrollView headerBackgroundColor={bookCoverBackgroundColors} headerImage={BookVocerImage}>
-				<View className="bg-white px-4">
+			<UIParallaxScrollView headerBackgroundColor={props.bookCoverBackgroundColors} headerImage={BookVocerImage}>
+				<View className="relative bg-white px-4">
+					<Pressable className="absolute left-2 top-2 z-50 rounded-full bg-slate-300 p-1" onPress={onClose}>
+						<Icon name="close" color="gray" size={20} />
+					</Pressable>
 					<View className="mt-4 flex items-center">
 						{props.book?.title && splitBookTitleAndSubtitle(props.book.title).title && (
 							<Text className="text-center text-2xl font-semibold text-gray-800">{splitBookTitleAndSubtitle(props.book?.title).title}</Text>
@@ -167,7 +150,7 @@ export const BookInfoModal = (props: Props) => {
 
 					<View className="mb-4 mt-4 self-start">
 						<Text className="text-lg font-semibold text-gray-600">For more info:</Text>
-						<TouchableOpacity onPress={() => openGoodreads(props.book?.bookId, props.book?.goodreadsLink)}>
+						<TouchableOpacity onPress={() => openGoodreads(props.book?.goodreadsLink)}>
 							<Image source={require('@/assets/images/goodreads-logo.png')} className="h-[43px] w-[200px]" resizeMode="cover" />
 						</TouchableOpacity>
 					</View>

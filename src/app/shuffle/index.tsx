@@ -12,6 +12,8 @@ import { onLongHaptics } from '@/lib/utils/haptics';
 import { UIRating } from '@/ui/UIRating';
 import { BookInfoModal } from '@/modals/BookInfoModal';
 import { FilterModal } from '@/modals/FilterModal';
+import { splitBookTitleAndSubtitle } from '@/lib/utils/book';
+import { getImageDominantColor } from '@/lib/utils/image';
 
 const ShuffleScreen = () => {
 	const { booksList } = useBooksStore();
@@ -24,6 +26,16 @@ const ShuffleScreen = () => {
 		minimumRating: 0,
 		maxNumberOfPages: 'all',
 	});
+
+	const [bookCoverBackgroundColors, setBookCoverBackgroundColors] = useState<string[]>([]);
+
+	const fetchBookCoverColors = async (bookCoverImage: string) => {
+		const colors = await getImageDominantColor(bookCoverImage);
+
+		if (colors.length > 0) {
+			setBookCoverBackgroundColors(colors);
+		}
+	};
 
 	const fadeInSlowOpacity = useSharedValue(0);
 	const fadeInTitleOpacity = useSharedValue(0);
@@ -142,14 +154,29 @@ const ShuffleScreen = () => {
 		});
 	};
 
+	const onViewBookDetails = () => {
+		if (selectedShuffleBook?.bookCoverUrl) {
+			fetchBookCoverColors(selectedShuffleBook.bookCoverUrl);
+		}
+
+		setIsModalOpen(true);
+	};
+
 	return (
 		<View className={`relative -mx-4 flex h-full flex-1 items-center bg-slate-100 ${selectedShuffleBook ? 'justify-start' : 'justify-center'}`}>
 			{selectedShuffleBook ? (
 				<>
 					<View className="mt-6 flex items-center justify-center">
-						<Animated.Text className="text-center text-4xl font-bold text-blue-500" style={fadeInTitleStyle}>
-							{selectedShuffleBook.title}
-						</Animated.Text>
+						{selectedShuffleBook.title && splitBookTitleAndSubtitle(selectedShuffleBook.title).title && (
+							<Animated.Text className="text-center text-4xl font-bold text-blue-500" style={fadeInTitleStyle}>
+								{splitBookTitleAndSubtitle(selectedShuffleBook.title).title}
+							</Animated.Text>
+						)}
+						{selectedShuffleBook.title && splitBookTitleAndSubtitle(selectedShuffleBook?.title).subTitle && (
+							<Animated.Text className="text-center text-xl font-semibold text-gray-500" style={fadeInTitleStyle}>
+								{`(${splitBookTitleAndSubtitle(selectedShuffleBook?.title).subTitle})`}
+							</Animated.Text>
+						)}
 						<Animated.Text className="mb-4 text-xl font-semibold text-gray-600" style={fadeInAuthorStyle}>
 							{`by ${selectedShuffleBook.author}`}
 						</Animated.Text>
@@ -172,12 +199,13 @@ const ShuffleScreen = () => {
 						<ThemedButton
 							name="bruce"
 							type="messenger"
+							progressLoadingTime={0}
 							backgroundColor="#60a5fa"
 							activityColor="#fff"
 							borderColor="#60a5fa"
 							size="small"
 							textSize={14}
-							onPress={() => setIsModalOpen(true)}
+							onPress={onViewBookDetails}
 						>
 							View details
 						</ThemedButton>
@@ -189,7 +217,12 @@ const ShuffleScreen = () => {
 						</TouchableOpacity>
 					</Animated.View>
 
-					<BookInfoModal book={selectedShuffleBook} isVisible={isModalOpen} onClose={() => setIsModalOpen(false)} />
+					<BookInfoModal
+						book={selectedShuffleBook}
+						bookCoverBackgroundColors={bookCoverBackgroundColors}
+						isVisible={isModalOpen}
+						onClose={() => setIsModalOpen(false)}
+					/>
 				</>
 			) : (
 				<>

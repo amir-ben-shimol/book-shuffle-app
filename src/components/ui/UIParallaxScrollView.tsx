@@ -28,9 +28,9 @@ export const UIParallaxScrollView = ({ children, headerImage, headerBackgroundCo
 	});
 
 	return (
-		<View className="">
+		<View className="pt-14">
 			<Animated.ScrollView ref={scrollRef} scrollEventThrottle={16}>
-				<Animated.View className="flex h-[280px] items-center justify-center overflow-hidden" style={[headerAnimatedStyle]}>
+				<Animated.View className="flex h-[310px] items-center justify-center overflow-hidden" style={[headerAnimatedStyle]}>
 					<UILinearGradient className="absolute h-full w-full" gradientColors={headerBackgroundColor} />
 					{headerImage}
 				</Animated.View>
