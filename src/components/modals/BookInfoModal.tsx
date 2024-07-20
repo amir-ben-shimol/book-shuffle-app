@@ -9,7 +9,7 @@ import { UIRating } from '@/ui/UIRating';
 import { useBook } from '@/lib/hooks/useBooks';
 import type { Book, DescriptionAndReviewsCount } from '@/lib/types/ui/book';
 import { useBooksStore } from '@/lib/store/useBooksStore';
-import { launchImagePicker } from '@/lib/utils/image-picker';
+import { getImageDominantColor, launchImagePicker } from '@/lib/utils/image';
 import { UIParallaxScrollView } from '@/ui/UIParallaxScrollView';
 import { formatNumberWithCommas } from '@/lib/utils/format';
 import { splitBookTitleAndSubtitle } from '@/lib/utils/book';
@@ -27,10 +27,12 @@ export const BookInfoModal = (props: Props) => {
 	const { getBookDescriptionAndReviewsCount } = useBook();
 	const { onAddBook, onUpdateBook, onRemoveBook } = useBooksStore();
 	const [bookDescriptionAndReviewsCount, setBookDescriptionAndReviewsCount] = useState<DescriptionAndReviewsCount | undefined>(undefined);
+	const [bookCoverBackgroundColors, setBookCoverBackgroundColors] = useState<string[]>(['#1e293b', '#404040']);
 
 	const onClose = () => {
 		props.onClose();
 		setBookDescriptionAndReviewsCount(undefined);
+		setBookCoverBackgroundColors(['#1e293b', '#404040']);
 	};
 
 	const onAddNewBook = () => {
@@ -53,6 +55,16 @@ export const BookInfoModal = (props: Props) => {
 		onClose();
 	};
 
+	const fetchBookCoverColors = async () => {
+		if (!props.book?.bookCoverUrl) return;
+
+		const colors = await getImageDominantColor(props.book.bookCoverUrl);
+
+		if (colors.length > 0) {
+			setBookCoverBackgroundColors(colors);
+		}
+	};
+
 	const fetchData = async () => {
 		if (!props.book) return;
 
@@ -61,6 +73,8 @@ export const BookInfoModal = (props: Props) => {
 		if (!descriptionAndReviewsCountResults) return;
 
 		setBookDescriptionAndReviewsCount(descriptionAndReviewsCountResults);
+
+		fetchBookCoverColors();
 	};
 
 	useEffect(() => {
@@ -114,7 +128,7 @@ export const BookInfoModal = (props: Props) => {
 			size={props.canAdd ? 'large' : 'smallToBig'}
 			onClose={onClose}
 		>
-			<UIParallaxScrollView headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }} headerImage={BookVocerImage}>
+			<UIParallaxScrollView headerBackgroundColor={bookCoverBackgroundColors} headerImage={BookVocerImage}>
 				<View className="bg-white px-4">
 					<View className="mt-4 flex items-center">
 						{props.book?.title && splitBookTitleAndSubtitle(props.book.title).title && (
