@@ -108,14 +108,20 @@ export const BookInfoModal = (props: Props) => {
 			size={props.canAdd ? 'large' : 'full'}
 			onClose={onClose}
 		>
-			<UIParallaxScrollView headerBackgroundColor={props.bookCoverBackgroundColors} headerImage={BookVocerImage}>
-				<View className="relative bg-white px-4">
+			<UIParallaxScrollView
+				childrenTitle={splitBookTitleAndSubtitle(props?.book?.title ?? '').title}
+				headerBackgroundColor={props.bookCoverBackgroundColors}
+				headerImage={BookVocerImage}
+			>
+				<View className="relative bg-white px-4 pb-40">
 					<Pressable className="absolute left-2 top-2 z-50 rounded-full bg-slate-300 p-1" onPress={onClose}>
 						<Icon name="close" color="gray" size={20} />
 					</Pressable>
 					<View className="mt-4 flex items-center">
 						{props.book?.title && splitBookTitleAndSubtitle(props.book.title).title && (
-							<Text className="text-center text-2xl font-semibold text-gray-800">{splitBookTitleAndSubtitle(props.book?.title).title}</Text>
+							<Text className="text-center text-2xl font-semibold text-gray-800" style={{ fontFamily: 'Georgia' }}>
+								{splitBookTitleAndSubtitle(props.book?.title).title}
+							</Text>
 						)}
 						{props.book?.title && splitBookTitleAndSubtitle(props.book?.title).subTitle && (
 							<Text className="text-center text-xl font-semibold text-gray-400">{`(${splitBookTitleAndSubtitle(props.book?.title).subTitle})`}</Text>
