@@ -20,7 +20,7 @@
 			"extends": "production",
 			"distribution": "internal",
 			"env": {
-				"EXPO_PUBLIC_GOODREADS_API_KEY": "Ys0aMCpm754ABIoafSezZw"
+				"EXPO_PUBLIC_GOODREADS_API_KEY": "@env:EXPO_PUBLIC_GOODREADS_API_KEY"
 			}
 		}
 	},
