@@ -8,11 +8,7 @@ export const UICollapsible = ({ children, title }: PropsWithChildren & { title: 
 	return (
 		<View>
 			<TouchableOpacity style={styles.heading} activeOpacity={0.8} onPress={() => setIsOpen((value) => !value)}>
-				<Ionicons
-					name={isOpen ? 'chevron-down' : 'chevron-forward-outline'}
-					size={18}
-					// color={theme === 'light' ? Colors.light.icon : Colors.dark.icon}
-				/>
+				<Ionicons name={isOpen ? 'chevron-down' : 'chevron-forward-outline'} size={18} />
 				<Text>{title}</Text>
 			</TouchableOpacity>
 			{isOpen && <View style={styles.content}>{children}</View>}
