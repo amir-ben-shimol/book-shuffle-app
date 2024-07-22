@@ -5,9 +5,9 @@ import type { Book, Filters, FilterTabs } from '../types/ui/book';
 
 type State = {
 	booksList: Book[];
+	recentlyViewedBooks: Book[];
 	filterBooksQuery: string;
 	selectedFilterTab: FilterTabs;
-	selectedBook: Book | null;
 	allBooksFilters: Filters;
 };
 
@@ -16,9 +16,10 @@ type Actions = {
 	setFilterBooksQuery: (query: string) => void;
 	setFilterTab: (tab: FilterTabs) => void;
 	onAddBook: (book: Book) => void;
+	onAddRecentlyViewedBook: (book: Book) => void;
+	onResetRecentlyViewedBooks: () => void;
 	onUpdateBook: (book: Book) => void;
 	onRemoveBook: (bookId: number) => void;
-	setSelectedBook: (book: Book | null) => void;
 	setAllBooksFilters: (filters: Filters) => void;
 	resetAllBooksFilters: () => void;
 	resetStore: () => void;
@@ -30,9 +31,9 @@ const useBooksStore = create<BooksStore>()(
 	persist(
 		(set) => ({
 			booksList: [],
+			recentlyViewedBooks: [],
 			filterBooksQuery: '',
 			selectedFilterTab: 'all',
-			selectedBook: null,
 			allBooksFilters: {
 				yearStart: '',
 				yearEnd: '2024',
@@ -40,7 +41,6 @@ const useBooksStore = create<BooksStore>()(
 				maxNumberOfPages: 'all',
 			},
 			setBooksList: (books) => {
-				//ensure that it delete all books before adding new ones
 				set(() => ({
 					booksList: [],
 				}));
@@ -54,7 +54,6 @@ const useBooksStore = create<BooksStore>()(
 					filterBooksQuery: query,
 				});
 			},
-
 			setFilterTab: (tab) => {
 				set({
 					selectedFilterTab: tab,
@@ -64,6 +63,25 @@ const useBooksStore = create<BooksStore>()(
 				set((state) => ({
 					booksList: [...state.booksList, book],
 				}));
+			},
+			onAddRecentlyViewedBook: (book) => {
+				set((state) => {
+					const bookExists = state.recentlyViewedBooks.some((b) => b.bookId === book.bookId);
+					let updatedRecentlyViewedBooks = state.recentlyViewedBooks.filter((b) => b.bookId !== book.bookId);
+
+					if (bookExists) {
+						updatedRecentlyViewedBooks = [book, ...updatedRecentlyViewedBooks];
+					} else {
+						updatedRecentlyViewedBooks = [book, ...state.recentlyViewedBooks].slice(0, 15);
+					}
+
+					return { recentlyViewedBooks: updatedRecentlyViewedBooks };
+				});
+			},
+			onResetRecentlyViewedBooks: () => {
+				set({
+					recentlyViewedBooks: [],
+				});
 			},
 			onUpdateBook: (book) => {
 				set((state) => ({
@@ -75,11 +93,7 @@ const useBooksStore = create<BooksStore>()(
 					booksList: state.booksList.filter((book) => book.bookId !== bookId),
 				}));
 			},
-			setSelectedBook: (book) => {
-				set({
-					selectedBook: book,
-				});
-			},
+
 			setAllBooksFilters: (filters) => {
 				set({
 					allBooksFilters: filters,
@@ -96,9 +110,9 @@ const useBooksStore = create<BooksStore>()(
 			resetStore: () => {
 				set({
 					booksList: [],
+					recentlyViewedBooks: [],
 					filterBooksQuery: '',
 					selectedFilterTab: 'all',
-					selectedBook: null,
 					allBooksFilters: {
 						minimumRating: 0,
 						maxNumberOfPages: 'all',

@@ -64,7 +64,7 @@ export const SearchNewBookModal = (props: Props) => {
 
 	return (
 		<>
-			<UIModal scrollable={false} className="pb-40" modalHeaderTitle="Search your new book 😝" size="large" isOpen={props.isVisible} onClose={onClose}>
+			<UIModal scrollable={false} className="pb-20" modalHeaderTitle="Search your new book 😝" size="large" isOpen={props.isVisible} onClose={onClose}>
 				<View className="w-full">
 					<UIInput
 						placeholder="Title or Author"
