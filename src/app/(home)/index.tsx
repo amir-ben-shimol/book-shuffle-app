@@ -8,11 +8,13 @@ import { onBlurActiveInput } from '@/lib/utils/input';
 import { useBooksStore } from '@/lib/store/useBooksStore';
 import Searchbar from './components/Searchbar';
 import Filterbar from './components/Filterbar';
+import RecentlyViewedBooks from './components/RecentlyViewedBooks';
 
 const HomeScreen = () => {
-	const { booksList, filterBooksQuery, selectedFilterTab, allBooksFilters } = useBooksStore();
+	const { booksList, filterBooksQuery, selectedFilterTab, allBooksFilters, onAddRecentlyViewedBook } = useBooksStore();
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [selectedBook, setSelectedBook] = useState<Book | undefined>(undefined);
+	const [isSearchInputFocused, setIsSearchInputFocused] = useState(false);
 	const [bookCoverBackgroundColors, setBookCoverBackgroundColors] = useState<string[]>(['#1e293b', '#404040']);
 
 	const fetchBookCoverColors = async (bookCoverImage: string) => {
@@ -86,6 +88,7 @@ const HomeScreen = () => {
 			await fetchBookCoverColors(book.bookCoverUrl);
 		}
 
+		onAddRecentlyViewedBook(book);
 		setIsModalOpen(true);
 	}, []);
 
@@ -112,25 +115,39 @@ const HomeScreen = () => {
 		setSelectedBook(book);
 	};
 
+	const onSearchInputFocus = () => {
+		setIsSearchInputFocused(true);
+	};
+
+	const onSearchInputBlur = () => {
+		setIsSearchInputFocused(false);
+	};
+
 	return (
 		<View className="flex flex-1">
-			<Searchbar />
-			<Filterbar />
-			<FlatList
-				data={filteredBooksList}
-				columnWrapperStyle={{ justifyContent: 'space-between' }}
-				className="h-full w-full"
-				scrollEventThrottle={16}
-				renderItem={renderBook}
-				keyExtractor={(item) => item.bookId.toString()}
-				numColumns={3}
-				initialNumToRender={12}
-				maxToRenderPerBatch={12}
-				windowSize={21}
-				updateCellsBatchingPeriod={50}
-				removeClippedSubviews
-				onTouchStart={onBlurActiveInput}
-			/>
+			<Searchbar isFocused={isSearchInputFocused} onSearchInputFocus={onSearchInputFocus} onSearchInputBlur={onSearchInputBlur} />
+			{isSearchInputFocused && filterBooksQuery.length === 0 ? (
+				<RecentlyViewedBooks />
+			) : (
+				<>
+					<Filterbar />
+					<FlatList
+						data={filteredBooksList}
+						columnWrapperStyle={{ justifyContent: 'space-between' }}
+						className="h-full w-full"
+						scrollEventThrottle={16}
+						renderItem={renderBook}
+						keyExtractor={(item) => item.bookId.toString()}
+						numColumns={3}
+						initialNumToRender={12}
+						maxToRenderPerBatch={12}
+						windowSize={21}
+						updateCellsBatchingPeriod={50}
+						removeClippedSubviews
+						onTouchStart={onBlurActiveInput}
+					/>
+				</>
+			)}
 			<BookInfoModal
 				book={selectedBook}
 				isVisible={isModalOpen}
