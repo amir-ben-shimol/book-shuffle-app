@@ -97,7 +97,7 @@ const HomeScreen = () => {
 				onBookClick(item);
 			}}
 		>
-			<View className="flex overflow-hidden rounded shadow-lg">
+			<View className="flex overflow-hidden rounded">
 				{item.bookCoverUrl && <Image source={{ uri: item.bookCoverUrl }} className="h-[170px] w-full" resizeMode="cover" />}
 			</View>
 			{!item.bookshelves.includes('to-read') && (

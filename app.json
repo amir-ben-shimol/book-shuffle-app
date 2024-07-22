@@ -20,7 +20,7 @@
 				"origin": false
 			},
 			"eas": {
-				"projectId": "d126ec9d-9c3c-4ab2-86fd-7c4173008bbd"
+				"projectId": "94647923-b7b4-4a57-83ec-5770f37af511"
 			}
 		},
 		"ios": {
@@ -47,7 +47,8 @@
 				"android.permission.RECEIVE_BOOT_COMPLETED",
 				"android.permission.READ_EXTERNAL_STORAGE",
 				"android.permission.WRITE_EXTERNAL_STORAGE",
-				"android.permission.INTERNET"
+				"android.permission.INTERNET",
+				"android.permission.RECORD_AUDIO"
 			],
 			"useNextNotificationsApi": true
 		},
