@@ -99,15 +99,7 @@ export const BookInfoModal = (props: Props) => {
 	);
 
 	return (
-		<UIModal
-			isOpen={props.isVisible}
-			scrollable={false}
-			className="p-0"
-			noHeader
-			modalHeaderTitle={props.book?.title ?? ''}
-			size={props.canAdd ? 'large' : 'full'}
-			onClose={onClose}
-		>
+		<UIModal isOpen={props.isVisible} scrollable={false} className="p-0" noHeader modalHeaderTitle={props.book?.title ?? ''} size="full" onClose={onClose}>
 			<UIParallaxScrollView
 				childrenTitle={splitBookTitleAndSubtitle(props?.book?.title ?? '').title}
 				headerBackgroundColor={props.bookCoverBackgroundColors}

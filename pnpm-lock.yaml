@@ -95,18 +95,12 @@ importers:
       react-native-confetti-cannon:
         specifier: 1.5.2
         version: 1.5.2
-      react-native-dominant-color:
-        specifier: 1.0.0
-        version: 1.0.0(react-native@0.74.3(@babel/core@7.24.9)(@babel/preset-env@7.24.8(@babel/core@7.24.9))(@types/react@18.2.79)(react@18.2.0))
       react-native-gesture-handler:
         specifier: ~2.16.1
         version: 2.16.2(react-native@0.74.3(@babel/core@7.24.9)(@babel/preset-env@7.24.8(@babel/core@7.24.9))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
       react-native-image-colors:
         specifier: 2.4.0
         version: 2.4.0(expo@51.0.20(@babel/core@7.24.9)(@babel/preset-env@7.24.8(@babel/core@7.24.9)))(react-native@0.74.3(@babel/core@7.24.9)(@babel/preset-env@7.24.8(@babel/core@7.24.9))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
-      react-native-image-dominant-color:
-        specifier: 1.0.1
-        version: 1.0.1(react-native@0.74.3(@babel/core@7.24.9)(@babel/preset-env@7.24.8(@babel/core@7.24.9))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
       react-native-modal:
         specifier: 13.0.1
         version: 13.0.1(react-native@0.74.3(@babel/core@7.24.9)(@babel/preset-env@7.24.8(@babel/core@7.24.9))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
@@ -5053,11 +5047,6 @@ packages:
   react-native-confetti-cannon@1.5.2:
     resolution: {integrity: sha512-IZuWjlW7QsdxEGNnvpD6W+7iKCCQhnd5BvuNvMtirU7Nxm8WS2N6LPGMBz1ZYDuusG+GRZkoXXTNCdoAAGpCTg==}
 
-  react-native-dominant-color@1.0.0:
-    resolution: {integrity: sha512-JL8WdNuQ4bjBCwwQlWUrHeGBH1n1ZujDV+DIbfViaE7wR2Eknqa2toZdhAfdHrSc8s6ayWcIwej98SHULpWFNQ==}
-    peerDependencies:
-      react-native: ^0.41.2
-
   react-native-gesture-handler@2.16.2:
     resolution: {integrity: sha512-vGFlrDKlmyI+BT+FemqVxmvO7nqxU33cgXVsn6IKAFishvlG3oV2Ds67D5nPkHMea8T+s1IcuMm0bF8ntZtAyg==}
     peerDependencies:
@@ -5073,13 +5062,6 @@ packages:
     resolution: {integrity: sha512-qlC31+UNVthByNLVuYSEQeZghOXn3uy1GLF6lHKlvT1HM1GGFH/LXNhU8iXAoQvUyzNa1bEAOTo09Hwinvp/rA==}
     peerDependencies:
       expo: '*'
-      react: '*'
-      react-native: '*'
-
-  react-native-image-dominant-color@1.0.1:
-    resolution: {integrity: sha512-7D4ulFngI4XMagWSCXnTgjRFBCGPzB1wZB/XEYtsO8Vm+hvcLRlkyYFc4ySacZfwxrpsUhImKrLqM7tM+qV0eA==}
-    engines: {node: '>= 18.0.0'}
-    peerDependencies:
       react: '*'
       react-native: '*'
 
@@ -12569,10 +12551,6 @@ snapshots:
 
   react-native-confetti-cannon@1.5.2: {}
 
-  react-native-dominant-color@1.0.0(react-native@0.74.3(@babel/core@7.24.9)(@babel/preset-env@7.24.8(@babel/core@7.24.9))(@types/react@18.2.79)(react@18.2.0)):
-    dependencies:
-      react-native: 0.74.3(@babel/core@7.24.9)(@babel/preset-env@7.24.8(@babel/core@7.24.9))(@types/react@18.2.79)(react@18.2.0)
-
   react-native-gesture-handler@2.16.2(react-native@0.74.3(@babel/core@7.24.9)(@babel/preset-env@7.24.8(@babel/core@7.24.9))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0):
     dependencies:
       '@egjs/hammerjs': 2.0.17
@@ -12598,11 +12576,6 @@ snapshots:
       react-native: 0.74.3(@babel/core@7.24.9)(@babel/preset-env@7.24.8(@babel/core@7.24.9))(@types/react@18.2.79)(react@18.2.0)
     transitivePeerDependencies:
       - debug
-
-  react-native-image-dominant-color@1.0.1(react-native@0.74.3(@babel/core@7.24.9)(@babel/preset-env@7.24.8(@babel/core@7.24.9))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0):
-    dependencies:
-      react: 18.2.0
-      react-native: 0.74.3(@babel/core@7.24.9)(@babel/preset-env@7.24.8(@babel/core@7.24.9))(@types/react@18.2.79)(react@18.2.0)
 
   react-native-modal@13.0.1(react-native@0.74.3(@babel/core@7.24.9)(@babel/preset-env@7.24.8(@babel/core@7.24.9))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0):
     dependencies:

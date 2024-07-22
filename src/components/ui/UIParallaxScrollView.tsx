@@ -1,12 +1,13 @@
-import React, { type PropsWithChildren, type ReactElement } from 'react';
-import { View, StatusBar, Text } from 'react-native';
-import Animated, { interpolate, useAnimatedRef, useAnimatedStyle, useScrollViewOffset } from 'react-native-reanimated';
+import React, { useEffect, useState, type PropsWithChildren, type ReactElement } from 'react';
+import { View, StatusBar, Text, type StatusBarStyle } from 'react-native';
+import Animated, { interpolate, useAnimatedRef, useAnimatedStyle, useScrollViewOffset, Extrapolation } from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { isDarkOrLight } from '@/lib/utils/check-color';
 import { UILinearGradient } from './UILinearGradient';
 
 const HEADER_HEIGHT = 250;
 const TITLE_ANIMATION_START = HEADER_HEIGHT + 120; // Start the animation at the end of the header height
-const TITLE_ANIMATION_END = TITLE_ANIMATION_START + 30; // Fully visible 100px after the end of the header
+const TITLE_ANIMATION_END = TITLE_ANIMATION_START + 30; // Fully visible 30px after TITLE_ANIMATION_START
 
 type Props = PropsWithChildren<{
 	readonly headerImage: ReactElement;
@@ -17,6 +18,15 @@ type Props = PropsWithChildren<{
 export const UIParallaxScrollView = ({ children, childrenTitle, headerImage, headerBackgroundColor }: Props) => {
 	const scrollRef = useAnimatedRef<Animated.ScrollView>();
 	const scrollOffset = useScrollViewOffset(scrollRef);
+	const [statusBarColor, setStatusBarColor] = useState<StatusBarStyle>('default');
+
+	useEffect(() => {
+		if (headerBackgroundColor[0]) {
+			const isDark = isDarkOrLight(headerBackgroundColor[0]);
+
+			setStatusBarColor(isDark ? 'light-content' : 'dark-content');
+		}
+	}, [headerBackgroundColor]);
 
 	const headerAnimatedStyle = useAnimatedStyle(() => {
 		return {
@@ -32,19 +42,25 @@ export const UIParallaxScrollView = ({ children, childrenTitle, headerImage, hea
 	});
 
 	const titleAnimatedStyle = useAnimatedStyle(() => {
-		const opacity = interpolate(scrollOffset.value, [TITLE_ANIMATION_START, TITLE_ANIMATION_END], [0, 1]);
+		const opacity = interpolate(scrollOffset.value, [TITLE_ANIMATION_START, TITLE_ANIMATION_END], [0, 1], Extrapolation.CLAMP);
+		const translateY = interpolate(scrollOffset.value, [TITLE_ANIMATION_START, TITLE_ANIMATION_END], [-10, 0], Extrapolation.CLAMP);
 
 		return {
 			opacity,
+			transform: [
+				{
+					translateY,
+				},
+			],
 		};
 	});
 
 	return (
 		<View className="relative">
 			<SafeAreaView edges={['top']} style={{ backgroundColor: headerBackgroundColor[0] }} />
-			<StatusBar barStyle="dark-content" />
+			<StatusBar barStyle={statusBarColor} />
 			<Animated.View
-				className="absolute top-14 z-50 flex w-full items-center py-2 shadow-lg"
+				className="absolute top-9 z-50 flex w-full items-center pb-2 pt-6 shadow-lg"
 				style={[{ backgroundColor: headerBackgroundColor[0] }, titleAnimatedStyle]}
 			>
 				<Text className="text-2xl text-white" style={{ fontFamily: 'Georgia' }}>
