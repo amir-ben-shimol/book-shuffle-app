@@ -111,7 +111,7 @@ export const BookInfoModal = (props: Props) => {
 					</Pressable>
 					<View className="mt-4 flex items-center">
 						{props.book?.title && splitBookTitleAndSubtitle(props.book.title).title && (
-							<Text className="text-center text-2xl font-semibold text-gray-800" style={{ fontFamily: 'Georgia' }}>
+							<Text className="px-1.5 text-center text-2xl font-semibold text-gray-800" style={{ fontFamily: 'Georgia' }}>
 								{splitBookTitleAndSubtitle(props.book?.title).title}
 							</Text>
 						)}

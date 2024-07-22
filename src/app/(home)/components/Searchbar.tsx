@@ -7,9 +7,9 @@ import { UISvg } from '@/ui/UISvg';
 import { UIInput } from '@/ui/UIInput';
 
 type Props = {
-	readonly isFocused: boolean;
-	readonly onSearchInputBlur: VoidFunction;
-	readonly onSearchInputFocus: VoidFunction;
+	readonly isActive: boolean;
+	readonly onActivate?: VoidFunction;
+	readonly onDeactivate?: VoidFunction;
 };
 
 const Searchbar = (props: Props) => {
@@ -29,7 +29,7 @@ const Searchbar = (props: Props) => {
 	};
 
 	return (
-		<View className="my-6 flex w-full flex-row items-center border-b border-gray-200 pb-4">
+		<View className={`my-6 flex w-full flex-row items-center ${!props.isActive && 'border-b border-gray-200 pb-4'}`}>
 			<Pressable onPress={onNavigateToSettings}>
 				{user?.avatarUrl ? (
 					<Image source={{ uri: user.avatarUrl }} className="mr-2 h-8 w-8 rounded-full" />
@@ -45,10 +45,11 @@ const Searchbar = (props: Props) => {
 				showClearButton
 				showCancelButton
 				debounceDelay={300}
+				isActive={props.isActive}
 				debounceCallback={onSetFilterBooksQuery}
 				onClear={onClear}
-				onFocus={props.onSearchInputFocus}
-				onBlur={props.onSearchInputBlur}
+				onActivate={props.onActivate}
+				onDeactivate={props.onDeactivate}
 			/>
 		</View>
 	);

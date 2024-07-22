@@ -63,7 +63,7 @@ export const UIParallaxScrollView = ({ children, childrenTitle, headerImage, hea
 				className="absolute top-9 z-50 flex w-full items-center pb-2 pt-6 shadow-lg"
 				style={[{ backgroundColor: headerBackgroundColor[0] }, titleAnimatedStyle]}
 			>
-				<Text className="text-2xl text-white" style={{ fontFamily: 'Georgia' }}>
+				<Text className="text-center text-2xl font-semibold text-white" style={{ fontFamily: 'Georgia' }}>
 					{childrenTitle}
 				</Text>
 			</Animated.View>

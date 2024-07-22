@@ -6,6 +6,7 @@ import type { Book } from '@/lib/types/ui/book';
 import { useBooksStore } from '@/lib/store/useBooksStore';
 import { getImageDominantColor } from '@/lib/utils/image';
 import { BookInfoModal } from '@/modals/BookInfoModal';
+import { onBlurActiveInput } from '@/lib/utils/input';
 
 const RecentlyViewedBooks = () => {
 	const { recentlyViewedBooks, onResetRecentlyViewedBooks } = useBooksStore();
@@ -76,12 +77,12 @@ const RecentlyViewedBooks = () => {
 
 	return (
 		<Animated.View style={[animatedStyle, { flex: 1 }]}>
-			<View className="mb-4 flex flex-row items-center justify-between border-b border-gray-200 pb-4">
+			<Pressable className="mb-4 flex flex-row items-center justify-between border-b border-gray-200 pb-4" onPress={onBlurActiveInput}>
 				<Text className="text-l font-semibold">Recently Viewed Books</Text>
 				<Pressable onPress={onResetRecentlyViewedBooks}>
 					<Text className="font-bold text-blue-400">Clear</Text>
 				</Pressable>
-			</View>
+			</Pressable>
 			{recentlyViewedBooks.length === 0 && <Text className="border-4 text-center text-gray-500">No books viewed yet</Text>}
 			{recentlyViewedBooks.length <= 4 ? (
 				<FlatList
