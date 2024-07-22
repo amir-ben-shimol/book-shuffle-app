@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import * as Haptics from 'expo-haptics';
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import { Keyboard, Pressable, TextInput, type TextInputProps, Text } from 'react-native';
 import { debounce } from '@/lib/utils/debounce';
@@ -11,8 +12,9 @@ type Props = {
 	readonly value?: string;
 	readonly showClearButton?: boolean;
 	readonly showCancelButton?: boolean;
-	readonly onFocus?: VoidFunction;
-	readonly onBlur?: VoidFunction;
+	readonly isActive?: boolean;
+	readonly onActivate?: VoidFunction;
+	readonly onDeactivate?: VoidFunction;
 	readonly debounceCallback?: (text: string) => void;
 	readonly onClear?: VoidFunction;
 } & TextInputProps;
@@ -52,20 +54,17 @@ export const UIInput = React.memo((props: Props) => {
 	});
 
 	const handleFocus = () => {
+		Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
 		setIsFocused(true);
 
-		if (props.onFocus) {
-			props.onFocus();
+		if (props.onActivate) {
+			props.onActivate();
 		}
 	};
 
 	const handleBlur = () => {
 		setIsFocused(false);
 		Keyboard.dismiss();
-
-		if (props.onBlur) {
-			props.onBlur();
-		}
 	};
 
 	const onClear = () => {
@@ -83,6 +82,10 @@ export const UIInput = React.memo((props: Props) => {
 	const onCancel = () => {
 		onClear();
 		handleBlur();
+
+		if (props.onDeactivate) {
+			props.onDeactivate();
+		}
 	};
 
 	return (
@@ -111,7 +114,7 @@ export const UIInput = React.memo((props: Props) => {
 				)}
 			</Animated.View>
 
-			{isFocused && props.showCancelButton && (
+			{props.isActive && (
 				<Pressable className="ml-2" onPress={onCancel}>
 					<Text>Cancel</Text>
 				</Pressable>

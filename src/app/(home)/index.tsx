@@ -14,7 +14,7 @@ const HomeScreen = () => {
 	const { booksList, filterBooksQuery, selectedFilterTab, allBooksFilters, onAddRecentlyViewedBook } = useBooksStore();
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [selectedBook, setSelectedBook] = useState<Book | undefined>(undefined);
-	const [isSearchInputFocused, setIsSearchInputFocused] = useState(false);
+	const [isSearchInputActive, setIsSearchInputActive] = useState(false);
 	const [bookCoverBackgroundColors, setBookCoverBackgroundColors] = useState<string[]>(['#1e293b', '#404040']);
 
 	const fetchBookCoverColors = async (bookCoverImage: string) => {
@@ -115,18 +115,14 @@ const HomeScreen = () => {
 		setSelectedBook(book);
 	};
 
-	const onSearchInputFocus = () => {
-		setIsSearchInputFocused(true);
-	};
+	const onActivateSearchInput = () => setIsSearchInputActive(true);
 
-	const onSearchInputBlur = () => {
-		setIsSearchInputFocused(false);
-	};
+	const onDeactivateSearchInput = () => setIsSearchInputActive(false);
 
 	return (
 		<View className="flex flex-1">
-			<Searchbar isFocused={isSearchInputFocused} onSearchInputFocus={onSearchInputFocus} onSearchInputBlur={onSearchInputBlur} />
-			{isSearchInputFocused && filterBooksQuery.length === 0 ? (
+			<Searchbar isActive={isSearchInputActive} onActivate={onActivateSearchInput} onDeactivate={onDeactivateSearchInput} />
+			{isSearchInputActive && filterBooksQuery.length === 0 ? (
 				<RecentlyViewedBooks />
 			) : (
 				<>
