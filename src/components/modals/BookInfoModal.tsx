@@ -37,13 +37,6 @@ export const BookInfoModal = (props: Props) => {
 	const currentBookCoverBackgroundColors = booksCoverBackgroundColorsStack[booksCoverBackgroundColorsStack.length - 1] ?? [];
 
 	const onClose = () => {
-		if (booksStack.length > 1) {
-			setBooksStack(booksStack.slice(0, -1));
-			setBooksCoverBackgroundColorsStack(booksCoverBackgroundColorsStack.slice(0, -1));
-
-			return;
-		}
-
 		props.onClose();
 		setBooksStack([]);
 		setBooksCoverBackgroundColorsStack([]);
