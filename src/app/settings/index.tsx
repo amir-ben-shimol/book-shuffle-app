@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { View, Text, Pressable, Image } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import Animated, { Easing, useSharedValue, useAnimatedStyle, withRepeat, withSequence, withTiming } from 'react-native-reanimated';
+import { Easing, useSharedValue, withRepeat, withSequence, withTiming } from 'react-native-reanimated';
 import { useUserStore } from '@/lib/store/useUserStore';
 import type { User } from '@/lib/types/ui/user';
 import { launchImagePicker } from '@/lib/utils/image';
 import { UIInput } from '@/ui/UIInput';
+import { UIHelloWave } from '@/ui/UIHelloWave';
 
 const SettingsPage: React.FC = () => {
 	const { user, setUser } = useUserStore();
@@ -68,12 +69,6 @@ const SettingsPage: React.FC = () => {
 		setUser({ ...editingUser, avatarUrl: uploadedImage } as User);
 	}, [editingUser, setUser]);
 
-	const animatedStyle = useAnimatedStyle(() => {
-		return {
-			transform: [{ rotate: `${waveAnimation.value}deg` }],
-		};
-	});
-
 	const onClearAsyncStorage = () => {
 		AsyncStorage.clear();
 		console.log('AsyncStorage cleared');
@@ -83,7 +78,7 @@ const SettingsPage: React.FC = () => {
 		<View className="flex-1 bg-gray-100 p-4">
 			<View className="mb-4 flex flex-row items-center">
 				<Text className="ml-2 text-3xl font-semibold">{`Hello ${user?.firstName}`}</Text>
-				<Animated.Text style={[animatedStyle, { fontSize: 30 }]}>👋</Animated.Text>
+				<UIHelloWave />
 			</View>
 
 			<Pressable className="self-center shadow-lg" onPress={handleImagePicker}>

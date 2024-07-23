@@ -4,6 +4,7 @@ import * as Haptics from 'expo-haptics';
 import { router, Tabs } from 'expo-router';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Animated, { useSharedValue, useAnimatedStyle, withRepeat, withSequence, withTiming, Easing } from 'react-native-reanimated';
+import { UILinearGradient } from '@/ui/UILinearGradient';
 
 const BottomTabsNavigator: React.FC = () => {
 	const rotation = useSharedValue(0);
@@ -49,7 +50,7 @@ const BottomTabsNavigator: React.FC = () => {
 			<Tabs
 				sceneContainerStyle={{ backgroundColor: '#f1f5f9' }}
 				screenOptions={{
-					tabBarActiveTintColor: '#93c5fd',
+					tabBarActiveTintColor: '#3b82f6',
 					tabBarIconStyle: { marginBottom: -15 },
 					headerShown: false,
 					unmountOnBlur: true,
@@ -70,11 +71,14 @@ const BottomTabsNavigator: React.FC = () => {
 						tabBarIcon: () => (
 							<Pressable onPress={handlePress}>
 								<View className="mb-10 h-16 w-16 rounded-full bg-white p-2">
-									<View className="flex items-center justify-center rounded-full bg-blue-300 p-2">
+									<UILinearGradient
+										gradientColors={['#60a5fa', '#3b82f6']}
+										className="flex items-center justify-center rounded-full bg-blue-300 p-2"
+									>
 										<Animated.View style={animatedStyle}>
 											<Text className="text-3xl">📚</Text>
 										</Animated.View>
-									</View>
+									</UILinearGradient>
 								</View>
 							</Pressable>
 						),
