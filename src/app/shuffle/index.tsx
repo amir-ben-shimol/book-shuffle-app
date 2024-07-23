@@ -278,11 +278,12 @@ const ShuffleScreen = () => {
 		onSpinShuffleButton();
 		onFadeOutShuffleButton();
 		onLongHaptics(() => {
-			Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+			setTimeout(() => {
+				Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+			}, 1000);
 		});
 
 		setTimeout(() => {
-			Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
 			rotate.value = 0;
 			fadeOutPulseAndButtonOpacity.value = 1;
 			onShuffle();
