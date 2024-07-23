@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from 'react';
-import { View, type ViewStyle } from 'react-native';
+import { View, type ViewStyle, Text } from 'react-native';
 import { Rating, type RatingProps } from 'react-native-ratings';
 
 type Props = {
@@ -10,6 +10,7 @@ type Props = {
 	readonly readonly?: boolean;
 	readonly style?: ViewStyle;
 	readonly showRating?: boolean;
+	readonly showRatingNumber?: boolean;
 	readonly imageSize?: number;
 	readonly onChange?: (rating: number) => void;
 };
@@ -42,6 +43,7 @@ export const UIRating = React.memo((props: Props) => {
 	return (
 		<View className={`flex flex-row items-center ${props.readonly ? 'justify-start' : 'justify-center'} ${props.className}`} style={props.style}>
 			<Rating {...ratingProps} />
+			{props.showRatingNumber && <Text className="text-l ml-1 font-semibold text-yellow-400">{props.rating}</Text>}
 		</View>
 	);
 });

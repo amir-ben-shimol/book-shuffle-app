@@ -38,4 +38,5 @@ export type DescriptionAndReviewsCount = {
 	readonly description: string;
 	readonly textReviewsCount: string;
 	readonly ratingsCount: string;
+	readonly similarBooks: Book[];
 };

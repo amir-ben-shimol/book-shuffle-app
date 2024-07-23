@@ -1,4 +1,4 @@
-import React, { useEffect, useState, type PropsWithChildren, type ReactElement } from 'react';
+import React, { useEffect, useState, useImperativeHandle, forwardRef, type PropsWithChildren, type ReactElement } from 'react';
 import { View, StatusBar, Text, type StatusBarStyle } from 'react-native';
 import Animated, { interpolate, useAnimatedRef, useAnimatedStyle, useScrollViewOffset, Extrapolation } from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -15,7 +15,7 @@ type Props = PropsWithChildren<{
 	readonly headerBackgroundColor: string[];
 }>;
 
-export const UIParallaxScrollView = ({ children, childrenTitle, headerImage, headerBackgroundColor }: Props) => {
+export const UIParallaxScrollView = forwardRef(({ children, childrenTitle, headerImage, headerBackgroundColor }: Props, ref) => {
 	const scrollRef = useAnimatedRef<Animated.ScrollView>();
 	const scrollOffset = useScrollViewOffset(scrollRef);
 	const [statusBarColor, setStatusBarColor] = useState<StatusBarStyle>('default');
@@ -27,6 +27,12 @@ export const UIParallaxScrollView = ({ children, childrenTitle, headerImage, hea
 			setStatusBarColor(isDark ? 'light-content' : 'dark-content');
 		}
 	}, [headerBackgroundColor]);
+
+	useImperativeHandle(ref, () => ({
+		scrollToTop: () => {
+			scrollRef.current?.scrollTo({ y: 0, animated: true });
+		},
+	}));
 
 	const headerAnimatedStyle = useAnimatedStyle(() => {
 		return {
@@ -63,7 +69,7 @@ export const UIParallaxScrollView = ({ children, childrenTitle, headerImage, hea
 				className="absolute top-9 z-50 flex w-full items-center pb-2 pt-6 shadow-lg"
 				style={[{ backgroundColor: headerBackgroundColor[0] }, titleAnimatedStyle]}
 			>
-				<Text className="text-center text-2xl font-semibold text-white" style={{ fontFamily: 'Georgia' }}>
+				<Text className="px-2 text-center text-2xl font-semibold text-white" style={{ fontFamily: 'Georgia' }}>
 					{childrenTitle}
 				</Text>
 			</Animated.View>
@@ -77,4 +83,4 @@ export const UIParallaxScrollView = ({ children, childrenTitle, headerImage, hea
 			</Animated.ScrollView>
 		</View>
 	);
-};
+});
