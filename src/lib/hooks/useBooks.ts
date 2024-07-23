@@ -31,11 +31,42 @@ export const useBook = () => {
 			const textReviewsCount = result?.GoodreadsResponse?.book?.[0]?.text_reviews_count?.[0];
 			const ratingCount = result?.GoodreadsResponse?.book?.[0]?.ratings_count?.[0];
 			const description = result?.GoodreadsResponse?.book?.[0]?.description?.[0];
+			const similarBooks = result?.GoodreadsResponse?.book?.[0]?.similar_books?.[0]?.book || [];
+
+			const convertedSimilarBooks = similarBooks.map((book: any): Book => {
+				return {
+					title: book.title[0],
+					averageRating: +book.average_rating[0],
+					author: book.authors[0].author[0].name[0],
+					bookId: +book.id[0],
+					bookCoverUrl: book.image_url[0].replace(/_SX98_/, '_SX500_'),
+					isbn: book.isbn[0],
+					isbn13: book.isbn13[0],
+					numberOfPages: +book.num_pages[0],
+					yearPublished: +book.publication_year[0],
+					originalPublicationYear: +book.publication_year[0],
+					publisher: '',
+					binding: '',
+					authorLf: '',
+					additionalAuthors: '',
+					myRating: 0,
+					dateRead: '',
+					bookshelves: 'to-read',
+					bookshelvesWithPositions: '',
+					exclusiveShelf: 'to-read',
+					myReview: '',
+					spoiler: '',
+					privateNotes: '',
+					readCount: 0,
+					ownedCopies: 0,
+				};
+			});
 
 			return {
 				description: description || '',
 				textReviewsCount: textReviewsCount || '',
 				ratingsCount: ratingCount || '',
+				similarBooks: convertedSimilarBooks,
 			};
 		} catch (error) {
 			console.error('Error fetching book description:', error);
