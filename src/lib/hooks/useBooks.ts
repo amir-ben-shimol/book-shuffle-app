@@ -111,7 +111,7 @@ export const useBook = () => {
 					privateNotes: '',
 					readCount: 0,
 					ownedCopies: 0,
-					bookCoverUrl: bestBook.image_url[0],
+					bookCoverUrl: bestBook.image_url[0].replace(/_SX98_/, '_SX500_'),
 				};
 			});
 		} catch (error) {

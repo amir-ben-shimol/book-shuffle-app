@@ -156,8 +156,6 @@ const ShuffleScreen = () => {
 		setSelectedShuffleBook(undefined);
 		setIsPulseActive(false);
 
-		Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-
 		const filteredBooksList = booksList
 			.filter((book) => book.bookshelves.includes('to-read'))
 			.filter((book) => {
@@ -277,17 +275,17 @@ const ShuffleScreen = () => {
 		setIsPulseActive(true);
 		onSpinShuffleButton();
 		onFadeOutShuffleButton();
-		onLongHaptics(() => {
-			setTimeout(() => {
-				Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-			}, 1000);
-		});
+		onLongHaptics();
 
 		setTimeout(() => {
 			rotate.value = 0;
 			fadeOutPulseAndButtonOpacity.value = 1;
 			onShuffle();
 		}, 5000);
+
+		setTimeout(() => {
+			Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+		}, 5500);
 	};
 
 	return (
