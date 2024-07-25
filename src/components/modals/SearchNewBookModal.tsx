@@ -5,8 +5,8 @@ import { UIModal } from '@/ui/UIModal';
 import type { Book } from '@/lib/types/ui/book';
 import { UIInput } from '@/ui/UIInput';
 import { useBook } from '@/lib/hooks/useBooks';
+import { UIBookCover } from '@/ui/UIBookCover';
 import { getImageDominantColor } from '@/lib/utils/image';
-// import { UIRating } from '@/ui/UIRating';
 import { onBlurActiveInput } from '@/lib/utils/input';
 import { BookInfoModal } from './BookInfoModal';
 
@@ -83,7 +83,7 @@ export const SearchNewBookModal = (props: Props) => {
 							className="w-full"
 							renderItem={({ item }) => (
 								<TouchableOpacity className="mb-4 flex flex-row items-start" onPress={() => handleBookSelect(item)}>
-									<Image source={{ uri: item.bookCoverUrl }} className="mr-4 h-36 w-24" />
+									<UIBookCover book={item} className="mr-4" />
 									<View className="flex flex-1">
 										<Text className="-mt-1 text-lg font-bold">{item.title}</Text>
 										<Text className="text-sm text-gray-600">{item.author}</Text>
@@ -110,7 +110,6 @@ export const SearchNewBookModal = (props: Props) => {
 			</UIModal>
 			<BookInfoModal
 				book={selectedBook}
-				canAdd
 				isVisible={isBookInfoModalVisible}
 				bookCoverBackgroundColors={bookCoverBackgroundColors}
 				onSuccessfulAdd={onClose}

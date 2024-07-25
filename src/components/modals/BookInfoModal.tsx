@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { View, Text, Image, Pressable, TouchableOpacity, Linking } from 'react-native';
 import * as Haptics from 'expo-haptics';
 import RenderHtml from 'react-native-render-html';
@@ -13,11 +13,11 @@ import { getImageDominantColor, launchImagePicker } from '@/lib/utils/image';
 import { UIParallaxScrollView } from '@/ui/UIParallaxScrollView';
 import { formatNumberWithCommas } from '@/lib/utils/format';
 import { splitBookTitleAndSubtitle } from '@/lib/utils/book';
+import { UIBookCover } from '@/ui/UIBookCover';
 
 type Props = {
 	readonly book?: Book;
 	readonly isVisible: boolean;
-	readonly canAdd?: boolean;
 	readonly bookCoverBackgroundColors: string[];
 	readonly onClose: VoidFunction;
 	readonly onSuccessfulAdd?: VoidFunction;
@@ -26,7 +26,7 @@ type Props = {
 
 export const BookInfoModal = (props: Props) => {
 	const { getBookDescriptionAndReviewsCount } = useBook();
-	const { onAddBook, onUpdateBook, onRemoveBook } = useBooksStore();
+	const { booksList, onAddBook, onUpdateBook, onRemoveBook, onAddRecentlyViewedBook } = useBooksStore();
 	const [booksStack, setBooksStack] = useState<Book[]>([]);
 	const [booksCoverBackgroundColorsStack, setBooksCoverBackgroundColorsStack] = useState<string[][]>([]);
 	const [bookDescriptionAndReviewsCount, setBookDescriptionAndReviewsCount] = useState<DescriptionAndReviewsCount | undefined>(undefined);
@@ -121,12 +121,17 @@ export const BookInfoModal = (props: Props) => {
 			fetchBookCoverColors(book.bookCoverUrl);
 		}
 
+		onAddRecentlyViewedBook(book);
 		setBooksStack([...booksStack, book]);
 		fetchData(book.bookId);
 		scrollViewRef.current?.scrollToTop();
 	};
 
-	const BookVocerImage = (
+	const isBookInUserLibrary = useMemo(() => {
+		return booksList.some((book) => book.bookId === currentBook?.bookId);
+	}, [booksList, currentBook]);
+
+	const BookCoverImage = (
 		<View className="relative">
 			<Image source={{ uri: currentBook?.bookCoverUrl }} className="h-[280px] w-[190px]" resizeMode="cover" />
 			{props.onUpdateBook && (
@@ -143,7 +148,7 @@ export const BookInfoModal = (props: Props) => {
 				ref={scrollViewRef}
 				childrenTitle={splitBookTitleAndSubtitle(currentBook?.title ?? '').title}
 				headerBackgroundColor={currentBookCoverBackgroundColors}
-				headerImage={BookVocerImage}
+				headerImage={BookCoverImage}
 			>
 				<View className="relative bg-white px-4 pb-40">
 					<Pressable className="absolute left-2 top-2 z-50 rounded-full bg-slate-300 p-1" onPress={onClose}>
@@ -183,17 +188,16 @@ export const BookInfoModal = (props: Props) => {
 
 					<View className="flex w-full flex-row items-start justify-between">
 						<View className="flex w-2/3 items-start justify-center">
+							{!isBookInUserLibrary && (
+								<Pressable className="mb-2 flex self-start rounded bg-blue-300 p-2" onPress={onAddNewBook}>
+									<Text className="text-lg font-semibold text-white">Add to your library 📚</Text>
+								</Pressable>
+							)}
 							{!!currentBook?.numberOfPages && (
 								<View className="mb-2 flex flex-row flex-wrap items-center">
 									<Text className="text-lg font-semibold text-gray-600">Number of pages: </Text>
 									<Text className="flex-shrink text-lg text-gray-600">{currentBook?.numberOfPages}</Text>
 								</View>
-							)}
-
-							{props.canAdd && (
-								<Pressable className="mb-2 flex self-start rounded bg-blue-300 p-2" onPress={onAddNewBook}>
-									<Text className="text-lg font-semibold text-white">Add to your library 📚</Text>
-								</Pressable>
 							)}
 						</View>
 					</View>
@@ -233,7 +237,7 @@ export const BookInfoModal = (props: Props) => {
 								{bookDescriptionAndReviewsCount.similarBooks.map((book) => {
 									return (
 										<TouchableOpacity key={book.bookId} className="mb-4 flex flex-row items-start" onPress={() => onClickSimilarBook(book)}>
-											<Image source={{ uri: book.bookCoverUrl }} className="mr-4 h-36 w-24" />
+											<UIBookCover book={book} className="mr-4" showInLibrary />
 											<View className="flex flex-1">
 												{book?.title && splitBookTitleAndSubtitle(book.title).title && (
 													<Text className="text-xl font-semibold text-gray-800" style={{ fontFamily: 'Georgia' }}>
@@ -253,7 +257,7 @@ export const BookInfoModal = (props: Props) => {
 							</View>
 						</View>
 					)}
-					{!props.canAdd && booksStack.length === 1 && (
+					{isBookInUserLibrary && (
 						<Pressable className="my-2 flex flex-row items-center self-start rounded bg-red-400 px-4 py-2" onPress={onRemoveExistingBook}>
 							<Icon name="delete" color="white" size={20} />
 							<Text className="text-l font-semibold text-white">Remove book from your library</Text>
