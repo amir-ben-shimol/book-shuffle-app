@@ -23,6 +23,7 @@
 		"@react-navigation/native-stack": "6.10.1",
 		"@react-navigation/stack": "6.4.1",
 		"axios": "1.7.2",
+		"clsx": "2.1.1",
 		"expo": "~51.0.20",
 		"expo-asset": "~10.0.9",
 		"expo-constants": "~16.0.2",
@@ -56,6 +57,7 @@
 		"react-native-vector-icons": "10.1.0",
 		"react-native-web": "~0.19.10",
 		"react-native-xml2js": "1.0.3",
+		"tailwind-merge": "2.4.0",
 		"xml2js": "0.6.2",
 		"zustand": "4.5.4"
 	},
