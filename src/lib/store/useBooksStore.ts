@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNotificationsStore } from '@/lib/store/useNotificationsStore';
 import type { Book, Filters, FilterTabs } from '../types/ui/book';
 
 type State = {
@@ -63,6 +64,16 @@ const useBooksStore = create<BooksStore>()(
 				set((state) => ({
 					booksList: [...state.booksList, book],
 				}));
+
+				const { showNotification } = useNotificationsStore.getState();
+
+				showNotification({
+					type: 'success',
+					title: 'Book added',
+					content: `The book "${book.title}" has been successfully added to your library
+					`,
+					duration: 5000,
+				});
 			},
 			onAddRecentlyViewedBook: (book) => {
 				set((state) => {
@@ -89,9 +100,20 @@ const useBooksStore = create<BooksStore>()(
 				}));
 			},
 			onRemoveBook: (bookId) => {
+				const book = useBooksStore.getState().booksList.find((b) => b.bookId === bookId);
+
 				set((state) => ({
 					booksList: state.booksList.filter((book) => book.bookId !== bookId),
 				}));
+
+				const { showNotification } = useNotificationsStore.getState();
+
+				showNotification({
+					type: 'success',
+					title: 'Book removed',
+					content: `The book "${book?.title}" has been successfully removed from your library`,
+					duration: 5000,
+				});
 			},
 
 			setAllBooksFilters: (filters) => {

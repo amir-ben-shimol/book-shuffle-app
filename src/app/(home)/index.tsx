@@ -1,10 +1,11 @@
 import React, { useState, useDeferredValue, useMemo, useCallback } from 'react';
-import { View, Image, TouchableOpacity, Text, FlatList } from 'react-native';
+import { View, FlatList } from 'react-native';
 import * as Haptics from 'expo-haptics';
 import type { Book } from '@/lib/types/ui/book';
 import { BookInfoModal } from '@/modals/BookInfoModal';
 import { getImageDominantColor } from '@/lib/utils/image';
 import { onBlurActiveInput } from '@/lib/utils/input';
+import { UIBookCover } from '@/ui/UIBookCover';
 import { useBooksStore } from '@/lib/store/useBooksStore';
 import Searchbar from './components/Searchbar';
 import Filterbar from './components/Filterbar';
@@ -92,24 +93,10 @@ const HomeScreen = () => {
 		setIsModalOpen(true);
 	}, []);
 
-	const BookItem = React.memo(({ item }: { item: Book }) => (
-		<TouchableOpacity
-			key={item.bookId}
-			className="relative mb-4 w-[31%] overflow-hidden"
-			onPress={() => {
-				onBookClick(item);
-			}}
-		>
-			<View className="flex overflow-hidden rounded">
-				{item.bookCoverUrl && <Image source={{ uri: item.bookCoverUrl }} className="h-[170px] w-full" resizeMode="cover" />}
-			</View>
-			{!item.bookshelves.includes('to-read') && (
-				<Text className="absolute -left-6 top-4 w-24 -rotate-45 bg-green-700 px-5 text-center text-white">Read</Text>
-			)}
-		</TouchableOpacity>
-	));
-
-	const renderBook = useCallback(({ item }: { item: Book }) => <BookItem item={item} />, []);
+	const renderBook = useCallback(
+		({ item }: { item: Book }) => <UIBookCover className="relative mb-4 w-[31%] overflow-hidden" book={item} onPress={onBookClick} />,
+		[],
+	);
 
 	const onUpdateBook = (book: Book) => {
 		setSelectedBook(book);

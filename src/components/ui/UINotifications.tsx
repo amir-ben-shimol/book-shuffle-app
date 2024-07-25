@@ -116,7 +116,7 @@ const Notification = (notification: TNotification) => {
 			<Animated.View style={slideInStyle} className={containerClasses()}>
 				<View className="w-full">
 					<View className="w-full px-4 py-2">
-						<Text className={cn('z-10 text-sm font-medium', textColorClasses(notification.type))}>{notification.title}</Text>
+						<Text className={cn('z-10 text-sm font-bold', textColorClasses(notification.type))}>{notification.title}</Text>
 						<Text className={cn('z-10 text-xs', textColorClasses(notification.type))}>{notification.content}</Text>
 					</View>
 					<Animated.View style={backgroundStyle} className={timerBackgroundClasses(notification.type)} />
