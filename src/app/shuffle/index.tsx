@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { View, TouchableOpacity, Pressable } from 'react-native';
 import { ThemedButton } from 'react-native-really-awesome-button';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/Ionicons';
 import ConfettiCannon from 'react-native-confetti-cannon';
 import * as Haptics from 'expo-haptics';
 import Animated, { useSharedValue, useAnimatedStyle, withTiming, withRepeat, withSequence, Easing, withDelay } from 'react-native-reanimated';
@@ -338,7 +338,7 @@ const ShuffleScreen = () => {
 
 					<Animated.View style={[fadeInSlowStyle]} className="mb-4 mr-4 mt-auto flex flex-row items-center self-end">
 						<TouchableOpacity className="ml-2 rounded-full bg-gray-400 p-2" onPress={onResetShuffle}>
-							<Icon name="redo" color="white" size={14} />
+							<Icon name="arrow-redo-outline" color="white" size={14} />
 						</TouchableOpacity>
 					</Animated.View>
 
@@ -352,12 +352,8 @@ const ShuffleScreen = () => {
 			) : (
 				<>
 					<Pressable className="absolute right-4 top-4" onPress={() => setIsFilterVisible(true)}>
-						<Icon name="sort" color="gray" size={24} />
-						{areFiltersApplied && (
-							<View className="absolute right-6 top-0">
-								<Icon name="circle" color="red" size={12} />
-							</View>
-						)}
+						<Icon name="filter" color="gray" size={24} />
+						{areFiltersApplied && <View className="absolute right-6 top-0 h-2 w-2 rounded-full bg-red-500" />}
 					</Pressable>
 
 					<Animated.View style={fadeOutPulseAndButtonOpacityStyle}>

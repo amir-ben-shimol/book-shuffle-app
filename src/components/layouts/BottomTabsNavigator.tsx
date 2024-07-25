@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { View, Text, Pressable, StatusBar } from 'react-native';
 import * as Haptics from 'expo-haptics';
 import { router, Tabs } from 'expo-router';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/Ionicons';
 import Animated, { useSharedValue, useAnimatedStyle, withRepeat, withSequence, withTiming, Easing } from 'react-native-reanimated';
 import { UILinearGradient } from '@/ui/UILinearGradient';
 
@@ -34,7 +34,6 @@ const BottomTabsNavigator: React.FC = () => {
 			withTiming(0, { duration: 500, easing: Easing.inOut(Easing.ease) }),
 		);
 
-		//navigate to shuffle screen
 		router.navigate('shuffle');
 	};
 
@@ -52,6 +51,7 @@ const BottomTabsNavigator: React.FC = () => {
 				screenOptions={{
 					tabBarActiveTintColor: '#3b82f6',
 					tabBarIconStyle: { marginBottom: -15 },
+					tabBarLabelStyle: { fontSize: 12, position: 'absolute', bottom: -12, fontWeight: '500' },
 					headerShown: false,
 					unmountOnBlur: true,
 				}}
@@ -59,10 +59,8 @@ const BottomTabsNavigator: React.FC = () => {
 				<Tabs.Screen
 					name="(home)"
 					options={{
-						tabBarIcon: ({ color, size }) => <Icon name="home" color={color} size={size} />,
-						tabBarLabel: 'Home',
-						tabBarLabelStyle: { fontSize: 12, position: 'absolute', bottom: -10, fontWeight: '500' },
-						unmountOnBlur: true,
+						tabBarIcon: ({ color, size }) => <Icon name="library" color={color} size={size} />,
+						tabBarLabel: 'Library',
 					}}
 				/>
 				<Tabs.Screen
@@ -83,9 +81,6 @@ const BottomTabsNavigator: React.FC = () => {
 							</Pressable>
 						),
 						tabBarLabel: 'Shuffle',
-						tabBarLabelStyle: { fontSize: 12, position: 'absolute', bottom: -10, fontWeight: '500' },
-						headerTintColor: 'black',
-						unmountOnBlur: true,
 					}}
 				/>
 				<Tabs.Screen
@@ -93,7 +88,6 @@ const BottomTabsNavigator: React.FC = () => {
 					options={{
 						tabBarIcon: ({ color, size }) => <Icon name="settings" color={color} size={size} />,
 						tabBarLabel: 'Settings',
-						tabBarLabelStyle: { fontSize: 12, position: 'absolute', bottom: -10, fontWeight: '500' },
 					}}
 				/>
 			</Tabs>

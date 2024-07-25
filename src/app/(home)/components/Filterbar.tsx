@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, Pressable } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/Ionicons';
 import * as Haptics from 'expo-haptics';
 import Animated, { useSharedValue, useAnimatedStyle, withTiming } from 'react-native-reanimated';
 import type { FilterTabs } from '@/lib/types/ui/book';
@@ -56,7 +56,7 @@ const Filterbar = () => {
 		<>
 			<View className="z-10 mb-4 flex w-full flex-row items-center justify-between">
 				<Pressable onPress={onAddNewBook}>
-					<Icon name="add" color="gray" size={24} />
+					<Icon name="add-circle" color="#3b82f6" size={24} />
 				</Pressable>
 
 				<View className="relative flex flex-1 flex-row items-end justify-center">
@@ -70,12 +70,8 @@ const Filterbar = () => {
 				</View>
 
 				<Pressable className="relative" onPress={onOpenFilterModal}>
-					<Icon name="sort" color="gray" size={24} />
-					{areFiltersApplied && (
-						<View className="absolute right-6 top-0">
-							<Icon name="circle" color="red" size={12} />
-						</View>
-					)}
+					<Icon name="filter" color="gray" size={24} />
+					{areFiltersApplied && <View className="absolute right-6 top-0 h-2 w-2 rounded-full bg-red-500" />}
 				</Pressable>
 
 				<SearchNewBookModal isVisible={isAddNewBookModalVisible} onClose={onCloseAddNewBookModal} />
