@@ -2,7 +2,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { View, Text, Image, Pressable, TouchableOpacity, Linking } from 'react-native';
 import * as Haptics from 'expo-haptics';
-import RenderHtml from 'react-native-render-html';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { UIModal } from '@/ui/UIModal';
 import { UIRating } from '@/ui/UIRating';
@@ -14,6 +13,7 @@ import { UIParallaxScrollView } from '@/ui/UIParallaxScrollView';
 import { formatNumberWithCommas } from '@/lib/utils/format';
 import { splitBookTitleAndSubtitle } from '@/lib/utils/book';
 import { UIBookCover } from '@/ui/UIBookCover';
+import { UIHtmlView } from '@/ui/UIHtmlView';
 
 type Props = {
 	readonly book?: Book;
@@ -219,7 +219,7 @@ export const BookInfoModal = (props: Props) => {
 						bookDescriptionAndReviewsCount?.description && (
 							<View className="mb-4">
 								<Text className="mb-2 text-lg font-semibold text-gray-600">Description: </Text>
-								<RenderHtml contentWidth={100} source={{ html: bookDescriptionAndReviewsCount.description }} />
+								<UIHtmlView value={bookDescriptionAndReviewsCount.description} />
 							</View>
 						)
 					)}
