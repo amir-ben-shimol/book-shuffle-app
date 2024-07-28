@@ -2,6 +2,14 @@
 
 Welcome to the Shuffle Book App! This app allows users to explore and shuffle through books based on their preferences. Additionally, users can upload their `.csv` file export of book lists from Goodreads, integrate with their Goodreads account, and utilize the Goodreads API for displaying detailed book information. Below is an overview of the app, including the technologies used, linters and CI/CD setup, and the main features.
 
+## Getting Started
+
+To get started with the development of this app, follow these steps:
+
+1. Clone the repository.
+2. Install the dependencies using `pnpm install`.
+3. Run the app using `pnpm dev`.
+
 ## App Features
 
 -   **Upload Goodreads CSV**: Users can upload their `.csv` file export of book lists from Goodreads.
@@ -82,14 +90,6 @@ I use GitHub Actions for our CI/CD pipeline. The workflow includes:
 -   Building the app using EAS build services.
 -   Automated dependency updates with Renovate.
 -   Automated versioning and releases with Semantic Release.
-
-## Getting Started
-
-To get started with the development of this app, follow these steps:
-
-1. Clone the repository.
-2. Install the dependencies using `pnpm install`.
-3. Run the app using `pnpm dev`.
 
 ## License
 
