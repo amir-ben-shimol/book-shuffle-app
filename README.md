@@ -2,13 +2,22 @@
 
 Welcome to the Shuffle Book App! This app allows users to explore and shuffle through books based on their preferences. Additionally, users can upload their `.csv` file export of book lists from Goodreads, integrate with their Goodreads account, and utilize the Goodreads API for displaying detailed book information. Below is an overview of the app, including the technologies used, linters and CI/CD setup, and the main features.
 
+## App Features
+
+-   **Upload Goodreads CSV**: Users can upload their `.csv` file export of book lists from Goodreads.
+-   **Goodreads Integration**: The app integrates with the user's Goodreads account, allowing seamless access to their book information.
+-   **Goodreads API**: Utilizes the Goodreads API to display detailed book information, including cover, title, author, and description.
+-   **Book Search**: Users can search for books using the Goodreads API and add them to their library.
+-   **Detailed Book Info**: Includes title, author, description, and reviews count for each book.
+-   **Shuffle Book**: Allows users to shuffle books based on various filters.
+
 ## Technologies Used
 
 -   **Expo**: Utilized for building the app with an app router structure.
 -   **TypeScript**: Ensuring type safety and better development experience.
 -   **ESLint**: For identifying and reporting on patterns found in ECMAScript/JavaScript code.
 -   **Prettier**: An opinionated code formatter to ensure consistent code style.
--   **inflint**: For defining and insuring files names convensions.
+-   **inflint**: For defining and insuring file name conventions.
 -   **knip**: For unused files and exports.
 -   **lint-staged**: To run linters on staged files before committing.
 -   **Husky**: Used in combination with lint-staged to check code before committing.
@@ -54,12 +63,6 @@ Welcome to the Shuffle Book App! This app allows users to explore and shuffle th
   <img src="./src/assets/images/showcase/filter-preferences.png" alt="Filter preferences screen allowing users to set criteria before shuffling books" width="400"/>
 </p>
 
-## App Features
-
--   **Upload Goodreads CSV**: Users can upload their `.csv` file export of book lists from Goodreads.
--   **Goodreads Integration**: The app integrates with the user's Goodreads account, allowing seamless access to their book information.
--   **Goodreads API**: Utilizes the Goodreads API to display detailed book information, including cover, title, author, and description.
-
 ## Linters and Code Quality
 
 I have configured several linters and tools to maintain code quality:
@@ -68,7 +71,7 @@ I have configured several linters and tools to maintain code quality:
 -   **Husky**: Ensures lint-staged checks are performed before commits.
 -   **ESLint**: Enforces code quality and consistency.
 -   **Prettier**: Formats the code to maintain a consistent style.
--   **inflint**: Inline lint checks for files names convensions.
+-   **inflint**: Inline lint checks for file name conventions.
 -   **knip**: Identifies unused files and exports.
 
 ## Continuous Integration and Continuous Deployment (CI/CD)
