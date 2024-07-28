@@ -1,77 +1,85 @@
 name: Integration
 
 on:
-    pull_request:
-        branches: [main]
+  pull_request:
+    branches: [main]
 
 permissions:
-    contents: read
+  contents: read
 
 jobs:
-    knip:
-        name: Knip
-        runs-on: ubuntu-latest
+  knip:
+    name: Knip
+    runs-on: ubuntu-latest
 
-        steps:
-            - uses: actions/checkout@v4
-            - uses: actions/setup-node@v4
-              with:
-                  node-version-file: '.nvmrc'
-            - uses: pnpm/action-setup@v4
-              with:
-                  version: 9.5.0
-                  run_install: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9.5.0
 
-            - name: Run Knip
-              run: pnpm knip
+      - name: Install dependencies
+        run: pnpm install
 
-    inflint:
-        name: Inflint
-        runs-on: ubuntu-latest
+      - name: Run Knip
+        run: pnpm knip
 
-        steps:
-            - uses: actions/checkout@v4
-            - uses: actions/setup-node@v4
-              with:
-                  node-version-file: '.nvmrc'
-            - uses: pnpm/action-setup@v4
-              with:
-                  version: 9.5.0
-                  run_install: true
+  inflint:
+    name: Inflint
+    runs-on: ubuntu-latest
 
-            - name: Run Inflint
-              run: pnpm inflint
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9.5.0
 
-    typescript:
-        name: TypeScript
-        runs-on: ubuntu-latest
+      - name: Install dependencies
+        run: pnpm install
 
-        steps:
-            - uses: actions/checkout@v4
-            - uses: actions/setup-node@v4
-              with:
-                  node-version-file: '.nvmrc'
-            - uses: pnpm/action-setup@v4
-              with:
-                  version: 9.5.0
-                  run_install: true
+      - name: Run Inflint
+        run: pnpm inflint
 
-            - name: Test TypeScript
-              run: pnpm run type-check
+  typescript:
+    name: TypeScript
+    runs-on: ubuntu-latest
 
-    eslint:
-        name: ESLint
-        runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9.5.0
 
-        steps:
-            - uses: actions/checkout@v4
-            - uses: actions/setup-node@v4
-              with:
-                  node-version-file: '.nvmrc'
-            - uses: pnpm/action-setup@v4
-              with:
-                  version: 9.5.0
-                  run_install: true
+      - name: Install dependencies
+        run: pnpm install
 
-            - name: Test ESLint
-              run: pnpm lint
+      - name: Test TypeScript
+        run: pnpm run type-check
+
+  eslint:
+    name: ESLint
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9.5.0
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Test ESLint
+        run: pnpm lint
