@@ -11,7 +11,8 @@
 		"web": "expo start --web",
 		"test": "jest --watchAll",
 		"lint": "expo lint",
-		"knip": "knip"
+		"knip": "knip",
+		"inflint": "inflint -c ./inflint.config.cjs"
 	},
 	"dependencies": {
 		"@expo/vector-icons": "^14.0.2",
@@ -52,6 +53,7 @@
 	},
 	"devDependencies": {
 		"@babel/core": "^7.20.0",
+		"@exlint.io/inflint": "2.1.1",
 		"@types/react": "~18.2.45",
 		"@types/react-native-htmlview": "0.16.5",
 		"@types/react-native-vector-icons": "6.4.18",
