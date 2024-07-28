@@ -57,7 +57,7 @@ const BottomTabsNavigator: React.FC = () => {
 				}}
 			>
 				<Tabs.Screen
-					name="(home)"
+					name="(library)"
 					options={{
 						tabBarIcon: ({ color, size }) => <Icon name="library" color={color} size={size} />,
 						tabBarLabel: 'Library',
