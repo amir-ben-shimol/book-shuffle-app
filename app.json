@@ -52,7 +52,7 @@
 			],
 			"useNextNotificationsApi": true
 		},
-		"plugins": ["expo-router", "expo-document-picker", "expo-file-system", "expo-asset", "expo-image-picker"],
+		"plugins": ["expo-router", "expo-image-picker"],
 		"experiments": {
 			"typedRoutes": true
 		},
