@@ -27,9 +27,9 @@
 	"submit": {
 		"production": {
 			"ios": {
-				"appleId": "webmaster@leumit.co.il",
-				"ascAppId": "6503964440",
-				"appleTeamId": "869Y96474U"
+				"appleId": "env:SUBMIT_PRODUCTION_IOS_APPLE_ID",
+				"ascAppId": "env:SUBMIT_PRODUCTION_IOS_ASC_APP_ID",
+				"appleTeamId": "env:SUBMIT_PRODUCTION_IOS_APPLE_TEAM_ID"
 			}
 		}
 	}
