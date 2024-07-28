@@ -18,4 +18,5 @@ web-build/
 
 expo-env.d.ts
 .env
+help-commands.md
 # @end expo-cli
