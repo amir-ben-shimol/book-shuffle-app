@@ -1,56 +1,94 @@
-# Welcome to your Expo app 👋
+# Shuffle Book App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Welcome to the Shuffle Book App! This app allows users to explore and shuffle through books based on their preferences. Additionally, users can upload their `.csv` file export of book lists from Goodreads, integrate with their Goodreads account, and utilize the Goodreads API for displaying detailed book information. Below is an overview of the app, including the technologies used, linters and CI/CD setup, and the main features.
 
-## Get started
+## Technologies Used
 
-1. Install dependencies
+-   **Expo**: Utilized for building the app with an app router structure.
+-   **TypeScript**: Ensuring type safety and better development experience.
+-   **ESLint**: For identifying and reporting on patterns found in ECMAScript/JavaScript code.
+-   **Prettier**: An opinionated code formatter to ensure consistent code style.
+-   **inflint**: For defining and insuring files names convensions.
+-   **knip**: For unused files and exports.
+-   **lint-staged**: To run linters on staged files before committing.
+-   **Husky**: Used in combination with lint-staged to check code before committing.
+-   **Renovate**: For automated dependency updates.
+-   **Semantic Release**: For automated versioning and package publishing.
+-   **EAS Build Services**: For building the app.
 
-    ```bash
-    npm install
-    ```
+## Project Environment
 
-2. Start the app
+-   **pnpm**: >=9
+-   **node**: >=20
 
-    ```bash
-    npx expo start
-    ```
+## CI/CD Setup
 
-In the output, you'll find options to open the app in a
+-   **GitHub Actions**: Used for continuous integration and continuous deployment (CI/CD). The workflow checks code conventions based on the linter configurations.
 
--   [development build](https://docs.expo.dev/develop/development-builds/introduction/)
--   [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
--   [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
--   [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Screenshots
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+### Library View
 
-## Get a fresh project
+![Library view showing a collection of book covers arranged in a grid layout](./src/assets/images/showcase/library.png)
 
-When you're ready, run:
+### Recently Viewed Books Section
 
-```bash
-npm run reset-project
-```
+![Recently viewed books section](./src/assets/images/showcase/recently-viewed.png)
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### Book Information Page
 
-## Learn more
+![Book information page](./src/assets/images/showcase/book-info.png)
 
-To learn more about developing your project with Expo, look at the following resources:
+### Similar Books Section
 
--   [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
--   [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+![Similar books section showcasing a selection of book covers related to the current book](./src/assets/images/showcase/similar-books.png)
 
-## Join the community
+### Shuffle Your Book Feature
 
-Join our community of developers creating universal apps.
+![Shuffle your book feature interface with a button to start shuffling books](./src/assets/images/showcase/shuffle.png)
 
--   [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
--   [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+### Shuffled Book Result
 
-## Add secret to EAS
+![Result of a shuffled book displaying a randomly selected book cover and its title](./src/assets/images/showcase/result-of-shuffled.png)
 
-```bash
-eas secret:create --name EXPO_PUBLIC_GOODREADS_API_KEY --value secretValue
-```
+### Filter Preferences Screen
+
+![Filter preferences screen allowing users to set criteria before shuffling books](./src/assets/images/showcase/filter-preferences.png)
+
+## App Features
+
+-   **Upload Goodreads CSV**: Users can upload their `.csv` file export of book lists from Goodreads.
+-   **Goodreads Integration**: The app integrates with the user's Goodreads account, allowing seamless access to their book information.
+-   **Goodreads API**: Utilizes the Goodreads API to display detailed book information, including cover, title, author, and description.
+
+## Linters and Code Quality
+
+I have configured several linters and tools to maintain code quality:
+
+-   **lint-staged**: Runs linters on staged files before committing.
+-   **Husky**: Ensures lint-staged checks are performed before commits.
+-   **ESLint**: Enforces code quality and consistency.
+-   **Prettier**: Formats the code to maintain a consistent style.
+-   **inflint**: Inline lint checks for files names convensions.
+-   **knip**: Identifies unused files and exports.
+
+## Continuous Integration and Continuous Deployment (CI/CD)
+
+I use GitHub Actions for our CI/CD pipeline. The workflow includes:
+
+-   Checking code conventions based on the configured linters.
+-   Building the app using EAS build services.
+-   Automated dependency updates with Renovate.
+-   Automated versioning and releases with Semantic Release.
+
+## Getting Started
+
+To get started with the development of this app, follow these steps:
+
+1. Clone the repository.
+2. Install the dependencies using `pnpm install`.
+3. Run the app using `pnpm dev`.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
