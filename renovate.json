@@ -1,0 +1,23 @@
+{
+	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
+	"extends": ["config:base", ":semanticCommitTypeAll(chore)", ":semanticCommitScopeDisabled"],
+	"regexManagers": [
+		{
+			"fileMatch": ["package.json"],
+			"matchStrings": ["\"node\": \"(?<currentValue>.*)\""],
+			"depNameTemplate": "node",
+			"datasourceTemplate": "node",
+			"versioningTemplate": "node"
+		}
+	],
+	"packageRules": [
+		{
+			"updateTypes": ["minor", "patch"],
+			"automerge": true
+		}
+	],
+	"commitMessageAction": "🤖 Update",
+	"stabilityDays": 7,
+	"reviewers": ["@amir-ben-shimol"],
+	"schedule": ["every weekend"]
+}
