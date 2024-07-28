@@ -1,8 +1,22 @@
 {
 	"name": "book-shuffle",
+	"description": "A mobile app for book lovers to discover new books and shuffle their reading list.",
+	"author": "Amir Ben Shimol",
+	"license": "MIT",
 	"main": "expo-router/entry",
 	"version": "1.0.0",
 	"private": true,
+	"keywords": [
+		"book",
+		"shuffle",
+		"reading",
+		"list",
+		"discover",
+		"expo",
+		"react",
+		"native",
+		"goodreads"
+	],
 	"scripts": {
 		"prepare": "run-s husky onboarding",
 		"husky": "husky",
