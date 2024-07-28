@@ -27,33 +27,32 @@ Welcome to the Shuffle Book App! This app allows users to explore and shuffle th
 
 ## Screenshots
 
-### Library View
+### Library View and Recently Viewed Books Section
 
-![Library view showing a collection of book covers arranged in a grid layout](./src/assets/images/showcase/library.png)
+<p align="center">
+  <img src="./src/assets/images/showcase/library.png" alt="Library view showing a collection of book covers arranged in a grid layout" width="400"/>
+  <img src="./src/assets/images/showcase/recently-viewed.png" alt="Recently viewed books section" width="400"/>
+</p>
 
-### Recently Viewed Books Section
+### Book Information Page and Similar Books Section
 
-![Recently viewed books section](./src/assets/images/showcase/recently-viewed.png)
+<p align="center">
+  <img src="./src/assets/images/showcase/book-info.png" alt="Book information page" width="400"/>
+  <img src="./src/assets/images/showcase/similar-books.png" alt="Similar books section showcasing a selection of book covers related to the current book" width="400"/>
+</p>
 
-### Book Information Page
+### Shuffle Your Book Feature and Shuffled Book Result
 
-![Book information page](./src/assets/images/showcase/book-info.png)
-
-### Similar Books Section
-
-![Similar books section showcasing a selection of book covers related to the current book](./src/assets/images/showcase/similar-books.png)
-
-### Shuffle Your Book Feature
-
-![Shuffle your book feature interface with a button to start shuffling books](./src/assets/images/showcase/shuffle.png)
-
-### Shuffled Book Result
-
-![Result of a shuffled book displaying a randomly selected book cover and its title](./src/assets/images/showcase/result-of-shuffled.png)
+<p align="center">
+  <img src="./src/assets/images/showcase/shuffle.png" alt="Shuffle your book feature interface with a button to start shuffling books" width="400"/>
+  <img src="./src/assets/images/showcase/result-of-shuffled.png" alt="Result of a shuffled book displaying a randomly selected book cover and its title" width="400"/>
+</p>
 
 ### Filter Preferences Screen
 
-![Filter preferences screen allowing users to set criteria before shuffling books](./src/assets/images/showcase/filter-preferences.png)
+<p align="center">
+  <img src="./src/assets/images/showcase/filter-preferences.png" alt="Filter preferences screen allowing users to set criteria before shuffling books" width="400"/>
+</p>
 
 ## App Features
 
