@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
-import { SplashScreen } from 'expo-router';
+import * as SplashScreen from 'expo-splash-screen';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import BottomTabsNavigator from '@/layouts/BottomTabsNavigator';
 import { convertToBookArray } from '@/lib/utils/book';
@@ -22,15 +22,13 @@ const RootLayout: React.FC = () => {
 	useEffect(() => {
 		const prepare = async () => {
 			try {
-				SplashScreen.preventAutoHideAsync();
+				await SplashScreen.preventAutoHideAsync();
 
-				const bookLoadingPromise = loadBooks();
+				loadBooks();
 
-				const splashTimeoutPromise = new Promise((resolve) => {
+				await new Promise((resolve) => {
 					setTimeout(resolve, 2000);
 				});
-
-				await Promise.all([bookLoadingPromise, splashTimeoutPromise]);
 
 				setAppIsReady(true);
 				await SplashScreen.hideAsync();

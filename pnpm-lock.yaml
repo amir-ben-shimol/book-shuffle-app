@@ -53,6 +53,9 @@ importers:
       expo-router:
         specifier: ~3.5.18
         version: 3.5.18(xg2bq5zibnjcwcz2wy7s3vyeaq)
+      expo-splash-screen:
+        specifier: 0.27.5
+        version: 0.27.5(expo-modules-autolinking@1.11.1)(expo@51.0.20(@babel/core@7.24.9)(@babel/preset-env@7.24.8(@babel/core@7.24.9)))
       expo-status-bar:
         specifier: ~1.12.1
         version: 1.12.1
