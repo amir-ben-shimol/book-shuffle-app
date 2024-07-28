@@ -1,0 +1,6 @@
+{
+	"entry": "src/**/*",
+	"ignore": ["inflint.config.cjs", "metro.config.cjs", "app.config.ts"],
+	"ignoreDependencies": ["expo-dev-client", "react-native-xml2js"],
+	"ignoreBinaries": ["eas"]
+}
