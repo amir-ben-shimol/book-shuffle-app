@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/amir-ben-shimol/react_native-book_shuffle/compare/v1.0.0...v1.0.1) (2024-07-28)
+
+
+### Bug Fixes
+
+* Update eas.json with environment variables for iOS submission ([37cc4f6](https://github.com/amir-ben-shimol/react_native-book_shuffle/commit/37cc4f6220a5b7d4bfe680280e7e7705803de1bb))
+
 # 1.0.0 (2024-07-28)
 
 
