@@ -151,7 +151,7 @@ export const UIButton = (props: Props) => {
 	if (typeof backgroundColors[varient] !== 'string') {
 		return (
 			<TouchableOpacity className={props.buttonSize === 'fit-content' ? 'self-start' : 'self-stretch'} onPress={handlePress}>
-				<UILinearGradient varient={varient} className={buttonClass} style={props.style}>
+				<UILinearGradient gradientColors={['#60a5fa', '#3b82f6']} className={buttonClass} style={props.style}>
 					{renderButtonContent()}
 				</UILinearGradient>
 			</TouchableOpacity>

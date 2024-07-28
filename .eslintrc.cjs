@@ -221,7 +221,13 @@ module.exports = {
 		{
 			files: ['inflint.config.cjs'],
 			rules: {
-				'quotes': 'off',
+				'import/no-commonjs': 'off',
+			},
+		},
+		{
+			files: ['./lint-staged.config.cjs'],
+			rules: {
+				'unicorn/no-empty-file': 'off',
 				'import/no-commonjs': 'off',
 			},
 		},
