@@ -19,5 +19,5 @@
 	"commitMessageAction": "🤖 Update",
 	"stabilityDays": 7,
 	"reviewers": ["@amir-ben-shimol"],
-	"schedule": ["every weekend"]
+	"schedule": ["at any time"]
 }
