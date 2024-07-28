@@ -26,8 +26,6 @@ const HomeScreen = () => {
 		}
 	};
 
-	const test: any = 1;
-
 	const deferredQuery = useDeferredValue(filterBooksQuery);
 
 	const filteredBooksList = useMemo(() => {
