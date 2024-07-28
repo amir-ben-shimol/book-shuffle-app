@@ -218,6 +218,13 @@ module.exports = {
 				'unicorn/no-empty-file': 'off',
 			},
 		},
+		{
+			files: ['inflint.config.cjs'],
+			rules: {
+				'quotes': 'off',
+				'import/no-commonjs': 'off',
+			},
+		},
 	],
 	settings: {
 		'import/ignore': ['react-native'],
