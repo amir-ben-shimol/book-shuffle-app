@@ -5,7 +5,7 @@ import * as Haptics from 'expo-haptics';
 import Animated, { useSharedValue, useAnimatedStyle, withTiming } from 'react-native-reanimated';
 import type { FilterTabs } from '@/lib/types/ui/book';
 import { useBooksStore } from '@/lib/store/useBooksStore';
-import { SearchNewBookModal } from '@/modals/SearchNewBookModal';
+import { AddNewBookModal } from '@/modals/AddNewBookModal';
 import { FilterModal } from '@/modals/FilterModal';
 import { onBlurActiveInput } from '@/lib/utils/input';
 
@@ -74,7 +74,7 @@ const Filterbar = () => {
 					{areFiltersApplied && <View className="absolute right-6 top-0 h-2 w-2 rounded-full bg-red-500" />}
 				</Pressable>
 
-				<SearchNewBookModal isVisible={isAddNewBookModalVisible} onClose={onCloseAddNewBookModal} />
+				<AddNewBookModal isVisible={isAddNewBookModalVisible} onClose={onCloseAddNewBookModal} />
 			</View>
 			<FilterModal type="allBooks" isVisible={isFilterVisible} onClose={() => setIsFilterVisible(false)} />
 		</>

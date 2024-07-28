@@ -15,7 +15,7 @@ type Props = {
 	readonly onClose: VoidFunction;
 };
 
-export const SearchNewBookModal = (props: Props) => {
+export const AddNewBookModal = (props: Props) => {
 	const { searchBooks } = useBook();
 	const [isLoading, setIsLoading] = useState(false);
 	const [results, setResults] = useState<Book[]>([]);
