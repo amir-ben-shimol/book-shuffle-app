@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { View, Text, Pressable, StatusBar } from 'react-native';
 import * as Haptics from 'expo-haptics';
 import { router, Tabs } from 'expo-router';
@@ -25,7 +25,7 @@ const BottomTabsNavigator: React.FC = () => {
 		);
 	}, [rotation]);
 
-	const handlePress = () => {
+	const handlePress = useCallback(() => {
 		Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Soft);
 
 		pressRotation.value = withSequence(
@@ -35,13 +35,11 @@ const BottomTabsNavigator: React.FC = () => {
 		);
 
 		router.navigate('shuffle');
-	};
+	}, [pressRotation]);
 
-	const animatedStyle = useAnimatedStyle(() => {
-		return {
-			transform: [{ rotate: `${rotation.value + pressRotation.value}deg` }],
-		};
-	});
+	const animatedStyle = useAnimatedStyle(() => ({
+		transform: [{ rotate: `${rotation.value + pressRotation.value}deg` }],
+	}));
 
 	return (
 		<>
