@@ -231,6 +231,13 @@ module.exports = {
 				'import/no-commonjs': 'off',
 			},
 		},
+		{
+			files: ['./release.config.cjs'],
+			rules: {
+				'unicorn/no-empty-file': 'off',
+				'import/no-commonjs': 'off',
+			},
+		},
 	],
 	settings: {
 		'import/ignore': ['react-native'],
