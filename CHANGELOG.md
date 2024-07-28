@@ -1,3 +1,11 @@
+# [1.2.0](https://github.com/amir-ben-shimol/react_native-book_shuffle/compare/v1.1.0...v1.2.0) (2024-07-28)
+
+
+### Bug Fixes
+
+* fix ci issue ([a6be628](https://github.com/amir-ben-shimol/react_native-book_shuffle/commit/a6be6284bd963169a16bbda2f89c22fc1f6ca15d))
+* Update pnpm/action-setup to version 4 ([beba0d5](https://github.com/amir-ben-shimol/react_native-book_shuffle/commit/beba0d5109c655034fa519ff7f810187b7d21f60))
+
 # [1.1.0](https://github.com/amir-ben-shimol/react_native-book_shuffle/compare/v1.0.1...v1.1.0) (2024-07-28)
 
 
