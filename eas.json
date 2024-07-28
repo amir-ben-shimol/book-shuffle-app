@@ -5,7 +5,10 @@
 	"build": {
 		"production": {
 			"node": "20.15.1",
-			"pnpm": "9.5.0"
+			"pnpm": "9.5.0",
+			"env": {
+				"EXPO_PUBLIC_GOODREADS_API_KEY": "@env:EXPO_PUBLIC_GOODREADS_API_KEY"
+			}
 		},
 		"development": {
 			"extends": "production",
@@ -18,10 +21,7 @@
 
 		"preview": {
 			"extends": "production",
-			"distribution": "internal",
-			"env": {
-				"EXPO_PUBLIC_GOODREADS_API_KEY": "@env:EXPO_PUBLIC_GOODREADS_API_KEY"
-			}
+			"distribution": "internal"
 		}
 	},
 	"submit": {
