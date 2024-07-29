@@ -19,5 +19,6 @@
 	"commitMessageAction": "🤖 Update",
 	"stabilityDays": 7,
 	"reviewers": ["@amir-ben-shimol"],
+	"ignoreDeps": ["tailwindcss", "react-native-reanimated", "react-native-ratings"],
 	"schedule": ["every 1st day of the month"]
 }
