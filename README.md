@@ -14,7 +14,7 @@ To get started with the development of this app, follow these steps:
 
 -   **Upload Goodreads CSV**: Users can upload their `.csv` file export of book lists from Goodreads.
 -   **Goodreads Integration**: The app integrates with the user's Goodreads account, allowing seamless access to their book information.
--   **Goodreads API**: Utilizes the Goodreads API to display detailed book information, including cover, title, author, and description.
+-   **Goodreads API**: Utilizes the Goodreads API to display detailed book information, including cover, title, author, description and similar books.
 -   **Book Search**: Users can search for books using the Goodreads API and add them to their library.
 -   **Detailed Book Info**: Includes title, author, description, and reviews count for each book.
 -   **Shuffle Book**: Allows users to shuffle books based on various filters.
@@ -22,6 +22,9 @@ To get started with the development of this app, follow these steps:
 ## Technologies Used
 
 -   **Expo**: Utilized for building the app with an app router structure.
+-   **EAS Build Services**: For building the app.
+-   **Renovate**: For automated dependency updates.
+-   **Semantic Release**: For automated versioning and package publishing.
 -   **TypeScript**: Ensuring type safety and better development experience.
 -   **ESLint**: For identifying and reporting on patterns found in ECMAScript/JavaScript code.
 -   **Prettier**: An opinionated code formatter to ensure consistent code style.
@@ -29,9 +32,6 @@ To get started with the development of this app, follow these steps:
 -   **knip**: For unused files and exports.
 -   **lint-staged**: To run linters on staged files before committing.
 -   **Husky**: Used in combination with lint-staged to check code before committing.
--   **Renovate**: For automated dependency updates.
--   **Semantic Release**: For automated versioning and package publishing.
--   **EAS Build Services**: For building the app.
 
 ## Project Environment
 
@@ -70,17 +70,6 @@ To get started with the development of this app, follow these steps:
 <p align="center">
   <img src="./src/assets/images/showcase/filter-preferences.png" alt="Filter preferences screen allowing users to set criteria before shuffling books" width="400"/>
 </p>
-
-## Linters and Code Quality
-
-I have configured several linters and tools to maintain code quality:
-
--   **lint-staged**: Runs linters on staged files before committing.
--   **Husky**: Ensures lint-staged checks are performed before commits.
--   **ESLint**: Enforces code quality and consistency.
--   **Prettier**: Formats the code to maintain a consistent style.
--   **inflint**: Inline lint checks for file name conventions.
--   **knip**: Identifies unused files and exports.
 
 ## Continuous Integration and Continuous Deployment (CI/CD)
 
