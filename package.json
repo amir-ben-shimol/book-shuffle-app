@@ -77,7 +77,6 @@
 		"@exlint.io/inflint": "2.1.1",
 		"@react-native-community/datetimepicker": "^8.2.0",
 		"@react-native-community/slider": "^4.5.2",
-		"@storybook/addon-actions": "8.2.6",
 		"@storybook/addon-ondevice-actions": "^7.6.20",
 		"@storybook/addon-ondevice-controls": "^7.6.20",
 		"@storybook/react": "8.2.6",

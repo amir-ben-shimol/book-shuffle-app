@@ -129,9 +129,6 @@ importers:
       '@react-native-community/slider':
         specifier: ^4.5.2
         version: 4.5.2
-      '@storybook/addon-actions':
-        specifier: 8.2.6
-        version: 8.2.6(storybook@8.2.6(@babel/preset-env@7.25.0(@babel/core@7.24.9)))
       '@storybook/addon-ondevice-actions':
         specifier: ^7.6.20
         version: 7.6.20(react-dom@18.2.0(react@18.2.0))(react-native@0.74.3(@babel/core@7.24.9)(@babel/preset-env@7.25.0(@babel/core@7.24.9))(@types/react@18.2.79)(react@18.2.0))(react@18.2.0)
@@ -2179,11 +2176,6 @@ packages:
 
   '@storybook/addon-actions@7.6.20':
     resolution: {integrity: sha512-c/GkEQ2U9BC/Ew/IMdh+zvsh4N6y6n7Zsn2GIhJgcu9YEAa5aF2a9/pNgEGBMOABH959XE8DAOMERw/5qiLR8g==}
-
-  '@storybook/addon-actions@8.2.6':
-    resolution: {integrity: sha512-iCsf3V28/jJ95w2zd8aSvR4denoA2UYV3fpNCTGOURqICyKOG3cyVxvqKp8Hhcwn7trNOsK+HlL6q5gpv56ViA==}
-    peerDependencies:
-      storybook: ^8.2.6
 
   '@storybook/addon-controls@7.6.20':
     resolution: {integrity: sha512-06ZT5Ce1sZW52B0s6XuokwjkKO9GqHlTUHvuflvd8wifxKlCmRvNUxjBvwh+ccGJ49ZS73LbMSLFgtmBEkCxbg==}
@@ -10537,15 +10529,6 @@ snapshots:
       '@types/uuid': 9.0.8
       dequal: 2.0.3
       polished: 4.3.1
-      uuid: 9.0.1
-
-  '@storybook/addon-actions@8.2.6(storybook@8.2.6(@babel/preset-env@7.25.0(@babel/core@7.24.9)))':
-    dependencies:
-      '@storybook/global': 5.0.0
-      '@types/uuid': 9.0.8
-      dequal: 2.0.3
-      polished: 4.3.1
-      storybook: 8.2.6(@babel/preset-env@7.25.0(@babel/core@7.24.9))
       uuid: 9.0.1
 
   '@storybook/addon-controls@7.6.20(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
