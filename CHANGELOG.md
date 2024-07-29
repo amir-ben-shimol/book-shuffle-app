@@ -1,3 +1,10 @@
+# [1.13.0](https://github.com/amir-ben-shimol/react_native-book_shuffle/compare/v1.12.0...v1.13.0) (2024-07-29)
+
+
+### Features
+
+* update readme ([2d91c2a](https://github.com/amir-ben-shimol/react_native-book_shuffle/commit/2d91c2adef1178d53ebcb81ef965e45752e06521))
+
 # [1.12.0](https://github.com/amir-ben-shimol/react_native-book_shuffle/compare/v1.11.0...v1.12.0) (2024-07-29)
 
 
