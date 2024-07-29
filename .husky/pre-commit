@@ -1,1 +1,1 @@
-pnpm knip && pnpm exec lint-staged && pnpm type-check && pnpm inflint
+pnpm knip && pnpm exec lint-staged && pnpm type-check && pnpm inflint && pnpm test:storybook
