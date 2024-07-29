@@ -25,6 +25,8 @@ To get started with the development of this app, follow these steps:
 -   **EAS Build Services**: For building the app.
 -   **Renovate**: For automated dependency updates.
 -   **Semantic Release**: For automated versioning and package publishing.
+-   **Storybook**: An interactive environment for developing and testing UI components in isolation.
+-   **Jest**: A testing framework for unit and integration tests.
 -   **TypeScript**: Ensuring type safety and better development experience.
 -   **ESLint**: For identifying and reporting on patterns found in ECMAScript/JavaScript code.
 -   **Prettier**: An opinionated code formatter to ensure consistent code style.
@@ -41,6 +43,14 @@ To get started with the development of this app, follow these steps:
 ## CI/CD Setup
 
 -   **GitHub Actions**: Used for continuous integration and continuous deployment (CI/CD). The workflow checks code conventions based on the linter configurations.
+
+## Storybook
+
+-   **Storybook**: Configured for all UI components, providing an interactive environment for developing and testing components in isolation. To start Storybook, run `pnpm storybook`.
+
+## Testing
+
+-   **Jest**: Used for unit and integration testing. Tests are written for all components and features to ensure correctness and reliability. To run tests, use `pnpm test:storybook`.
 
 ## Screenshots
 
