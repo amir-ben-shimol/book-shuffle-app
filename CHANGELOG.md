@@ -1,3 +1,17 @@
+# [1.23.0](https://github.com/amir-ben-shimol/react_native-book_shuffle/compare/v1.22.0...v1.23.0) (2024-07-29)
+
+
+### Bug Fixes
+
+* Update UIBookCover component to pass showInLibrary prop correctly ([7c986d6](https://github.com/amir-ben-shimol/react_native-book_shuffle/commit/7c986d600a8b3c7cb6e4d449d6df474ffd880835))
+
+
+### Features
+
+* changed stories dir location ([0c85c4a](https://github.com/amir-ben-shimol/react_native-book_shuffle/commit/0c85c4ac3ef43815d90f40e37b76d84fa52c5acf))
+* configure storybook ([544817d](https://github.com/amir-ben-shimol/react_native-book_shuffle/commit/544817dcec98c8ad16f11154258249cb0840d159))
+* Update readme with Storybook for UI components and Jest for testing ([7dc0f03](https://github.com/amir-ben-shimol/react_native-book_shuffle/commit/7dc0f03dee9a0df18ff78e0329d8c0751932ff08))
+
 # [1.22.0](https://github.com/amir-ben-shimol/react_native-book_shuffle/compare/v1.21.0...v1.22.0) (2024-07-29)
 
 # [1.21.0](https://github.com/amir-ben-shimol/react_native-book_shuffle/compare/v1.20.0...v1.21.0) (2024-07-29)
