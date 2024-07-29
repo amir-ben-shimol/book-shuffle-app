@@ -71,15 +71,6 @@ To get started with the development of this app, follow these steps:
   <img src="./src/assets/images/showcase/filter-preferences.png" alt="Filter preferences screen allowing users to set criteria before shuffling books" width="400"/>
 </p>
 
-## Continuous Integration and Continuous Deployment (CI/CD)
-
-I use GitHub Actions for our CI/CD pipeline. The workflow includes:
-
--   Checking code conventions based on the configured linters.
--   Building the app using EAS build services.
--   Automated dependency updates with Renovate.
--   Automated versioning and releases with Semantic Release.
-
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
