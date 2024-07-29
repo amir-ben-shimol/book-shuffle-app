@@ -37,20 +37,22 @@ const Searchbar = (props: Props) => {
 					<UISvg name="profileImagePlaceholder" className="mr-2 h-8 w-8 rounded-full" />
 				)}
 			</Pressable>
-			<UIInput
-				placeholder="Search for books"
-				className="ml-2 text-start"
-				placeholderTextColor="gray"
-				icon="search"
-				showClearButton
-				showCancelButton
-				debounceDelay={300}
-				isActive={props.isActive}
-				debounceCallback={onSetFilterBooksQuery}
-				onClear={onClear}
-				onActivate={props.onActivate}
-				onDeactivate={props.onDeactivate}
-			/>
+			<View className="flex-1">
+				<UIInput
+					placeholder="Search for books"
+					className="text-start"
+					placeholderTextColor="gray"
+					icon="search"
+					showClearButton
+					showCancelButton
+					debounceDelay={300}
+					isActive={props.isActive}
+					debounceCallback={onSetFilterBooksQuery}
+					onClear={onClear}
+					onActivate={props.onActivate}
+					onDeactivate={props.onDeactivate}
+				/>
+			</View>
 		</View>
 	);
 };

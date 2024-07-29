@@ -6,6 +6,7 @@ import type { Book } from '@/lib/types/ui/book';
 import { UIInput } from '@/ui/UIInput';
 import { useBook } from '@/lib/hooks/useBooks';
 import { UIBookCover } from '@/ui/UIBookCover';
+import { useBooksStore } from '@/lib/store/useBooksStore';
 import { getImageDominantColor } from '@/lib/utils/image';
 import { onBlurActiveInput } from '@/lib/utils/input';
 import { BookInfoModal } from './BookInfoModal';
@@ -16,6 +17,7 @@ type Props = {
 };
 
 export const AddNewBookModal = (props: Props) => {
+	const { booksList } = useBooksStore();
 	const { searchBooks } = useBook();
 	const [isLoading, setIsLoading] = useState(false);
 	const [results, setResults] = useState<Book[]>([]);
@@ -68,9 +70,9 @@ export const AddNewBookModal = (props: Props) => {
 				<View className="w-full">
 					<UIInput
 						placeholder="Title or Author"
-						className="mb-4"
 						autoFocus
 						icon="search"
+						className="mb-4"
 						showClearButton
 						debounceDelay={1000}
 						debounceCallback={onFetchBooks}
@@ -81,20 +83,21 @@ export const AddNewBookModal = (props: Props) => {
 							data={results}
 							keyExtractor={(item) => item.bookId.toString()}
 							className="w-full"
-							renderItem={({ item }) => (
-								<TouchableOpacity className="mb-4 flex flex-row items-start" onPress={() => handleBookSelect(item)}>
-									<UIBookCover book={item} className="mr-4" />
-									<View className="flex flex-1">
-										<Text className="-mt-1 text-lg font-bold">{item.title}</Text>
-										<Text className="text-sm text-gray-600">{item.author}</Text>
-										{/* <View className="flex flex-row items-center">
-											<Text className="text-sm text-gray-600">Rating</Text>
-											<UIRating imageSize={15} rating={item.averageRating} />
-										</View> */}
-										<Text className="text-sm text-gray-600">{`Year: ${item.yearPublished}`}</Text>
-									</View>
-								</TouchableOpacity>
-							)}
+							renderItem={({ item }) => {
+								const isInLibrary = booksList.some((book) => book.bookId === item.bookId);
+
+								return (
+									<TouchableOpacity className="mb-4 flex flex-row items-start" onPress={() => handleBookSelect(item)}>
+										<UIBookCover book={item} className="mr-4" showInLibrary isInLibrary={isInLibrary} />
+										<View className="flex flex-1">
+											<Text className="-mt-1 text-lg font-bold">{item.title}</Text>
+											<Text className="text-sm text-gray-600">{item.author}</Text>
+
+											<Text className="text-sm text-gray-600">{`Year: ${item.yearPublished}`}</Text>
+										</View>
+									</TouchableOpacity>
+								);
+							}}
 							onTouchStart={onBlurActiveInput}
 						/>
 					) : (
