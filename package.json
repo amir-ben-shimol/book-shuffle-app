@@ -91,7 +91,7 @@
 		"@typescript-eslint/eslint-plugin": "6.21.0",
 		"@typescript-eslint/parser": "6.21.0",
 		"babel-jest": "29.7.0",
-		"babel-loader": "^8.3.0",
+		"babel-loader": "^9.0.0",
 		"chalk": "4.1.2",
 		"cross-env": "7.0.3",
 		"eslint": "8.57.0",
