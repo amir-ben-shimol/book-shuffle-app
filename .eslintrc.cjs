@@ -238,6 +238,19 @@ module.exports = {
 				'import/no-commonjs': 'off',
 			},
 		},
+		{
+			files: ['./metro.config.js'],
+			rules: {
+				'import/no-commonjs': 'off',
+				'@typescript-eslint/no-var-requires': 'off',
+			},
+		},
+		{
+			files: ['./src/app/_layout.tsx'],
+			rules: {
+				'@typescript-eslint/no-var-requires': 'off',
+			},
+		},
 	],
 	settings: {
 		'import/ignore': ['react-native'],

@@ -7,6 +7,14 @@ import { convertToBookArray } from '@/lib/utils/book';
 import { useBooksStore } from '@/lib/store/useBooksStore';
 import jsonData from '../lib/data/books-list-updated.json';
 
+let StorybookUIRoot: React.ComponentType | undefined;
+
+const storybookEnabled = process.env.EXPO_PUBLIC_STORYBOOK_ENABLED === 'true';
+
+if (storybookEnabled) {
+	StorybookUIRoot = require('../lib/utils/storybook').default;
+}
+
 const RootLayout: React.FC = () => {
 	const [appIsReady, setAppIsReady] = useState(false);
 	const { booksList, setBooksList } = useBooksStore();
@@ -42,6 +50,10 @@ const RootLayout: React.FC = () => {
 
 	if (!appIsReady) {
 		return null;
+	}
+
+	if (storybookEnabled && StorybookUIRoot) {
+		return <StorybookUIRoot />;
 	}
 
 	return (
