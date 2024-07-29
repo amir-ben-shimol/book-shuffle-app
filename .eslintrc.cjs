@@ -2,6 +2,7 @@ module.exports = {
 	root: true,
 	env: {
 		node: true,
+		jest: true,
 	},
 	extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended', 'plugin:import/typescript', 'prettier'],
 	reportUnusedDisableDirectives: true,
@@ -242,6 +243,18 @@ module.exports = {
 			files: ['./metro.config.js'],
 			rules: {
 				'import/no-commonjs': 'off',
+				'@typescript-eslint/no-var-requires': 'off',
+			},
+		},
+		{
+			files: ['./jest.config.js'],
+			rules: {
+				'import/no-commonjs': 'off',
+			},
+		},
+		{
+			files: ['./jest.setup.js'],
+			rules: {
 				'@typescript-eslint/no-var-requires': 'off',
 			},
 		},
