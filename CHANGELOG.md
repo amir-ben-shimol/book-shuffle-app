@@ -1,3 +1,11 @@
+# [1.12.0](https://github.com/amir-ben-shimol/react_native-book_shuffle/compare/v1.11.0...v1.12.0) (2024-07-29)
+
+
+### Features
+
+* update renovate.json schedule to run on the 1st day of every month ([a7ba553](https://github.com/amir-ben-shimol/react_native-book_shuffle/commit/a7ba5537304329aad2cf19632f426c5b852a875d))
+* update renovate.json schedule to run on the 1st day of every month ([2607c13](https://github.com/amir-ben-shimol/react_native-book_shuffle/commit/2607c138abf8b5dfac40172967cfbd4ed5e5f05f))
+
 # [1.11.0](https://github.com/amir-ben-shimol/react_native-book_shuffle/compare/v1.10.0...v1.11.0) (2024-07-29)
 
 # [1.10.0](https://github.com/amir-ben-shimol/react_native-book_shuffle/compare/v1.9.0...v1.10.0) (2024-07-29)
