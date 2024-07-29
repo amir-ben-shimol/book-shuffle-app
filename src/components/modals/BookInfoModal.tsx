@@ -235,7 +235,7 @@ export const BookInfoModal = (props: Props) => {
 							<Text className="mb-2 text-lg font-semibold text-gray-600">Similar books: </Text>
 							<View className="flex flex-row flex-wrap items-center">
 								{bookDescriptionAndReviewsCount.similarBooks.map((book) => {
-									const isInLibrary = booksList.some((book) => book.bookId === props.book?.bookId);
+									const isInLibrary = booksList.some((bookFromList) => book.bookId === bookFromList?.bookId);
 
 									return (
 										<TouchableOpacity key={book.bookId} className="mb-4 flex flex-row items-start" onPress={() => onClickSimilarBook(book)}>

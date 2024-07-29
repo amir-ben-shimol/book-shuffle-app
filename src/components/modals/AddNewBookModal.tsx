@@ -72,6 +72,7 @@ export const AddNewBookModal = (props: Props) => {
 						placeholder="Title or Author"
 						autoFocus
 						icon="search"
+						className="mb-4"
 						showClearButton
 						debounceDelay={1000}
 						debounceCallback={onFetchBooks}
@@ -87,7 +88,7 @@ export const AddNewBookModal = (props: Props) => {
 
 								return (
 									<TouchableOpacity className="mb-4 flex flex-row items-start" onPress={() => handleBookSelect(item)}>
-										<UIBookCover book={item} className="mr-4" showInLibrary={isInLibrary} />
+										<UIBookCover book={item} className="mr-4" showInLibrary isInLibrary={isInLibrary} />
 										<View className="flex flex-1">
 											<Text className="-mt-1 text-lg font-bold">{item.title}</Text>
 											<Text className="text-sm text-gray-600">{item.author}</Text>
