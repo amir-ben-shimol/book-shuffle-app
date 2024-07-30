@@ -1,6 +1,6 @@
 /* eslint-disable max-lines */
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { View, Text, Image, Pressable, TouchableOpacity, Linking } from 'react-native';
+import { View, Text, Image, Pressable, TouchableOpacity } from 'react-native';
 import * as Haptics from 'expo-haptics';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { UIModal } from '@/ui/UIModal';
@@ -14,6 +14,7 @@ import { formatNumberWithCommas } from '@/lib/utils/format';
 import { splitBookTitleAndSubtitle } from '@/lib/utils/book';
 import { UIBookCover } from '@/ui/UIBookCover';
 import { UIHtmlView } from '@/ui/UIHtmlView';
+import { navigateToGoodreads, navigateToGoogleSearch, navigateToInstagramSearch, navigateToTikTokSearch } from '@/lib/utils/app-linking';
 
 type Props = {
 	readonly book?: Book;
@@ -90,12 +91,6 @@ export const BookInfoModal = (props: Props) => {
 
 		fetchData(props.book.bookId);
 	}, [props.book, props.bookCoverBackgroundColors]);
-
-	const openGoodreads = (goodreadsLink?: string) => {
-		if (!goodreadsLink) return;
-
-		Linking.openURL(goodreadsLink);
-	};
 
 	const onChangeBookCoverImage = async () => {
 		const uploadedImage = await launchImagePicker();
@@ -226,9 +221,27 @@ export const BookInfoModal = (props: Props) => {
 
 					<View className="mb-4 mt-4 self-start">
 						<Text className="text-lg font-semibold text-gray-600">For more info:</Text>
-						<TouchableOpacity onPress={() => openGoodreads(currentBook?.goodreadsLink)}>
-							<Image source={require('@/assets/images/goodreads-logo.png')} className="h-[43px] w-[200px]" resizeMode="cover" />
-						</TouchableOpacity>
+						<View className="flex w-full flex-row items-center justify-between py-2">
+							{currentBook?.goodreadsLink && (
+								<TouchableOpacity onPress={() => navigateToGoodreads(currentBook.goodreadsLink!)}>
+									<Image source={require('@/assets/images/goodreads-logo-small.png')} className="h-[70px] w-[70px]" resizeMode="cover" />
+								</TouchableOpacity>
+							)}
+
+							{currentBook?.title && (
+								<>
+									<TouchableOpacity onPress={() => navigateToTikTokSearch(currentBook.title)}>
+										<Image source={require('@/assets/images/tiktok-logo.png')} className="h-[70px] w-[70px]" resizeMode="cover" />
+									</TouchableOpacity>
+									<TouchableOpacity onPress={() => navigateToGoogleSearch(currentBook?.title)}>
+										<Image source={require('@/assets/images/google-logo.png')} className="h-[70px] w-[70px]" resizeMode="cover" />
+									</TouchableOpacity>
+									<TouchableOpacity onPress={() => navigateToInstagramSearch(currentBook?.title)}>
+										<Image source={require('@/assets/images/instagram-logo.png')} className="h-[70px] w-[70px]" resizeMode="cover" />
+									</TouchableOpacity>
+								</>
+							)}
+						</View>
 					</View>
 					{bookDescriptionAndReviewsCount && bookDescriptionAndReviewsCount.similarBooks.length > 0 && (
 						<View className="mb-4">
