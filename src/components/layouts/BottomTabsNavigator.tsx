@@ -34,7 +34,7 @@ const BottomTabsNavigator: React.FC = () => {
 			withTiming(0, { duration: 500, easing: Easing.inOut(Easing.ease) }),
 		);
 
-		router.navigate('shuffle');
+		router.navigate('/shuffle');
 	}, [pressRotation]);
 
 	const animatedStyle = useAnimatedStyle(() => ({
