@@ -1,14 +1,13 @@
 {
 	"cli": {
-		"version": ">= 10.2.1",
-		"requireCommit": true
+		"version": ">= 10"
 	},
 	"build": {
 		"production": {
 			"node": "20.15.1",
 			"pnpm": "9.5.0",
 			"env": {
-				"EXPO_PUBLIC_GOODREADS_API_KEY": "@env:EXPO_PUBLIC_GOODREADS_API_KEY"
+				"EXPO_PUBLIC_GOODREADS_API_KEY": "Ys0aMCpm754ABIoafSezZw"
 			}
 		},
 		"development": {

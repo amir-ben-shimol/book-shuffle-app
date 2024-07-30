@@ -1,4 +1,3 @@
-// metro.config.js
 const path = require('node:path');
 const { getDefaultConfig } = require('expo/metro-config');
 
