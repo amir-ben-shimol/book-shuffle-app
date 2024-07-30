@@ -1,3 +1,10 @@
+# [1.25.0](https://github.com/amir-ben-shimol/react_native-book_shuffle/compare/v1.24.0...v1.25.0) (2024-07-30)
+
+
+### Features
+
+* add linking apps functions ([581b63e](https://github.com/amir-ben-shimol/react_native-book_shuffle/commit/581b63eca5daf9e762423189cabcee3d022b1435))
+
 # [1.24.0](https://github.com/amir-ben-shimol/react_native-book_shuffle/compare/v1.23.0...v1.24.0) (2024-07-29)
 
 # [1.23.0](https://github.com/amir-ben-shimol/react_native-book_shuffle/compare/v1.22.0...v1.23.0) (2024-07-29)
