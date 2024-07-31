@@ -120,6 +120,7 @@ export const UIPulse: React.FC<UIPulseProps> = ({
 					{pulses.map((pulse) => (
 						<View
 							key={pulse.pulseKey}
+							testID="pulse"
 							style={[
 								styles.pulse,
 								{

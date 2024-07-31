@@ -53,7 +53,11 @@ const RootLayout: React.FC = () => {
 	}
 
 	if (storybookEnabled && StorybookUIRoot) {
-		return <StorybookUIRoot />;
+		return (
+			<GestureHandlerRootView className="flex-1">
+				<StorybookUIRoot />
+			</GestureHandlerRootView>
+		);
 	}
 
 	return (

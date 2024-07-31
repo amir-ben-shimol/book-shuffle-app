@@ -23,7 +23,7 @@ export const UISvg = (props: Props) => {
 
 	if (props.onClick) {
 		return (
-			<Pressable className={`h-5 w-5 ${props.className}`} style={props.style} onPress={clickHandler}>
+			<Pressable className={`h-5 w-5 ${props.className}`} style={props.style} testID="svg" onPress={clickHandler}>
 				<SvgXml
 					xml={`
 					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${viewBox}">

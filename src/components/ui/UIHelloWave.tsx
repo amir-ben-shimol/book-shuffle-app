@@ -15,7 +15,9 @@ export const UIHelloWave = () => {
 
 	return (
 		<Animated.View style={animatedStyle}>
-			<Text style={styles.text}>👋</Text>
+			<Text testID="wave-text" style={styles.text}>
+				👋
+			</Text>
 		</Animated.View>
 	);
 };

@@ -1,11 +1,21 @@
 /* eslint-disable max-lines */
 import React, { useCallback, useMemo, useRef, useEffect, useState } from 'react';
-import { View, TouchableOpacity, Image, Text, Linking, BackHandler, type NativeSyntheticEvent, type NativeScrollEvent, type ViewStyle } from 'react-native';
+import {
+	View,
+	TouchableOpacity,
+	Image,
+	Text,
+	Linking,
+	BackHandler,
+	type NativeSyntheticEvent,
+	type NativeScrollEvent,
+	type ViewStyle,
+	Pressable,
+} from 'react-native';
 import { BottomSheetModal, BottomSheetScrollView, BottomSheetView, type BottomSheetBackdropProps } from '@gorhom/bottom-sheet';
 import Animated, { Extrapolation, interpolate, useAnimatedStyle } from 'react-native-reanimated';
 import type { icons } from '@/assets/icons';
 import { UISvg } from './UISvg';
-import { UIButton } from './UIButton';
 import { UITitle } from './UITitle';
 
 type Props = {
@@ -51,7 +61,7 @@ const ModalBody = (props: Props) => {
 					<Text>{props.buttonLabel}</Text>
 				</TouchableOpacity>
 			)}
-			{props.onClick && <UIButton label={props.buttonLabel} varient="gradientPinkPurple" buttonSize="large" onClick={props.onClick} />}
+			{props.onClick && <Pressable onPress={props.onClick}>{props.buttonLabel}</Pressable>}
 		</>
 	);
 };
