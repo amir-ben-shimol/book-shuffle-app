@@ -15,15 +15,15 @@ const styles = StyleSheet.create({
 });
 
 type UIPulseProps = {
-	color?: string;
-	diameter?: number;
-	duration?: number;
-	image?: { source: ImageSourcePropType; style: ViewStyle };
-	initialDiameter?: number;
-	numPulses?: number;
-	pulseStyle?: ViewStyle;
-	speed?: number;
-	style?: ViewStyle;
+	readonly color?: string;
+	readonly diameter?: number;
+	readonly duration?: number;
+	readonly image?: { source: ImageSourcePropType; style: ViewStyle };
+	readonly initialDiameter?: number;
+	readonly numPulses?: number;
+	readonly pulseStyle?: ViewStyle;
+	readonly speed?: number;
+	readonly style?: ViewStyle;
 };
 
 type Pulse = {

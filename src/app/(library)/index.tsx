@@ -94,7 +94,7 @@ const HomeScreen = () => {
 	}, []);
 
 	const renderBook = useCallback(
-		({ item }: { item: Book }) => {
+		({ item }: { readonly item: Book }) => {
 			const isInLibrary = booksList.some((book) => book.bookId === item.bookId);
 
 			return <UIBookCover className="relative mb-4 w-[31%] overflow-hidden" book={item} showInLibrary={isInLibrary} onPress={onBookClick} />;
