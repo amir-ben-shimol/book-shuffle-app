@@ -1,3 +1,5 @@
+# [1.41.0](https://github.com/amir-ben-shimol/react_native-book_shuffle/compare/v1.40.0...v1.41.0) (2024-08-12)
+
 # [1.40.0](https://github.com/amir-ben-shimol/react_native-book_shuffle/compare/v1.39.0...v1.40.0) (2024-08-10)
 
 # [1.39.0](https://github.com/amir-ben-shimol/react_native-book_shuffle/compare/v1.38.0...v1.39.0) (2024-08-09)
