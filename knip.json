@@ -1,6 +1,6 @@
 {
 	"entry": "src/**/*",
 	"ignore": ["inflint.config.cjs", "release.config.cjs", "metro.config.js", "jest.config.js"],
-	"ignoreDependencies": ["expo-dev-client", "react-native-xml2js", "babel-loader", "@storybook/addon-actions/preview", "ts-jest", "ts-node"],
+	"ignoreDependencies": ["expo-dev-client", "react-native-xml2js", "babel-loader", "@storybook/addon-actions/preview", "ts-jest", "ts-node", "ts-mock-api"],
 	"ignoreBinaries": ["eas"]
 }
