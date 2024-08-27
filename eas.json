@@ -7,7 +7,7 @@
 			"node": "20.15.1",
 			"pnpm": "9.5.0",
 			"env": {
-				"EXPO_PUBLIC_GOODREADS_API_KEY": "Ys0aMCpm754ABIoafSezZw"
+				"EXPO_PUBLIC_GOODREADS_API_KEY": "env:EXPO_PUBLIC_GOODREADS_API_KEY"
 			}
 		},
 		"development": {
