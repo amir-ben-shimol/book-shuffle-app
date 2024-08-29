@@ -93,8 +93,8 @@ importers:
         specifier: 3.34.0
         version: 3.34.0(react-native@0.75.2(@babel/core@7.25.2)(@babel/preset-env@7.25.2(@babel/core@7.25.2))(@types/react@18.3.4)(react@18.3.1)(typescript@5.5.4))(react@18.3.1)
       react-native-svg:
-        specifier: 15.5.0
-        version: 15.5.0(react-native@0.75.2(@babel/core@7.25.2)(@babel/preset-env@7.25.2(@babel/core@7.25.2))(@types/react@18.3.4)(react@18.3.1)(typescript@5.5.4))(react@18.3.1)
+        specifier: 15.6.0
+        version: 15.6.0(react-native@0.75.2(@babel/core@7.25.2)(@babel/preset-env@7.25.2(@babel/core@7.25.2))(@types/react@18.3.4)(react@18.3.1)(typescript@5.5.4))(react@18.3.1)
       react-native-vector-icons:
         specifier: 10.1.0
         version: 10.1.0
@@ -6789,8 +6789,8 @@ packages:
       react: '*'
       react-native: '*'
 
-  react-native-svg@15.5.0:
-    resolution: {integrity: sha512-/DUPfmSf3eXt59WjG8hlRKVPzqVjM7duG9vJH6UYAJesj3NtYcyFsO5sYpSkovlOwagk84PibcVb92bBwMSmng==}
+  react-native-svg@15.6.0:
+    resolution: {integrity: sha512-TUtR+h+yi1ODsd8FHdom1TpjfWOmnaK5pri5rnSBXnMqpzq8o2zZfonHTjPX+nS3wb/Pu2XsoARgYaHNjVWXhQ==}
     peerDependencies:
       react: '*'
       react-native: '*'
@@ -16566,7 +16566,7 @@ snapshots:
       react-native: 0.75.2(@babel/core@7.25.2)(@babel/preset-env@7.25.2(@babel/core@7.25.2))(@types/react@18.3.4)(react@18.3.1)(typescript@5.5.4)
       warn-once: 0.1.1
 
-  react-native-svg@15.5.0(react-native@0.75.2(@babel/core@7.25.2)(@babel/preset-env@7.25.2(@babel/core@7.25.2))(@types/react@18.3.4)(react@18.3.1)(typescript@5.5.4))(react@18.3.1):
+  react-native-svg@15.6.0(react-native@0.75.2(@babel/core@7.25.2)(@babel/preset-env@7.25.2(@babel/core@7.25.2))(@types/react@18.3.4)(react@18.3.1)(typescript@5.5.4))(react@18.3.1):
     dependencies:
       css-select: 5.1.0
       css-tree: 1.1.3
