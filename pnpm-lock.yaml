@@ -34,7 +34,7 @@ importers:
         version: 16.0.2(expo@51.0.32(@babel/core@7.25.2)(@babel/preset-env@7.25.2(@babel/core@7.25.2)))
       expo-dev-client:
         specifier: ~4.0.20
-        version: 4.0.25(expo@51.0.32(@babel/core@7.25.2)(@babel/preset-env@7.25.2(@babel/core@7.25.2)))
+        version: 4.0.26(expo@51.0.32(@babel/core@7.25.2)(@babel/preset-env@7.25.2(@babel/core@7.25.2)))
       expo-haptics:
         specifier: 13.0.1
         version: 13.0.1(expo@51.0.32(@babel/core@7.25.2)(@babel/preset-env@7.25.2(@babel/core@7.25.2)))
@@ -4364,8 +4364,8 @@ packages:
     peerDependencies:
       expo: '*'
 
-  expo-dev-client@4.0.25:
-    resolution: {integrity: sha512-yChhepKXvdw+1vXIayvnvU9s42DJfgmAtBC9JLu7Q+Bk/SqgLxmEBpcxj9iBhu9x79bnrbgHEkGaLi+N1PljyA==}
+  expo-dev-client@4.0.26:
+    resolution: {integrity: sha512-GM+X7bngAK2vr0YMkPnQFUFVW22eG3CjoxTJ0yUwW3RgCqFdMkTeAIS/1sEXjyNYjGkigtgtch+bdYtJxfqpuw==}
     peerDependencies:
       expo: '*'
 
@@ -13772,7 +13772,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  expo-dev-client@4.0.25(expo@51.0.32(@babel/core@7.25.2)(@babel/preset-env@7.25.2(@babel/core@7.25.2))):
+  expo-dev-client@4.0.26(expo@51.0.32(@babel/core@7.25.2)(@babel/preset-env@7.25.2(@babel/core@7.25.2))):
     dependencies:
       expo: 51.0.32(@babel/core@7.25.2)(@babel/preset-env@7.25.2(@babel/core@7.25.2))
       expo-dev-launcher: 4.0.27(expo@51.0.32(@babel/core@7.25.2)(@babel/preset-env@7.25.2(@babel/core@7.25.2)))
