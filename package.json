@@ -82,7 +82,7 @@
 		"@storybook/react": "8.3.0",
 		"@storybook/react-native": "^7.6.20",
 		"@testing-library/jest-native": "5.4.3",
-		"@testing-library/react-native": "12.7.1",
+		"@testing-library/react-native": "12.7.2",
 		"@types/jest": "29.5.12",
 		"@types/react": "~18.3.0",
 		"@types/react-native-htmlview": "0.16.5",
