@@ -15,8 +15,8 @@ importers:
         specifier: 1.24.0
         version: 1.24.0(react-native@0.75.3(@babel/core@7.25.2)(@babel/preset-env@7.25.2(@babel/core@7.25.2))(@types/react@18.3.8)(react@18.3.1)(typescript@5.6.2))
       '@react-native-picker/picker':
-        specifier: 2.8.0
-        version: 2.8.0(react-native@0.75.3(@babel/core@7.25.2)(@babel/preset-env@7.25.2(@babel/core@7.25.2))(@types/react@18.3.8)(react@18.3.1)(typescript@5.6.2))(react@18.3.1)
+        specifier: 2.8.1
+        version: 2.8.1(react-native@0.75.3(@babel/core@7.25.2)(@babel/preset-env@7.25.2(@babel/core@7.25.2))(@types/react@18.3.8)(react@18.3.1)(typescript@5.6.2))(react@18.3.1)
       axios:
         specifier: 1.7.7
         version: 1.7.7
@@ -2258,8 +2258,8 @@ packages:
   '@react-native-community/slider@4.5.3':
     resolution: {integrity: sha512-0mOdnIL3xPWYGkP7levDH3bBsjdMOiR5mQIzFrSkZznZdIfX9MvGnelNZxsWuibmkc3hczHybo7RRb6mE96H2g==}
 
-  '@react-native-picker/picker@2.8.0':
-    resolution: {integrity: sha512-nNU3T3DUi0NDmOEv34aGvV3tDybfIo4Di+1AaNceiImhRFD/dvBWIEgkVfOKUsC/biqv1Yo7td+2BrDL0gyZcw==}
+  '@react-native-picker/picker@2.8.1':
+    resolution: {integrity: sha512-iFhsKQzRh/z3GlmvJWSjJJ4333FdLE/PhXxlGlYllE7sFf+UTzziVY+ajatuJ+R5zDw2AxfJV4v/3tAzUJb0/A==}
     peerDependencies:
       react: '*'
       react-native: '*'
@@ -10965,7 +10965,7 @@ snapshots:
 
   '@react-native-community/slider@4.5.3': {}
 
-  '@react-native-picker/picker@2.8.0(react-native@0.75.3(@babel/core@7.25.2)(@babel/preset-env@7.25.2(@babel/core@7.25.2))(@types/react@18.3.8)(react@18.3.1)(typescript@5.6.2))(react@18.3.1)':
+  '@react-native-picker/picker@2.8.1(react-native@0.75.3(@babel/core@7.25.2)(@babel/preset-env@7.25.2(@babel/core@7.25.2))(@types/react@18.3.8)(react@18.3.1)(typescript@5.6.2))(react@18.3.1)':
     dependencies:
       react: 18.3.1
       react-native: 0.75.3(@babel/core@7.25.2)(@babel/preset-env@7.25.2(@babel/core@7.25.2))(@types/react@18.3.8)(react@18.3.1)(typescript@5.6.2)
