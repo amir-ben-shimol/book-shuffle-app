@@ -120,7 +120,7 @@
 		"react-dom": "18.3.1",
 		"tailwindcss": "3.3.2",
 		"ts-jest": "29.2.5",
-		"ts-mock-api": "1.0.6",
+		"ts-mock-api": "1.0.13",
 		"ts-node": "10.9.2",
 		"typescript": "~5.6.0"
 	},
