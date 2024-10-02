@@ -175,8 +175,8 @@ importers:
         specifier: 4.1.2
         version: 4.1.2
       cnb:
-        specifier: 1.1.4
-        version: 1.1.4
+        specifier: 1.2.2
+        version: 1.2.2
       cross-env:
         specifier: 7.0.3
         version: 7.0.3
@@ -3592,8 +3592,8 @@ packages:
     resolution: {integrity: sha512-eYm0QWBtUrBWZWG0d386OGAw16Z995PiOVo2B7bjWSbHedGl5e0ZWaq65kOGgUSNesEIDkB9ISbTg/JK9dhCZA==}
     engines: {node: '>=6'}
 
-  cnb@1.1.4:
-    resolution: {integrity: sha512-+tHPaBeCUrO8G4MOTossjkmHSAgIIOniGpWlNVTpowLxlGw3oaXhoqTE+rzhWXhOUyqQOWbJ7DSfABOumJB5Ww==}
+  cnb@1.2.2:
+    resolution: {integrity: sha512-DYOuaYTi3Kwgli6W1sdac02//fhvhDEHbI2/9udlycuyNqn4Z/UWLRPJ85237IfGHElVNXJz6FeQU9VPQOLgPw==}
     engines: {node: '>=20', pnpm: '>=9', yarn: please-use-pnpm}
     hasBin: true
 
@@ -12906,7 +12906,7 @@ snapshots:
 
   clsx@2.1.1: {}
 
-  cnb@1.1.4:
+  cnb@1.2.2:
     dependencies:
       '@types/node': 22.5.5
       chalk: 4.1.2
