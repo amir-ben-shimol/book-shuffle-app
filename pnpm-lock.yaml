@@ -175,8 +175,8 @@ importers:
         specifier: 4.1.2
         version: 4.1.2
       cnb:
-        specifier: 1.2.3
-        version: 1.2.3
+        specifier: 1.2.4
+        version: 1.2.4
       cross-env:
         specifier: 7.0.3
         version: 7.0.3
@@ -3913,8 +3913,8 @@ packages:
     resolution: {integrity: sha512-eYm0QWBtUrBWZWG0d386OGAw16Z995PiOVo2B7bjWSbHedGl5e0ZWaq65kOGgUSNesEIDkB9ISbTg/JK9dhCZA==}
     engines: {node: '>=6'}
 
-  cnb@1.2.3:
-    resolution: {integrity: sha512-IQgNU0XvGTN+TDqnoutgbeG+OdNoy6gMeIIL1sCXTecgw9Tzx7w5utktrOHIGdKJsCESWfh0ZCHI1ClfycRSWA==}
+  cnb@1.2.4:
+    resolution: {integrity: sha512-CEB2NRLzKNxLgLQYW0X7BQ2ql5Yzv/JqWmXGZYNJPPq8DWclUhUo9VClsy5qEjOEa/XYkeB4XmWfgEfQCtPpVA==}
     engines: {node: '>=20', pnpm: '>=9', yarn: please-use-pnpm}
     hasBin: true
 
@@ -4673,6 +4673,7 @@ packages:
   eslint@8.57.1:
     resolution: {integrity: sha512-ypowyDxpVSYpkXr9WPv2PAZCtNip1Mv5KTW0SCurXv/9iOpcrH9PaqUElksqEB6pChqHGDRCFTyrZlGhnLNGiA==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    deprecated: This version is no longer supported. Please see https://eslint.org/version-support for other options.
     hasBin: true
 
   espree@9.6.1:
@@ -14392,7 +14393,7 @@ snapshots:
 
   clsx@2.1.1: {}
 
-  cnb@1.2.3:
+  cnb@1.2.4:
     dependencies:
       '@types/node': 22.5.5
       chalk: 4.1.2
