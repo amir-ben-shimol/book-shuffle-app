@@ -68,7 +68,7 @@
 		"react-native-svg": "15.7.1",
 		"react-native-vector-icons": "10.2.0",
 		"react-native-xml2js": "1.0.3",
-		"tailwind-merge": "2.5.2",
+		"tailwind-merge": "2.5.3",
 		"xml2js": "0.6.2",
 		"zustand": "4.5.5"
 	},
