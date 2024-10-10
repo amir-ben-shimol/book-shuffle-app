@@ -12,8 +12,8 @@ importers:
         specifier: 4.6.4
         version: 4.6.4(@types/react-native@0.70.19)(@types/react@18.3.11)(react-native-gesture-handler@2.20.0(react-native@0.75.4(@babel/core@7.25.7)(@babel/preset-env@7.25.2(@babel/core@7.25.7))(@types/react@18.3.11)(react@18.3.1)(typescript@5.6.2))(react@18.3.1))(react-native-reanimated@3.10.1(@babel/core@7.25.7)(react-native@0.75.4(@babel/core@7.25.7)(@babel/preset-env@7.25.2(@babel/core@7.25.7))(@types/react@18.3.11)(react@18.3.1)(typescript@5.6.2))(react@18.3.1))(react-native@0.75.4(@babel/core@7.25.7)(@babel/preset-env@7.25.2(@babel/core@7.25.7))(@types/react@18.3.11)(react@18.3.1)(typescript@5.6.2))(react@18.3.1)
       '@react-native-async-storage/async-storage':
-        specifier: 1.24.0
-        version: 1.24.0(react-native@0.75.4(@babel/core@7.25.7)(@babel/preset-env@7.25.2(@babel/core@7.25.7))(@types/react@18.3.11)(react@18.3.1)(typescript@5.6.2))
+        specifier: 2.0.0
+        version: 2.0.0(react-native@0.75.4(@babel/core@7.25.7)(@babel/preset-env@7.25.2(@babel/core@7.25.7))(@types/react@18.3.11)(react@18.3.1)(typescript@5.6.2))
       '@react-native-picker/picker':
         specifier: 2.8.1
         version: 2.8.1(react-native@0.75.4(@babel/core@7.25.7)(@babel/preset-env@7.25.2(@babel/core@7.25.7))(@types/react@18.3.11)(react@18.3.1)(typescript@5.6.2))(react@18.3.1)
@@ -2387,10 +2387,10 @@ packages:
   '@radix-ui/rect@1.0.1':
     resolution: {integrity: sha512-fyrgCaedtvMg9NK3en0pnOYJdtfwxUcNolezkNPUsoX57X8oQk+NkqcvzHXD2uKNij6GXmWU9NDru2IWjrO4BQ==}
 
-  '@react-native-async-storage/async-storage@1.24.0':
-    resolution: {integrity: sha512-W4/vbwUOYOjco0x3toB8QCr7EjIP6nE9G7o8PMguvvjYT5Awg09lyV4enACRx4s++PPulBiBSjL0KTFx2u0Z/g==}
+  '@react-native-async-storage/async-storage@2.0.0':
+    resolution: {integrity: sha512-af6H9JjfL6G/PktBfUivvexoiFKQTJGQCtSWxMdivLzNIY94mu9DdiY0JqCSg/LyPCLGKhHPUlRQhNvpu3/KVA==}
     peerDependencies:
-      react-native: ^0.0.0-0 || >=0.60 <1.0
+      react-native: ^0.0.0-0 || >=0.65 <1.0
 
   '@react-native-community/cli-clean@14.1.0':
     resolution: {integrity: sha512-/C4j1yntLo6faztNgZnsDtgpGqa6j0+GYrxOY8LqaKAN03OCnoeUUKO6w78dycbYSGglc1xjJg2RZI/M2oF2AA==}
@@ -11252,7 +11252,7 @@ snapshots:
     dependencies:
       '@babel/runtime': 7.25.7
 
-  '@react-native-async-storage/async-storage@1.24.0(react-native@0.75.4(@babel/core@7.25.7)(@babel/preset-env@7.25.2(@babel/core@7.25.7))(@types/react@18.3.11)(react@18.3.1)(typescript@5.6.2))':
+  '@react-native-async-storage/async-storage@2.0.0(react-native@0.75.4(@babel/core@7.25.7)(@babel/preset-env@7.25.2(@babel/core@7.25.7))(@types/react@18.3.11)(react@18.3.1)(typescript@5.6.2))':
     dependencies:
       merge-options: 3.0.4
       react-native: 0.75.4(@babel/core@7.25.7)(@babel/preset-env@7.25.2(@babel/core@7.25.7))(@types/react@18.3.11)(react@18.3.1)(typescript@5.6.2)
