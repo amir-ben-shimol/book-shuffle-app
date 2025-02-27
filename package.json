@@ -80,7 +80,7 @@
 		"@react-native-community/slider": "^4.5.2",
 		"@storybook/addon-ondevice-actions": "^7.6.20",
 		"@storybook/addon-ondevice-controls": "^7.6.20",
-		"@storybook/react": "8.3.5",
+		"@storybook/react": "8.5.8",
 		"@storybook/react-native": "^7.6.20",
 		"@testing-library/jest-native": "5.4.3",
 		"@testing-library/react-native": "12.7.2",
