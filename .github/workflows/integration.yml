@@ -19,7 +19,7 @@ jobs:
                   node-version-file: '.nvmrc'
             - uses: pnpm/action-setup@v4
               with:
-                  version: 9.6.0
+                  version: 9.15.9
 
             - name: Install dependencies
               run: pnpm install
@@ -38,7 +38,7 @@ jobs:
                   node-version-file: '.nvmrc'
             - uses: pnpm/action-setup@v4
               with:
-                  version: 9.6.0
+                  version: 9.15.9
 
             - name: Install dependencies
               run: pnpm install
@@ -57,7 +57,7 @@ jobs:
                   node-version-file: '.nvmrc'
             - uses: pnpm/action-setup@v4
               with:
-                  version: 9.6.0
+                  version: 9.15.9
 
             - name: Install dependencies
               run: pnpm install
@@ -76,7 +76,7 @@ jobs:
                   node-version-file: '.nvmrc'
             - uses: pnpm/action-setup@v4
               with:
-                  version: 9.6.0
+                  version: 9.15.9
 
             - name: Install dependencies
               run: pnpm install
@@ -95,7 +95,7 @@ jobs:
                   node-version-file: '.nvmrc'
             - uses: pnpm/action-setup@v4
               with:
-                  version: 9.6.0
+                  version: 9.15.9
 
             - name: Install dependencies
               run: pnpm install
