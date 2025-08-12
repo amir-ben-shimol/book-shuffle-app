@@ -74,7 +74,7 @@
 	},
 	"devDependencies": {
 		"@babel/core": "^7.20.0",
-		"@babel/preset-typescript": "7.26.0",
+		"@babel/preset-typescript": "7.27.1",
 		"@exlint.io/inflint": "2.1.1",
 		"@react-native-community/datetimepicker": "^8.2.0",
 		"@react-native-community/slider": "^4.5.2",
