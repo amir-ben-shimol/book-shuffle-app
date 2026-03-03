@@ -122,7 +122,7 @@ importers:
         version: 2.1.1(@types/node@22.7.5)(typescript@5.6.3)
       '@react-native-community/datetimepicker':
         specifier: ^8.2.0
-        version: 8.4.3(expo@51.0.39(@babel/core@7.29.0)(@babel/preset-env@7.25.2(@babel/core@7.29.0)))(react-native@0.75.4(@babel/core@7.29.0)(@babel/preset-env@7.25.2(@babel/core@7.29.0))(@types/react@18.3.28)(react@18.3.1)(typescript@5.6.3))(react@18.3.1)
+        version: 8.6.0(expo@51.0.39(@babel/core@7.29.0)(@babel/preset-env@7.25.2(@babel/core@7.29.0)))(react-native@0.75.4(@babel/core@7.29.0)(@babel/preset-env@7.25.2(@babel/core@7.29.0))(@types/react@18.3.28)(react@18.3.1)(typescript@5.6.3))(react@18.3.1)
       '@react-native-community/slider':
         specifier: ^4.5.2
         version: 4.5.7
@@ -131,7 +131,7 @@ importers:
         version: 7.6.20(react-dom@18.3.1(react@18.3.1))(react-native@0.75.4(@babel/core@7.29.0)(@babel/preset-env@7.25.2(@babel/core@7.29.0))(@types/react@18.3.28)(react@18.3.1)(typescript@5.6.3))(react@18.3.1)
       '@storybook/addon-ondevice-controls':
         specifier: ^7.6.20
-        version: 7.6.20(@react-native-community/datetimepicker@8.4.3(expo@51.0.39(@babel/core@7.29.0)(@babel/preset-env@7.25.2(@babel/core@7.29.0)))(react-native@0.75.4(@babel/core@7.29.0)(@babel/preset-env@7.25.2(@babel/core@7.29.0))(@types/react@18.3.28)(react@18.3.1)(typescript@5.6.3))(react@18.3.1))(@react-native-community/slider@4.5.7)(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react-native@0.75.4(@babel/core@7.29.0)(@babel/preset-env@7.25.2(@babel/core@7.29.0))(@types/react@18.3.28)(react@18.3.1)(typescript@5.6.3))(react@18.3.1)
+        version: 7.6.20(@react-native-community/datetimepicker@8.6.0(expo@51.0.39(@babel/core@7.29.0)(@babel/preset-env@7.25.2(@babel/core@7.29.0)))(react-native@0.75.4(@babel/core@7.29.0)(@babel/preset-env@7.25.2(@babel/core@7.29.0))(@types/react@18.3.28)(react@18.3.1)(typescript@5.6.3))(react@18.3.1))(@react-native-community/slider@4.5.7)(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react-native@0.75.4(@babel/core@7.29.0)(@babel/preset-env@7.25.2(@babel/core@7.29.0))(@types/react@18.3.28)(react@18.3.1)(typescript@5.6.3))(react@18.3.1)
       '@storybook/react':
         specifier: 8.5.8
         version: 8.5.8(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.6(@babel/preset-env@7.25.2(@babel/core@7.29.0)))(typescript@5.6.3)
@@ -2531,8 +2531,8 @@ packages:
     engines: {node: '>=18'}
     hasBin: true
 
-  '@react-native-community/datetimepicker@8.4.3':
-    resolution: {integrity: sha512-i5jpbJSoiDMdmle1kJlsW0EowTYQQKJCUIXH/KEZuqzWyBu+rm3v3MduPIEzyRWBaPpY0pv3MvGkJltg26WnWw==}
+  '@react-native-community/datetimepicker@8.6.0':
+    resolution: {integrity: sha512-yxPSqNfxgpGaqHQIpatqe6ykeBdU/1pdsk/G3x01mY2bpTflLpmVTLqFSJYd3MiZzxNZcMs/j1dQakUczSjcYA==}
     peerDependencies:
       expo: '>=52.0.0'
       react: '*'
@@ -12153,7 +12153,7 @@ snapshots:
       - typescript
       - utf-8-validate
 
-  '@react-native-community/datetimepicker@8.4.3(expo@51.0.39(@babel/core@7.29.0)(@babel/preset-env@7.25.2(@babel/core@7.29.0)))(react-native@0.75.4(@babel/core@7.29.0)(@babel/preset-env@7.25.2(@babel/core@7.29.0))(@types/react@18.3.28)(react@18.3.1)(typescript@5.6.3))(react@18.3.1)':
+  '@react-native-community/datetimepicker@8.6.0(expo@51.0.39(@babel/core@7.29.0)(@babel/preset-env@7.25.2(@babel/core@7.29.0)))(react-native@0.75.4(@babel/core@7.29.0)(@babel/preset-env@7.25.2(@babel/core@7.29.0))(@types/react@18.3.28)(react@18.3.1)(typescript@5.6.3))(react@18.3.1)':
     dependencies:
       invariant: 2.2.4
       react: 18.3.1
@@ -12591,9 +12591,9 @@ snapshots:
     transitivePeerDependencies:
       - react-dom
 
-  '@storybook/addon-ondevice-controls@7.6.20(@react-native-community/datetimepicker@8.4.3(expo@51.0.39(@babel/core@7.29.0)(@babel/preset-env@7.25.2(@babel/core@7.29.0)))(react-native@0.75.4(@babel/core@7.29.0)(@babel/preset-env@7.25.2(@babel/core@7.29.0))(@types/react@18.3.28)(react@18.3.1)(typescript@5.6.3))(react@18.3.1))(@react-native-community/slider@4.5.7)(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react-native@0.75.4(@babel/core@7.29.0)(@babel/preset-env@7.25.2(@babel/core@7.29.0))(@types/react@18.3.28)(react@18.3.1)(typescript@5.6.3))(react@18.3.1)':
+  '@storybook/addon-ondevice-controls@7.6.20(@react-native-community/datetimepicker@8.6.0(expo@51.0.39(@babel/core@7.29.0)(@babel/preset-env@7.25.2(@babel/core@7.29.0)))(react-native@0.75.4(@babel/core@7.29.0)(@babel/preset-env@7.25.2(@babel/core@7.29.0))(@types/react@18.3.28)(react@18.3.1)(typescript@5.6.3))(react@18.3.1))(@react-native-community/slider@4.5.7)(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react-native@0.75.4(@babel/core@7.29.0)(@babel/preset-env@7.25.2(@babel/core@7.29.0))(@types/react@18.3.28)(react@18.3.1)(typescript@5.6.3))(react@18.3.1)':
     dependencies:
-      '@react-native-community/datetimepicker': 8.4.3(expo@51.0.39(@babel/core@7.29.0)(@babel/preset-env@7.25.2(@babel/core@7.29.0)))(react-native@0.75.4(@babel/core@7.29.0)(@babel/preset-env@7.25.2(@babel/core@7.29.0))(@types/react@18.3.28)(react@18.3.1)(typescript@5.6.3))(react@18.3.1)
+      '@react-native-community/datetimepicker': 8.6.0(expo@51.0.39(@babel/core@7.29.0)(@babel/preset-env@7.25.2(@babel/core@7.29.0)))(react-native@0.75.4(@babel/core@7.29.0)(@babel/preset-env@7.25.2(@babel/core@7.29.0))(@types/react@18.3.28)(react@18.3.1)(typescript@5.6.3))(react@18.3.1)
       '@react-native-community/slider': 4.5.7
       '@storybook/addon-controls': 7.6.20(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@storybook/channels': 7.6.20
@@ -12605,7 +12605,7 @@ snapshots:
       prop-types: 15.8.1
       react: 18.3.1
       react-native: 0.75.4(@babel/core@7.29.0)(@babel/preset-env@7.25.2(@babel/core@7.29.0))(@types/react@18.3.28)(react@18.3.1)(typescript@5.6.3)
-      react-native-modal-datetime-picker: 14.0.1(@react-native-community/datetimepicker@8.4.3(expo@51.0.39(@babel/core@7.29.0)(@babel/preset-env@7.25.2(@babel/core@7.29.0)))(react-native@0.75.4(@babel/core@7.29.0)(@babel/preset-env@7.25.2(@babel/core@7.29.0))(@types/react@18.3.28)(react@18.3.1)(typescript@5.6.3))(react@18.3.1))(react-native@0.75.4(@babel/core@7.29.0)(@babel/preset-env@7.25.2(@babel/core@7.29.0))(@types/react@18.3.28)(react@18.3.1)(typescript@5.6.3))
+      react-native-modal-datetime-picker: 14.0.1(@react-native-community/datetimepicker@8.6.0(expo@51.0.39(@babel/core@7.29.0)(@babel/preset-env@7.25.2(@babel/core@7.29.0)))(react-native@0.75.4(@babel/core@7.29.0)(@babel/preset-env@7.25.2(@babel/core@7.29.0))(@types/react@18.3.28)(react@18.3.1)(typescript@5.6.3))(react@18.3.1))(react-native@0.75.4(@babel/core@7.29.0)(@babel/preset-env@7.25.2(@babel/core@7.29.0))(@types/react@18.3.28)(react@18.3.1)(typescript@5.6.3))
       react-native-modal-selector: 2.1.2
       tinycolor2: 1.6.0
     transitivePeerDependencies:
@@ -18399,9 +18399,9 @@ snapshots:
     transitivePeerDependencies:
       - debug
 
-  react-native-modal-datetime-picker@14.0.1(@react-native-community/datetimepicker@8.4.3(expo@51.0.39(@babel/core@7.29.0)(@babel/preset-env@7.25.2(@babel/core@7.29.0)))(react-native@0.75.4(@babel/core@7.29.0)(@babel/preset-env@7.25.2(@babel/core@7.29.0))(@types/react@18.3.28)(react@18.3.1)(typescript@5.6.3))(react@18.3.1))(react-native@0.75.4(@babel/core@7.29.0)(@babel/preset-env@7.25.2(@babel/core@7.29.0))(@types/react@18.3.28)(react@18.3.1)(typescript@5.6.3)):
+  react-native-modal-datetime-picker@14.0.1(@react-native-community/datetimepicker@8.6.0(expo@51.0.39(@babel/core@7.29.0)(@babel/preset-env@7.25.2(@babel/core@7.29.0)))(react-native@0.75.4(@babel/core@7.29.0)(@babel/preset-env@7.25.2(@babel/core@7.29.0))(@types/react@18.3.28)(react@18.3.1)(typescript@5.6.3))(react@18.3.1))(react-native@0.75.4(@babel/core@7.29.0)(@babel/preset-env@7.25.2(@babel/core@7.29.0))(@types/react@18.3.28)(react@18.3.1)(typescript@5.6.3)):
     dependencies:
-      '@react-native-community/datetimepicker': 8.4.3(expo@51.0.39(@babel/core@7.29.0)(@babel/preset-env@7.25.2(@babel/core@7.29.0)))(react-native@0.75.4(@babel/core@7.29.0)(@babel/preset-env@7.25.2(@babel/core@7.29.0))(@types/react@18.3.28)(react@18.3.1)(typescript@5.6.3))(react@18.3.1)
+      '@react-native-community/datetimepicker': 8.6.0(expo@51.0.39(@babel/core@7.29.0)(@babel/preset-env@7.25.2(@babel/core@7.29.0)))(react-native@0.75.4(@babel/core@7.29.0)(@babel/preset-env@7.25.2(@babel/core@7.29.0))(@types/react@18.3.28)(react@18.3.1)(typescript@5.6.3))(react@18.3.1)
       prop-types: 15.8.1
       react-native: 0.75.4(@babel/core@7.29.0)(@babel/preset-env@7.25.2(@babel/core@7.29.0))(@types/react@18.3.28)(react@18.3.1)(typescript@5.6.3)
 
